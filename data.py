@@ -88,7 +88,9 @@ grands_paninis_casa = {
     "grand seguin"
     }
 desserts_casa = {
-
+    "cookie",
+    "donut",
+    "panini nutella"
 }
 boissons_casa = {
      "Coca-Cola",
