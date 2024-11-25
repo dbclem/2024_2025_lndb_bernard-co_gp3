@@ -1,6 +1,3 @@
-#grenier a pain : a sans accent !!!
-
-
 horaires_patus = {
     "lundi" : "11:00 - 14:30 ",
     "mardi" : "11:00 - 14:30 ",
@@ -31,10 +28,81 @@ horaires_grenier_a_pain = {
     "dimanche" : "07:30 - 19:00 ",
 }
 
+paninis_patus = {
+    "Tout Simple",
+    "Végétarien",
+    "Burger"
+}
+pâtes_patus = {
+    "Carbo'",
+    "Bolo'",
+    "Mac_n_cheese",
+    "Pesto"
+}
+plat_patus = { paninis_patus + pâtes_patus }
 
-menus_patus = {}
+desserts_patus = {
+    "Cookie_froid",
+    "Cookie_chaud",
+    "Brownie"
+}
+boissons_patus = {
+    "Coca-Cola",
+    "Ice-Tea",
+    "Oasis",
+    "Fanta",
+    "Schweppes_agrumes"
+}
 
-menus_casa = {} 
+menus_patus = {
+    "formule_patus_1" : plat_patus + desserts_patus + boissons_patus,  
+    "formule_patus_2" : plat_patus + desserts_patus, 
+    "formule_patus_3" : plat_patus + boissons_patus, 
+    
+    
+}
+
+paninis_casa = {
+    "classico",
+    "rimini",
+    "roma",
+    "venezia",
+    "3 fromages",
+    "seguin"
+}
+paninis_XL_casa = {
+    "royal",
+    "cordon bleu",
+    "cordon royal"
+}
+grands_paninis_casa = {
+    "grec",
+    "burger",
+    "raclette",
+    "chita",
+    "grand classico",
+    "grand ;rimini",
+    "grand roma",
+    "grand venezia",
+    "grand 3 fromages",
+    "grand seguin"
+    }
+desserts_casa = {
+
+}
+boissons_casa = {
+     "Coca-Cola",
+    "Ice-Tea",
+    "Oasis",
+    "Fanta",
+    "Schweppes_agrumes"
+}
+menus_casa = {
+    "petite_formule_casa" : paninis_casa + desserts_casa + boissons_casa,
+    "formule_XL_casa" : paninis_XL_casa + boissons_casa,
+    "garnde_formule_casa" : grands_paninis_casa + boissons_casa + desserts_casa
+
+} 
 
 menus_grenier_a_pain = {}
 
