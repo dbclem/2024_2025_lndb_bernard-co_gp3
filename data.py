@@ -39,7 +39,11 @@ pâtes_patus = {
     "Mac_n_cheese",
     "Pesto"
 }
-plat_patus = { paninis_patus + pâtes_patus }
+
+plat_patus = { 
+    "paninis" : paninis_patus,
+    "pates" : pâtes_patus
+}
 
 desserts_patus = {
     "Cookie_froid",
@@ -54,10 +58,24 @@ boissons_patus = {
     "Schweppes_agrumes"
 }
 
+formule_patus_1 = {
+    "plat" : plat_patus,
+    "dessert" : desserts_patus,
+    "boisson" : boissons_patus
+}
+formule_patus_2 = {
+    "plat" : plat_patus,
+    "dessert" : desserts_patus,
+}
+formule_patus_3 = {
+    "plat" : plat_patus,
+    "boisson" : boissons_patus
+}
+
 menus_patus = {
-    "formule_patus_1" : plat_patus + desserts_patus + boissons_patus,  
-    "formule_patus_2" : plat_patus + desserts_patus, 
-    "formule_patus_3" : plat_patus + boissons_patus, 
+    "formule_patus_1" : formule_patus_1,  
+    "formule_patus_2" : formule_patus_2, 
+    "formule_patus_3" : formule_patus_3, 
     
     
 }
@@ -99,10 +117,27 @@ boissons_casa = {
     "Fanta",
     "Schweppes_agrumes"
 }
+
+petite_formule_casa = {
+    "plat" : paninis_casa,
+    "dessert" : desserts_casa, 
+    "boisson" : boissons_casa
+}
+
+formule_XL_casa = {
+    "plat" : paninis_XL_casa, 
+    "boisson" : boissons_casa
+}
+garnde_formule_casa = {
+    "plat" : grands_paninis_casa,
+    "boisson" : boissons_casa,
+    "dessert" : desserts_casa
+}
+
 menus_casa = {
-    "petite_formule_casa" : paninis_casa + desserts_casa + boissons_casa,
-    "formule_XL_casa" : paninis_XL_casa + boissons_casa,
-    "garnde_formule_casa" : grands_paninis_casa + boissons_casa + desserts_casa
+    "petite_formule_casa" : petite_formule_casa,
+    "formule_XL_casa" : formule_XL_casa,
+    "garnde_formule_casa" : garnde_formule_casa 
 
 } 
 
@@ -126,7 +161,7 @@ la_casa_del_panini = {
 }
 
 grenier_a_pain = {
-    "nom" : "Patus Paninus",
+    "nom" : "Grenier à pain",
     "adresse" : "12 rue du Parchamp",
     "horaires" : horaires_grenier_a_pain,
     "avis" : 4.8,      
@@ -135,4 +170,3 @@ grenier_a_pain = {
 
 
 data = [ patus_paninus, la_casa_del_panini, grenier_a_pain ]
-
