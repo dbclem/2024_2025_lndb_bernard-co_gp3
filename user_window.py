@@ -11,13 +11,13 @@ def bouton3_action():
     print("Bouton 3 cliqué !")
 
 # Créer la fenêtre principale
-main_window = Tk()
-main_window.title("Bernard&co")
-main_window.geometry("412x700")
+main_user_window = Tk()
+main_user_window.title("Bernard&co")
+main_user_window.geometry("412x700")
 
 
 # Créer un frame pour centrer les boutons
-frame = Frame(main_window)
+frame = Frame(main_user_window)
 frame.pack(expand=True)
 
 #ajouter une image dans les boutons 
@@ -40,4 +40,4 @@ bouton3.pack(pady=5)
 
 
 # Lancer la boucle principale
-main_window.mainloop()
+main_user_window.mainloop()
