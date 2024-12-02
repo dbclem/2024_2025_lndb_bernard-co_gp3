@@ -52,23 +52,24 @@ main_user_window = Tk()
 main_user_window.title("Bernard&co")
 main_user_window.geometry("412x700")
 
-
+main_text = Label(main_user_window, text="Choisissez votre restaurant", font="Calibri")
+main_text.pack(expand=True)
 # Créer un frame pour centrer les boutons
 frame = Frame(main_user_window)
 frame.pack(expand=True)
 
-# #ajouter une image dans les boutons 
-# image_logo_patus = PhotoImage(file="images/logo_patus.png")
-# canvas_logo_patus = Canvas(frame, width=50, height=2 ) #--> importation de la photo impossible 
+#ajouter une image dans les boutons 
+# image_logo_patus = PhotoImage(main_user_window,  file="images/logo_patus.png")
+# canvas_logo_patus = Canvas(main_user_window, width=50, height=50 ) #--> importation de la photo impossible 
 # canvas_logo_patus.create_image(image=image_logo_patus)
 # canvas_logo_patus.pack()
 
 
 
 # Ajouter les boutons
-bouton1 = Button(frame, text=data[0]["nom"], height=2, width=50, command=top_restaurant)
-bouton2 = Button(frame, text=data[1]["nom"], height=2, width=50, command=mid_restaurant)
-bouton3 = Button(frame, text=data[2]["nom"], height=2, width=50, command=buttom_restaurant)
+bouton1 = Button(frame, text=data[0]["nom"], height=2, width=50, font="Calibri", command=top_restaurant)
+bouton2 = Button(frame, text=data[1]["nom"], height=2, width=50, font="Calibri", command=mid_restaurant)
+bouton3 = Button(frame, text=data[2]["nom"], height=2, width=50, font="Calibri", command=buttom_restaurant)
 
 
 
