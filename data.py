@@ -1,3 +1,5 @@
+
+#Patus paninus debut
 horaires_patus = {
     "lundi" : "11:00 - 14:30 ",
     "mardi" : "11:00 - 14:30 ",
@@ -6,26 +8,6 @@ horaires_patus = {
     "vendredi" : "11:00 - 17:30 ",
     "samedi" : "Fermé",
     "dimanche" : "Fermé",    
-}
-
-horaires_casa = {    
-    "lundi" : "09:00 - 14:00 ",
-    "mardi" : "09:00 - 14:00 ",
-    "mercredi" : "09:00 - 14:00 ",
-    "jeudi" : "09:00 - 14:00 ",
-    "vendredi" : "09:00 - 14:00 ",
-    "samedi" : "Fermé",
-    "dimanche" : "Fermé",
-    }
-
-horaires_grenier_a_pain = {
-    "lundi" : "Fermé",
-    "mardi" : "07:30 - 20:00 ",
-    "mercredi" : "07:30 - 20:00  ",
-    "jeudi" : "07:30 - 20:00 ",
-    "vendredi" : "07:30 - 20:00  ",
-    "samedi" : "07:30 - 20:00 ",
-    "dimanche" : "07:30 - 19:00 ",
 }
 
 paninis_patus = {
@@ -40,11 +22,11 @@ pâtes_patus = {
     "Pesto"
 }
 
+
 plat_patus = { 
     "paninis" : paninis_patus,
     "pates" : pâtes_patus
 }
-
 desserts_patus = {
     "Cookie_froid",
     "Cookie_chaud",
@@ -72,13 +54,32 @@ formule_patus_3 = {
     "boisson" : boissons_patus
 }
 
+
 menus_patus = {
     "formule_patus_1" : formule_patus_1,  
     "formule_patus_2" : formule_patus_2, 
-    "formule_patus_3" : formule_patus_3, 
-    
-    
+    "formule_patus_3" : formule_patus_3,    
 }
+
+patus_paninus = {
+    "nom" : "Patus Paninus",
+    "adresse" : "12 rue du Parchamp",
+    "horaires" : horaires_patus,
+    "avis" : 4.8,      
+    "menus" : menus_patus
+}
+#Patus paninus fin 
+
+#Casa del panini debut
+horaires_casa = {    
+    "lundi" : "09:00 - 14:00 ",
+    "mardi" : "09:00 - 14:00 ",
+    "mercredi" : "09:00 - 14:00 ",
+    "jeudi" : "09:00 - 14:00 ",
+    "vendredi" : "09:00 - 14:00 ",
+    "samedi" : "Fermé",
+    "dimanche" : "Fermé",
+    }
 
 paninis_casa = {
     "classico",
@@ -123,7 +124,6 @@ petite_formule_casa = {
     "dessert" : desserts_casa, 
     "boisson" : boissons_casa
 }
-
 formule_XL_casa = {
     "plat" : paninis_XL_casa, 
     "boisson" : boissons_casa
@@ -138,19 +138,7 @@ menus_casa = {
     "petite_formule_casa" : petite_formule_casa,
     "formule_XL_casa" : formule_XL_casa,
     "garnde_formule_casa" : garnde_formule_casa 
-
 } 
-
-menus_grenier_a_pain = {}
-
-
-patus_paninus = {
-    "nom" : "Patus Paninus",
-    "adresse" : "12 rue du Parchamp",
-    "horaires" : horaires_patus,
-    "avis" : 4.8,      
-    "menus" : menus_patus
-}
 
 la_casa_del_panini = {
     "nom" : "La casa del panini",
@@ -159,6 +147,22 @@ la_casa_del_panini = {
     "avis" : 4.8,      
     "menus" : menus_casa 
 }
+#Casa del panini fin
+
+
+
+#grenier a pain debut
+horaires_grenier_a_pain = {
+    "lundi" : "Fermé",
+    "mardi" : "07:30 - 20:00 ",
+    "mercredi" : "07:30 - 20:00  ",
+    "jeudi" : "07:30 - 20:00 ",
+    "vendredi" : "07:30 - 20:00  ",
+    "samedi" : "07:30 - 20:00 ",
+    "dimanche" : "07:30 - 19:00 ",
+}
+
+menus_grenier_a_pain = {}
 
 grenier_a_pain = {
     "nom" : "Grenier à pain",
@@ -167,6 +171,7 @@ grenier_a_pain = {
     "avis" : 4.8,      
     "menus" : menus_grenier_a_pain
 } 
+#grenier a pain fin
 
 
 data = [ patus_paninus, la_casa_del_panini, grenier_a_pain ]
