@@ -18,7 +18,7 @@ paninis_patus = {
 pâtes_patus = {
     "Carbo'",
     "Bolo'",
-    "Mac_n_cheese",
+    "Mac n' cheese",
     "Pesto"
 }
 
@@ -28,8 +28,8 @@ plat_patus = {
     "pates" : pâtes_patus
 }
 desserts_patus = {
-    "Cookie_froid",
-    "Cookie_chaud",
+    "Cookie froid",
+    "Cookie chaud",
     "Brownie"
 }
 boissons_patus = {
@@ -56,9 +56,9 @@ formule_patus_3 = {
 
 
 menus_patus = {
-    "formule_patus_1" : formule_patus_1,  
-    "formule_patus_2" : formule_patus_2, 
-    "formule_patus_3" : formule_patus_3,    
+    "formule patus 1" : formule_patus_1,  
+    "formule patus 2" : formule_patus_2, 
+    "formule patus 3" : formule_patus_3,    
 }
 
 patus_paninus = {
@@ -112,11 +112,11 @@ desserts_casa = {
     "panini nutella"
 }
 boissons_casa = {
-     "Coca-Cola",
+    "Coca-Cola",
     "Ice-Tea",
     "Oasis",
     "Fanta",
-    "Schweppes_agrumes"
+    "Schweppes agrumes"
 }
 
 petite_formule_casa = {
@@ -135,9 +135,9 @@ garnde_formule_casa = {
 }
 
 menus_casa = {
-    "petite_formule_casa" : petite_formule_casa,
-    "formule_XL_casa" : formule_XL_casa,
-    "garnde_formule_casa" : garnde_formule_casa 
+    "petite formule casa" : petite_formule_casa,
+    "formule XL casa" : formule_XL_casa,
+    "garnde formule casa" : garnde_formule_casa 
 } 
 
 la_casa_del_panini = {
@@ -162,7 +162,26 @@ horaires_grenier_a_pain = {
     "dimanche" : "07:30 - 19:00 ",
 }
 
-menus_grenier_a_pain = {}
+formule_grenier_1 = {
+    "plat" : ...,
+    "dessert" : ... 
+}
+formule_grenier_2 = {
+    "plat" : ...,
+    "boisson" : ...
+    }
+formule_grenier_3 = {
+    "plat" : ...,
+    "dessert" : ...,
+    "boisson" : ...
+}
+
+menus_grenier_a_pain = {
+    "formule grenier 1" : formule_grenier_1,
+    "formule grenier 2" : formule_grenier_2,
+    "formule grenier 3" : formule_grenier_3
+
+}
 
 grenier_a_pain = {
     "nom" : "Grenier à pain",
