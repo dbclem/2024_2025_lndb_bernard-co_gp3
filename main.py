@@ -15,12 +15,18 @@ def show_main_window():
     main_user_window.title("Bernard&co")
     main_user_window.geometry("412x700")
 
+
+
     main_text = Label(main_user_window, text="Choisissez votre restaurant", font="Calibri")
     main_text.pack(expand=True)
     
+
+
     """creation d'une frame pour y placer seulement les boutons qui mène a des restaurants"""
     frame = Frame(main_user_window)
     frame.pack(expand=True)
+
+
 
     # Créer dynamiquement les boutons en fonction des restaurants dans 'data'
     for index, restaurant in enumerate(data):
@@ -34,7 +40,11 @@ def show_main_window():
             command=lambda i=index: open_restaurant_window(i))
         Bouton_restaurant.pack(pady=5)
 
+
+
     main_user_window.mainloop()
+
+
 
 
 
@@ -47,15 +57,26 @@ def open_restaurant_window(index):
     """
     main_user_window.destroy()
     
+
+
     restaurant_name = data[index]["nom"]
     restaurant_window = Tk()
     restaurant_window.title(f"Bernard&co - {restaurant_name}")
     restaurant_window.geometry("412x700")
     
+
+
     display_restaurant_name = Label(restaurant_window, text=restaurant_name, font=(20))
     display_restaurant_name.pack()
 
-    # Frame pour les boutons en bas
+
+
+    """creation d'une frame qui se place en bas de la page grace a BOTTOM
+        deux boutons a l'interieur : retour --> revenir a la page d'accueil 
+                                                aligné en bas au milieu par la gauche 
+                                    validée --> validée la commande --> inactif pour l'insant
+                                                aligné avec le bouton retour il se place à sa gauche   
+    """
     button_frame = Frame(restaurant_window)
     button_frame.pack(side=BOTTOM, pady=20)
 
@@ -64,6 +85,8 @@ def open_restaurant_window(index):
 
     bouton_validee = Button(button_frame, text="Validée", font="Calibri", command=lambda: print(f"Réservation validée pour {restaurant_name}"))
     bouton_validee.pack(side=LEFT, padx=10)
+
+
 
     restaurant_window.mainloop()
 
