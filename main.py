@@ -69,6 +69,25 @@ def open_restaurant_window(index):
 
 
 
+
+
+
+    # data_menus = data["menus"]
+    # for index, menu in enumerate(data_menus):
+    #     nom_menu = Label(restaurant_window, text=menu[index], font="Calibri")
+    #     nom_menu.pack(pady=5)
+    # pass
+
+
+    main_frame = Frame(restaurant_window)
+    main_frame.pack()
+
+
+
+    # for i, (key, values ) in enumerate(data[index]["menus"]) : 
+
+
+
     """
      creation d'une frame qui se place en bas de la page grace a BOTTOM
         deux boutons a l'interieur : retour --> revenir a la page d'accueil 
@@ -82,7 +101,7 @@ def open_restaurant_window(index):
     bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda: [restaurant_window.destroy(), main_window()])
     bouton_retour.pack(side=LEFT, padx=10)
 
-    bouton_validee = Button(button_frame, text="Valider", font="Calibri", command=lambda: print(f"Réservation validée pour {restaurant_name}"))
+    bouton_validee = Button(button_frame, text="Voir la commande", font="Calibri", command=lambda: print(f"Réservation validée pour {restaurant_name}"))
     bouton_validee.pack(side=LEFT, padx=10)
 
 
