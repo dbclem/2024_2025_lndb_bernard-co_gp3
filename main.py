@@ -2,8 +2,7 @@ from tkinter import*
 from data import*
 from tools import*
 
-def show_main_window():
-    # Recréer la fenêtre principale
+def main_window():
     """
     main_user_window est une variable global pour pour*voir la réccupérer pour chaques fonctions
     et pouvoir la détruire
@@ -28,7 +27,6 @@ def show_main_window():
 
 
 
-    # Créer dynamiquement les boutons en fonction des restaurants dans 'data'
     for index, restaurant in enumerate(data):
         """ enumerate --> Parcourt data recupère la position index et la valeur restaurant 
                     index --> 0, 1, 2, ...
@@ -71,7 +69,8 @@ def open_restaurant_window(index):
 
 
 
-    """creation d'une frame qui se place en bas de la page grace a BOTTOM
+    """
+     creation d'une frame qui se place en bas de la page grace a BOTTOM
         deux boutons a l'interieur : retour --> revenir a la page d'accueil 
                                                 aligné en bas au milieu par la gauche 
                                     validée --> validée la commande --> inactif pour l'insant
@@ -80,15 +79,14 @@ def open_restaurant_window(index):
     button_frame = Frame(restaurant_window)
     button_frame.pack(side=BOTTOM, pady=20)
 
-    bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda: [restaurant_window.destroy(), show_main_window()])
+    bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda: [restaurant_window.destroy(), main_window()])
     bouton_retour.pack(side=LEFT, padx=10)
 
-    bouton_validee = Button(button_frame, text="Validée", font="Calibri", command=lambda: print(f"Réservation validée pour {restaurant_name}"))
+    bouton_validee = Button(button_frame, text="Valider", font="Calibri", command=lambda: print(f"Réservation validée pour {restaurant_name}"))
     bouton_validee.pack(side=LEFT, padx=10)
 
 
 
     restaurant_window.mainloop()
 
-# Lancer la fenêtre principale au démarrage
-show_main_window()
+main_window()
