@@ -162,18 +162,57 @@ horaires_grenier_a_pain = {
     "dimanche" : "07:30 - 19:00 ",
 }
 
+sandwichs_grenier = {
+    "jambon, emmental",
+    "poulet, cruidités",
+    "thon, crudités",
+    "poulet, avocat",
+    "saumon, fumé"
+}
+salades_grenier = {
+    "tomate, mozza",
+    "chèvre, noix",
+    "courgette, aubergine"
+}
+quiches_grenier = {
+    "lorraine",
+    "saumon, épinard",
+    "courgettes",
+    "lardons, brocolis"
+}
+plats_grenier = {
+"sandwichs" : sandwichs_grenier,
+"salades" : salades_grenier,
+"quiches" : quiches_grenier
+
+}
+
+desserts_grenier = {
+    "tarte citron",
+    "tarte framboise",
+    "flan",
+    "éclair chocolat",
+    "paris-brest"
+}
+boissons_grenier = {
+    "eau plate",
+    "eau gazeuse",
+    "minute maid orange",
+    "ice-tea",
+    "coca-cola"
+}
 formule_grenier_1 = {
-    "plat" : ...,
-    "dessert" : ... 
+    "plat" : plats_grenier,
+    "dessert" : desserts_grenier 
 }
 formule_grenier_2 = {
-    "plat" : ...,
-    "boisson" : ...
+    "plat" : plats_grenier,
+    "boisson" : boissons_grenier
     }
 formule_grenier_3 = {
-    "plat" : ...,
-    "dessert" : ...,
-    "boisson" : ...
+    "plat" : plats_grenier,
+    "dessert" : desserts_grenier ,
+    "boisson" : boissons_grenier
 }
 
 menus_grenier_a_pain = {
