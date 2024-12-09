@@ -1,6 +1,10 @@
 from tkinter import* 
 from data import*
 from tools import*
+from clem import* 
+
+
+global_list_commande = []
 
 def main_window():
     """
@@ -67,17 +71,15 @@ def open_restaurant_window(index):
     display_restaurant_name = Label(restaurant_window, text=restaurant_name, font=(20))
     display_restaurant_name.pack()
 
-    main_frame = Frame(restaurant_window)
-    main_frame.pack()
+    def add_to_commande (choix) : 
+        global global_list_commande
+        global_list_commande.append(choix)
+        print (f"La {key} a été ajouter au panier.")
 
- 
+
     for key in list ( data[index]["menus"].keys()) : 
-        menu_frame = Button(restaurant_window, height=2, width=50, bg="lightblue") # --> la couleur de marche pas
-        menu_label = Label(menu_frame, text = key)
-
-        menu_label.pack(expand=True)
+        menu_frame = Button(restaurant_window, text=key, height=2, width=50, command = lambda : add_to_commande(key))
         menu_frame.pack(pady=10)
-
 
     """
      creation d'une frame qui se place en bas de la page grace a BOTTOM
@@ -92,7 +94,7 @@ def open_restaurant_window(index):
     bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda: [restaurant_window.destroy(), main_window()])
     bouton_retour.pack(side=LEFT, padx=10)
 
-    bouton_validee = Button(button_frame, text="Voir la commande", font="Calibri", command=lambda: print(f"Réservation validée pour {restaurant_name}"))
+    bouton_validee = Button(button_frame, text="Voir la commande", font="Calibri", command=lambda i=index: commande_window(i))
     bouton_validee.pack(side=LEFT, padx=10)
 
 
