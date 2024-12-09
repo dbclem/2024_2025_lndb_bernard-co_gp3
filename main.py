@@ -67,25 +67,16 @@ def open_restaurant_window(index):
     display_restaurant_name = Label(restaurant_window, text=restaurant_name, font=(20))
     display_restaurant_name.pack()
 
-
-
-
-
-
-    # data_menus = data["menus"]
-    # for index, menu in enumerate(data_menus):
-    #     nom_menu = Label(restaurant_window, text=menu[index], font="Calibri")
-    #     nom_menu.pack(pady=5)
-    # pass
-
-
     main_frame = Frame(restaurant_window)
     main_frame.pack()
 
+ 
+    for key in list ( data[index]["menus"].keys()) : 
+        menu_frame = Frame(restaurant_window, height=400, width=400, bg="lightblue", height=400, width=400)
+        menu_label = Label(menu_frame, text = key)
 
-
-    # for i, (key, values ) in enumerate(data[index]["menus"]) : 
-
+        menu_label.pack()
+        menu_frame.pack(pady=10)
 
 
     """
