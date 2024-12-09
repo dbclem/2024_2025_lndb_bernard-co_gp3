@@ -72,10 +72,10 @@ def open_restaurant_window(index):
 
  
     for key in list ( data[index]["menus"].keys()) : 
-        menu_frame = Frame(restaurant_window, height=400, width=400, bg="lightblue", height=400, width=400)
+        menu_frame = Button(restaurant_window, height=2, width=50, bg="lightblue") # --> la couleur de marche pas
         menu_label = Label(menu_frame, text = key)
 
-        menu_label.pack()
+        menu_label.pack(expand=True)
         menu_frame.pack(pady=10)
 
 
