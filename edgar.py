@@ -74,12 +74,12 @@ def open_restaurant_window(index):
     def add_to_commande (choix) : 
         global global_list_commande
         global_list_commande.append(choix)
-        print (f"La {key} a été ajouter au panier.")
+        print (f"La {choix} a été ajouter au panier.")
         
 
 
     for key in list ( data[index]["menus"].keys()) : 
-        menu_frame = Button(restaurant_window, text=key, height=2, width=50, command = lambda : add_to_commande(key))
+        menu_frame = Button(restaurant_window, text=key, height=2, width=50, command = lambda key=key : add_to_commande(key))
         menu_frame.pack(pady=10)
 
 
