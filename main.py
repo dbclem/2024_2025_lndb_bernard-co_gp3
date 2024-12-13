@@ -1,5 +1,5 @@
-from tkinter import* 
 from data import*
+from tkinter import*
 from tools import*
 from clem import* 
 
@@ -8,6 +8,8 @@ couleur : noir --> #000000
         bleu --> #3533cd
         degradé lineaire 90°
 """
+
+
 
 global_list_commande = []
 
@@ -51,6 +53,31 @@ def main_window():
 
     main_user_window.mainloop()
 
+
+def commande_window(): 
+    commande_window = Tk()
+    commande_window.title("Voir la commande")
+    commande_window.geometry("412x700")
+
+    # Afficher le titre de la commande
+    main_commande_text = Label(commande_window, text="Votre panier", font=("Calibri", 20))
+    main_commande_text.pack()
+    
+    global global_list_commande
+
+    if global_list_commande == [] : 
+        label_nothing = Label(commande_window, text="Votre panier est vide", font="Calibri")
+        label_nothing.pack(pady=10)
+    else : 
+        for choice in global_list_commande:
+            label_of_choice = Label(commande_window, text=choice, font="Calibri")
+            label_of_choice.pack(pady=10)
+
+
+
+
+
+    commande_window.mainloop()
 
 
 
@@ -103,10 +130,10 @@ def open_restaurant_window(index):
     button_frame = Frame(restaurant_window)
     button_frame.pack(side=BOTTOM, pady=20)
 
-    bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda: [restaurant_window.destroy(), main_window()])
+    bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda : [restaurant_window.destroy(), reset_commande(), main_window()])
     bouton_retour.pack(side=LEFT, padx=10)
 
-    bouton_validee = Button(button_frame, text="Voir la commande", font="Calibri", command=lambda: print(f"Réservation validée pour {restaurant_name}"))
+    bouton_validee = Button(button_frame, text="Voir la commande", font="Calibri", command=commande_window)
     bouton_validee.pack(side=LEFT, padx=10)
 
 
