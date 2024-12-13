@@ -3,6 +3,11 @@ from data import*
 from tools import*
 from clem import* 
 
+"""
+couleur : noir --> #000000
+        bleu --> #3533cd
+        degradé lineaire 90°
+"""
 
 global_list_commande = []
 
