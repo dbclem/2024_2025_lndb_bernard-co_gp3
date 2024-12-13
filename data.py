@@ -10,48 +10,51 @@ horaires_patus = {
     "dimanche" : "Fermé",    
 }
 
-paninis_patus = {
-    "Tout Simple",
-    "Végétarien",
-    "Burger"
+paninis_patus = { 
+    "Tout Simple" : 7,
+    "Végétarien" : 7,
+    "Burger" : 7
 }
 pâtes_patus = {
-    "Carbo'",
-    "Bolo'",
-    "Mac n' cheese",
-    "Pesto"
+    "Carbo'" : 8,
+    "Bolo'" : 8,
+    "Mac n' cheese" : 8,
+    "Pesto" : 8
 }
 
 
-plat_patus = { 
+plat_patus = {  
     "paninis" : paninis_patus,
     "pates" : pâtes_patus
 }
 desserts_patus = {
-    "Cookie froid",
-    "Cookie chaud",
-    "Brownie"
+    "Cookie froid" : 3,
+    "Cookie chaud" : 3,
+    "Brownie" : 3
 }
 boissons_patus = {
-    "Coca-Cola",
-    "Ice-Tea",
-    "Oasis",
-    "Fanta",
-    "Schweppes_agrumes"
+    "Coca-Cola" : 2,
+    "Ice-Tea" : 2,
+    "Oasis" : 2,
+    "Fanta" : 2,
+    "Schweppes_agrumes" : 2
 }
 
 formule_patus_1 = {
     "plat" : plat_patus,
     "dessert" : desserts_patus,
-    "boisson" : boissons_patus
+    "boisson" : boissons_patus,
+    "prix" : 12
 }
-formule_patus_2 = {
+formule_patus_2 = { 
     "plat" : plat_patus,
     "dessert" : desserts_patus,
+    "prix" : 10
 }
-formule_patus_3 = {
+formule_patus_3 = { 
     "plat" : plat_patus,
-    "boisson" : boissons_patus
+    "boisson" : boissons_patus,
+    "prix" : 10
 }
 
 
@@ -82,56 +85,59 @@ horaires_casa = {
     }
 
 paninis_casa = {
-    "classico",
-    "rimini",
-    "roma",
-    "venezia",
-    "3 fromages",
-    "seguin"
+    "classico" : 8,
+    "rimini" : 8,
+    "roma" : 8,
+    "venezia" : 8,
+    "3 fromages" : 8,
+    "seguin" : 8
 }
 paninis_XL_casa = {
-    "royal",
-    "cordon bleu",
-    "cordon royal"
+    "royal" : 10,
+    "cordon bleu" : 10,
+    "cordon royal" : 10
 }
 grands_paninis_casa = {
-    "grec",
-    "burger",
-    "raclette",
-    "chita",
-    "grand classico",
-    "grand ;rimini",
-    "grand roma",
-    "grand venezia",
-    "grand 3 fromages",
-    "grand seguin"
+    "grec" : 12,
+    "burger" : 12,
+    "raclette" : 12,
+    "chita" : 12,
+    "grand classico" : 12,
+    "grand ;rimini" : 12,
+    "grand roma" : 12,
+    "grand venezia" : 12,
+    "grand 3 fromages" : 12,
+    "grand seguin" : 12
     }
 desserts_casa = {
-    "cookie",
-    "donut",
-    "panini nutella"
+    "cookie" : 4,
+    "donut" : 4,
+    "panini nutella" : 4
 }
 boissons_casa = {
-    "Coca-Cola",
-    "Ice-Tea",
-    "Oasis",
-    "Fanta",
-    "Schweppes agrumes"
+    "Coca-Cola" : 2.50,
+    "Ice-Tea" : 2.50,
+    "Oasis" : 2.50,
+    "Fanta" : 2.50,
+    "Schweppes agrumes" : 2.50
 }
 
 petite_formule_casa = {
     "plat" : paninis_casa,
     "dessert" : desserts_casa, 
-    "boisson" : boissons_casa
+    "boisson" : boissons_casa,
+    "prix" : 12
 }
 formule_XL_casa = {
     "plat" : paninis_XL_casa, 
-    "boisson" : boissons_casa
+    "boisson" : boissons_casa,
+    "prix" : 15
 }
 garnde_formule_casa = {
     "plat" : grands_paninis_casa,
     "boisson" : boissons_casa,
-    "dessert" : desserts_casa
+    "dessert" : desserts_casa,
+    "prix" : 13.50
 }
 
 menus_casa = {
@@ -163,22 +169,22 @@ horaires_grenier_a_pain = {
 }
 
 sandwichs_grenier = {
-    "jambon, emmental",
-    "poulet, cruidités",
-    "thon, crudités",
-    "poulet, avocat",
-    "saumon, fumé"
+    "jambon, emmental" : 4,
+    "poulet, cruidités" : 4,
+    "thon, crudités" : 4,
+    "poulet, avocat" : 4,
+    "saumon, fumé" : 4
 }
 salades_grenier = {
-    "tomate, mozza",
-    "chèvre, noix",
-    "courgette, aubergine"
+    "tomate, mozza" : 5,
+    "chèvre, noix" : 5,
+    "courgette, aubergine" : 5
 }
 quiches_grenier = {
-    "lorraine",
-    "saumon, épinard",
-    "courgettes",
-    "lardons, brocolis"
+    "lorraine" : 4.50,
+    "saumon, épinard" : 4.50,
+    "courgettes" : 4.50,
+    "lardons, brocolis" : 4.50
 }
 plats_grenier = {
 "sandwichs" : sandwichs_grenier,
@@ -188,31 +194,34 @@ plats_grenier = {
 }
 
 desserts_grenier = {
-    "tarte citron",
-    "tarte framboise",
-    "flan",
-    "éclair chocolat",
-    "paris-brest"
+    "tarte citron" : 4,
+    "tarte framboise" : 4,
+    "flan" : 4,
+    "éclair chocolat" : 4,
+    "paris-brest" : 4
 }
 boissons_grenier = {
-    "eau plate",
-    "eau gazeuse",
-    "minute maid orange",
-    "ice-tea",
-    "coca-cola"
+    "eau plate" : 2.50,
+    "eau gazeuse" : 2.50,
+    "minute maid orange" : 2.50,
+    "ice-tea" : 2.50,
+    "coca-cola" : 2.50
 }
 formule_grenier_1 = {
     "plat" : plats_grenier,
-    "dessert" : desserts_grenier 
+    "dessert" : desserts_grenier,
+    "prix" : 8 
 }
 formule_grenier_2 = {
     "plat" : plats_grenier,
-    "boisson" : boissons_grenier
+    "boisson" : boissons_grenier,
+    "prix" : 8
     }
 formule_grenier_3 = {
     "plat" : plats_grenier,
     "dessert" : desserts_grenier ,
-    "boisson" : boissons_grenier
+    "boisson" : boissons_grenier,
+    "prix" : 10
 }
 
 menus_grenier_a_pain = {
