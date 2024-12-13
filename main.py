@@ -76,16 +76,21 @@ def open_restaurant_window(index):
     display_restaurant_name = Label(restaurant_window, text=restaurant_name, font=(20))
     display_restaurant_name.pack()
 
+
+
     def add_to_commande (choix) : 
         global global_list_commande
         global_list_commande.append(choix)
-
+        print (f"La {choix} a été ajouter au panier.")
+        
 
 
     for key in list ( data[index]["menus"].keys()) : 
-        
-        menu_button = Button(restaurant_window, text=key, height=2, width=50, command = lambda : [add_to_commande(key), print (f"La {key} a été ajouter au panier.")])
-        menu_button.pack(pady=10)
+        menu_frame = Button(restaurant_window, text=key, height=2, width=50, command = lambda key=key : add_to_commande(key))
+        menu_frame.pack(pady=10)
+
+
+
 
     """
      creation d'une frame qui se place en bas de la page grace a BOTTOM
@@ -94,36 +99,18 @@ def open_restaurant_window(index):
                                     validée --> validée la commande --> inactif pour l'insant
                                                 aligné avec le bouton retour il se place à sa gauche   
     """
+    
     button_frame = Frame(restaurant_window)
     button_frame.pack(side=BOTTOM, pady=20)
 
     bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda: [restaurant_window.destroy(), main_window()])
     bouton_retour.pack(side=LEFT, padx=10)
 
-    bouton_validee = Button(button_frame, text="Voir la commande", font="Calibri", command=commande_window)
+    bouton_validee = Button(button_frame, text="Voir la commande", font="Calibri", command=lambda: print(f"Réservation validée pour {restaurant_name}"))
     bouton_validee.pack(side=LEFT, padx=10)
 
 
 
     restaurant_window.mainloop()
-
-def commande_window () : 
-    voir_la_commande_window = Tk()
-    voir_la_commande_window.title("Ma commande")
-    voir_la_commande_window.geometry("412x700")
-
-
-    for value in global_list_commande :
-        commande_label = Label (voir_la_commande_window, text = value)
-        commande_label.pack (pady=10)
-        
-
-    voir_la_commande_window.mainloop()
-    
-
-
-
-
-
 
 main_window()
