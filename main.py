@@ -1,6 +1,15 @@
 from tkinter import* 
 from data import*
 from tools import*
+from clem import* 
+
+"""
+couleur : noir --> #000000
+        bleu --> #3533cd
+        degradé lineaire 90°
+"""
+
+global_list_commande = []
 
 def main_window():
     """
@@ -67,16 +76,20 @@ def open_restaurant_window(index):
     display_restaurant_name = Label(restaurant_window, text=restaurant_name, font=(20))
     display_restaurant_name.pack()
 
-    main_frame = Frame(restaurant_window)
-    main_frame.pack()
 
- 
+
+    def add_to_commande (choix) : 
+        global global_list_commande
+        global_list_commande.append(choix)
+        print (f"La {choix} a été ajouter au panier.")
+        
+
+
     for key in list ( data[index]["menus"].keys()) : 
-        menu_frame = Button(restaurant_window, height=2, width=50, bg="lightblue") # --> la couleur de marche pas
-        menu_label = Label(menu_frame, text = key)
-
-        menu_label.pack(expand=True)
+        menu_frame = Button(restaurant_window, text=key, height=2, width=50, command = lambda key=key : add_to_commande(key))
         menu_frame.pack(pady=10)
+
+
 
 
     """
@@ -86,6 +99,7 @@ def open_restaurant_window(index):
                                     validée --> validée la commande --> inactif pour l'insant
                                                 aligné avec le bouton retour il se place à sa gauche   
     """
+    
     button_frame = Frame(restaurant_window)
     button_frame.pack(side=BOTTOM, pady=20)
 
