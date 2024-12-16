@@ -65,13 +65,18 @@ def commande_window():
     
     global global_list_commande
 
+    def delete_in_global_list (e) :
+        global global_list_commande
+        global_list_commande.remove(e)
+        return global_list_commande
+
     if global_list_commande == [] : 
         label_nothing = Label(commande_window, text="Votre panier est vide", font="Calibri")
         label_nothing.pack(pady=10)
     else : 
         for choice in global_list_commande:
-            label_of_choice = Label(commande_window, text=choice, font="Calibri")
-            label_of_choice.pack(pady=10)
+            button_of_choice = Button(commande_window, text=choice, font="Calibri", command=lambda choice=choice : delete_in_global_list(global_list_commande[choice]))
+            button_of_choice.pack(pady=10)
 
 
 
