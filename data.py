@@ -242,3 +242,56 @@ grenier_a_pain = {
 
 
 data = [ patus_paninus, la_casa_del_panini, grenier_a_pain ]
+
+
+import tkinter as tk
+
+# Données des restaurants
+from data import data
+
+def afficher_menu(frame, menu):
+    """Affiche les détails du menu directement dans le cadre."""
+    for widget in frame.winfo_children():
+        widget.destroy()  # Supprime les widgets précédents
+
+    for categorie, items in menu.items():
+        label_categorie = tk.Label(frame, text=f"{categorie.capitalize()} :", font=("Helvetica", 12, "bold"))
+        label_categorie.pack(anchor="w")
+
+        if isinstance(items, dict):
+            for sous_categorie, sous_items in items.items():
+                label_sous_categorie = tk.Label(frame, text=f"  - {sous_categorie.capitalize()} : {', '.join(sous_items)}", wraplength=600, justify="left")
+                label_sous_categorie.pack(anchor="w", padx=20)
+        else:
+            label_items = tk.Label(frame, text=f"  - {', '.join(items)}", wraplength=600, justify="left")
+            label_items.pack(anchor="w", padx=20)
+
+def creer_interface():
+    """Crée l'interface principale pour afficher les restaurants et leurs menus."""
+    root = tk.Tk()
+    root.title("Menus des Restaurants")
+
+    main_frame = tk.Frame(root)
+    main_frame.pack(fill="both", expand=True, padx=10, pady=10)
+
+    left_frame = tk.Frame(main_frame, width=300, borderwidth=2, relief="groove", padx=10, pady=10)
+    left_frame.pack(side="left", fill="y")
+
+    right_frame = tk.Frame(main_frame, borderwidth=2, relief="groove", padx=10, pady=10)
+    right_frame.pack(side="right", fill="both", expand=True)
+
+    for restaurant in data:
+        nom = restaurant["nom"]
+        menus = restaurant["menus"]
+
+        # Bouton pour chaque restaurant
+        btn_restaurant = tk.Button(
+            left_frame, text=nom, font=("Helvetica", 12),
+            command=lambda menus=menus: afficher_menu(right_frame, menus)
+        )
+        btn_restaurant.pack(fill="x", pady=5)
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    creer_interface()

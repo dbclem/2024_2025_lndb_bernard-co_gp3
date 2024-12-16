@@ -40,13 +40,7 @@ def main_window():
             command=lambda i=index: open_restaurant_window(i))
         Bouton_restaurant.pack(pady=5)
 
-
-
     main_user_window.mainloop()
-
-
-
-
 
 def open_restaurant_window(index):
     """
@@ -57,74 +51,22 @@ def open_restaurant_window(index):
     """
     main_user_window.destroy()
     
-
-
     restaurant_name = data[index]["nom"]
     restaurant_window = Tk()
     restaurant_window.title(f"Bernard&co - {restaurant_name}")
     restaurant_window.geometry("412x700")
     
-
-
     display_restaurant_name = Label(restaurant_window, text=restaurant_name, font=(20))
     display_restaurant_name.pack()
-
-
 
     def add_to_commande (choix) : 
         global global_list_commande
         global_list_commande.append(choix)
         print (f"La {choix} a été ajouter au panier.")
 
-    canvas = Canvas(restaurant_window)
-    canvas.pack(expand=True, fill=BOTH)
-
-    scrollbar = Scrollbar(restaurant_window, orient="vertical", command=canvas.yview)
-    scrollbar.pack(side=RIGHT, fill="y")
-
-    canvas.configure(yscrollcommand=scrollbar.set)
-    
-
     for key in list ( data[index]["menus"].keys()) : 
         menu_frame = Button(restaurant_window, text=key, height=2, width=50, command = lambda key=key : add_to_commande(key))
         menu_frame.pack(pady=10)
-
-
-        """ Affichage des plats, desserts et boissons du restaurant """
-    menu_frame = Frame(restaurant_window)
-    menu_frame.pack(expand=True)
-
-    # Affichage des plats
-    plat_label = Label(menu_frame, text="Plats", font=("Calibri", 14))
-    plat_label.pack(pady=5)
-
-    for plat in list(data[index]["menus"]["formule patus 1"]["plat"]["paninis"].keys()):
-        plat_button = Button(menu_frame, text=plat, height=2, width=50, command=lambda plat=plat: add_to_commande(plat))
-        plat_button.pack(pady=5)
-
-    for plat in list(data[index]["menus"]["formule patus 1"]["plat"]["pates"].keys()):
-        plat_button = Button(menu_frame, text=plat, height=2, width=50, command=lambda plat=plat: add_to_commande(plat))
-        plat_button.pack(pady=5)
-
-    # Affichage des desserts
-    dessert_label = Label(menu_frame, text="Desserts", font=("Calibri", 14))
-    dessert_label.pack(pady=5)
-
-    for dessert in list(data[index]["menus"]["formule patus 1"]["dessert"].keys()):
-        dessert_button = Button(menu_frame, text=dessert, height=2, width=50, command=lambda dessert=dessert: add_to_commande(dessert))
-        dessert_button.pack(pady=5)
-
-    # Affichage des boissons
-    boisson_label = Label(menu_frame, text="Boissons", font=("Calibri", 14))
-    boisson_label.pack(pady=5)
-
-    for boisson in list(data[index]["menus"]["formule patus 1"]["boisson"].keys()):
-        boisson_button = Button(menu_frame, text=boisson, height=2, width=50, command=lambda boisson=boisson: add_to_commande(boisson))
-        boisson_button.pack(pady=5)
-        
-    menu_frame.update_idletasks()
-    canvas.config(scrollregion=canvas.bbox("all"))
-
 
     """
      creation d'une frame qui se place en bas de la page grace a BOTTOM
