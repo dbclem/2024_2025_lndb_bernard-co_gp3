@@ -71,25 +71,32 @@ def commande_window():
         global_list_commande.remove(item)
         print(f"Item {item} supprimé")
 
-    if global_list_commande == [] : 
-        label_nothing = Label(commande_window, text="Votre panier est vide", font="Calibri")
-        label_nothing.pack(pady=10)
-    else : 
-        for i, choice in enumerate(global_list_commande):
-            print(f"Création du bouton pour l'élément {i}: {choice}")
-            
-            # Création d'un bouton pour chaque élément de la liste
-            button_of_choice = tk.Button(commande_window, text=choice, font="Calibri", 
-                                        command=lambda i=i: [delete_in_global_list(global_list_commande[i]), refresh_page(commande_window)])
-            button_of_choice.pack(pady=10)
+    def refresh_page(window):
+        """Efface tous les widgets et réexécute le code pour recréer la page."""
+        for widget in window.winfo_children():
+            widget.destroy()
+        print("la page a été rafraichit")
+
+    def display_commande () :
+        if global_list_commande == [] : 
+            label_nothing = Label(commande_window, text="Votre panier est vide", font="Calibri")
+            label_nothing.pack(pady=10)
+        else : 
+            for i, choice in enumerate(global_list_commande):
+                print(f"Création du bouton pour l'élément {i}: {choice}")
+                
+                # Création d'un bouton pour chaque élément de la liste
+                button_of_choice = Button(commande_window, text=choice, font="Calibri", 
+                                            command=lambda i=i: [delete_in_global_list(global_list_commande[i]), refresh_page(commande_window)])
+                button_of_choice.pack(pady=10)
 
 
 
+    """les elements de la pages sont supprimé mais les elements restant pas réaffiché"""
 
 
 
-
-
+    display_commande ()
     commande_window.mainloop()
 
 
