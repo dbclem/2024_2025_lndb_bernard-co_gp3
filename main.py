@@ -65,18 +65,26 @@ def commande_window():
     
     global global_list_commande
 
-    def delete_in_global_list (e) :
+    def delete_in_global_list(item):
+        # Suppression de l'élément dans global_list_commande
         global global_list_commande
-        global_list_commande.remove(e)
-        return global_list_commande
+        global_list_commande.remove(item)
+        print(f"Item {item} supprimé")
 
     if global_list_commande == [] : 
         label_nothing = Label(commande_window, text="Votre panier est vide", font="Calibri")
         label_nothing.pack(pady=10)
     else : 
-        for choice in global_list_commande:
-            button_of_choice = Button(commande_window, text=choice, font="Calibri", command=lambda choice=choice : delete_in_global_list(global_list_commande[choice]))
+        for i, choice in enumerate(global_list_commande):
+            print(f"Création du bouton pour l'élément {i}: {choice}")
+            
+            # Création d'un bouton pour chaque élément de la liste
+            button_of_choice = tk.Button(commande_window, text=choice, font="Calibri", 
+                                        command=lambda i=i: [delete_in_global_list(global_list_commande[i]), refresh_page(commande_window)])
             button_of_choice.pack(pady=10)
+
+
+
 
 
 
