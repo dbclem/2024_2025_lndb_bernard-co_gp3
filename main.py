@@ -27,7 +27,7 @@ def main_window():
 
 
 
-    main_text = Label(main_user_window, text="Choisissez votre restaurant", font="Calibri")
+    main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Calibri", 20))
     main_text.pack(expand=True)
     
 
