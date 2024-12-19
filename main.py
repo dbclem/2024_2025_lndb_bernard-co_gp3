@@ -60,9 +60,7 @@ def commande_window():
     commande_window.geometry("412x700")
 
     # Afficher le titre de la commande
-    main_commande_text = Label(commande_window, text="Votre panier", font=("Calibri", 20))
-    main_commande_text.pack()
-    
+
     global global_list_commande
 
     def delete_in_global_list(item):
@@ -72,19 +70,27 @@ def commande_window():
         print(f"Item {item} supprimé")
 
     def refresh_page(window):
-        """Efface tous les widgets et réexécute le code pour recréer la page."""
+        """Efface tous les widgets et réexécute le code pour recréer la page.
+            et reafficher les elements du panier et la titre de la page 
+        """
         for widget in window.winfo_children():
             widget.destroy()
-        print("la page a été rafraichit")
+        display_commande ()
 
     def display_commande () :
         if global_list_commande == [] : 
             label_nothing = Label(commande_window, text="Votre panier est vide", font="Calibri")
             label_nothing.pack(pady=10)
+            
         else : 
+            main_commande_text = Label(commande_window, text="Votre panier :" , font=("Calibri", 20))
+            main_commande_text.pack()
+            sous_label_text = Label(commande_window, text="Appuiez pour supprimer", font=("Calibri", 10))
+            sous_label_text.pack()
+
             for i, choice in enumerate(global_list_commande):
                 print(f"Création du bouton pour l'élément {i}: {choice}")
-                
+
                 # Création d'un bouton pour chaque élément de la liste
                 button_of_choice = Button(commande_window, text=choice, font="Calibri", 
                                             command=lambda i=i: [delete_in_global_list(global_list_commande[i]), refresh_page(commande_window)])
