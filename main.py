@@ -13,6 +13,12 @@ couleur : noir --> #000000
 
 global_list_commande = []
 
+def reset_commande():
+    global global_list_commande
+    global_list_commande = []
+    print("Panier vidé")
+
+
 def main_window():
     """
     main_user_window est une variable global pour pour*voir la réccupérer pour chaques fonctions
