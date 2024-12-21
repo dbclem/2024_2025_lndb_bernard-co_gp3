@@ -21,7 +21,7 @@ def reset_commande():
 
 def main_window():
     """
-    main_user_window est une variable global pour pour*voir la réccupérer pour chaques fonctions
+    main_user_window est une variable global pour pouvoir la réccupérer pour chaques fonctions
     et pouvoir la détruire
 
     la page affiche sous forme de liste tous les restaurants disponibles
