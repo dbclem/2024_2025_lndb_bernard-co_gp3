@@ -54,7 +54,7 @@ formule_patus_2 = {
 formule_patus_3 = { 
     "plat" : plat_patus,
     "boisson" : boissons_patus,
-    "prix" : 10
+    "prix" : 9
 }
 
 

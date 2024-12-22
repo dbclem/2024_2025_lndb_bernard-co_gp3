@@ -15,6 +15,8 @@ couleur : noir --> #000000
 def reset_commande():
     global global_list_commande
     global_list_commande = []
+    global total_price
+    total_price = 0
     print("Panier vidé")
 
 
@@ -150,18 +152,30 @@ def open_restaurant_window(index):
             ajout de l'element choisi dans la liste global_list_commande
         """
         global global_list_commande
+        global global_total_price
         global_list_commande.append((choix, prix))
-        print (f"La {choix} a été ajouter au panier au prix de {prix}.")
+        global_total_price += prix
+        print(f"La {choix} a été ajoutée au panier au prix de {prix}.")
+        update_total_price()
         
     def diplay_menu():
+        global global_list_commande
         for key, value in global_choice_prix:
             menu_button = Button(restaurant_window, text=(key + diplays_prix(key)), height=2, width=50, 
-                                 command=lambda key=key: add_to_commande(key, value))
+                                 command=lambda key=key, value=value: add_to_commande(key, value))
             menu_button.pack(pady=10)
 
     def diplays_prix(key):
         prix = data[index]["menus"][key]["prix"]
         return f"  {prix} $"
+
+    def update_total_price():
+        total_price_label.config(text=f"Prix total : {global_total_price} $")
+
+ 
+ 
+    total_price_label = Label(restaurant_window, text="", font="Calibri")
+    total_price_label.pack(side=BOTTOM, pady=20)
 
 
 
@@ -188,4 +202,6 @@ def open_restaurant_window(index):
 
 global_list_commande = []
 global_choice_prix = []
+global_total_price = 0
+
 main_window()
