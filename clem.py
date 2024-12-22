@@ -147,11 +147,14 @@ def open_restaurant_window(index):
         for key in list ( data[index]["menus"].keys()) : 
             menu_frame = Button(restaurant_window, text=key, height=2, width=50, command = lambda key=key : add_to_commande(key))
             menu_frame.pack(pady=10)
+            diplays_prix (key)
+            print(key)
 
-        for key in list ( data[index]["menus"].keys()) :
-            for value in list ( data[index]["menus"][key]["prix"].values()) :
-                prix_frame = Label(restaurant_window, text=(value + " $") , height=2, width=50)
-                prix_frame.pack(pady=10)
+
+    def diplays_prix(key):
+        prix = data[index]["menus"][key]["prix"]
+        prix_frame = Label(restaurant_window, text=(str(prix) + " $"), font=("Calibri", 10))
+        prix_frame.pack(pady=10)
 
 
 
