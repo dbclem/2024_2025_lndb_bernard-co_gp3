@@ -11,7 +11,6 @@ couleur : noir --> #000000
 
 
 
-global_list_commande = []
 
 def reset_commande():
     global global_list_commande
@@ -61,6 +60,9 @@ def main_window():
 
 
 def commande_window(): 
+    global global_list_commande_prix
+    print(global_list_commande_prix)
+
     commande_window = Tk()
     commande_window.title("Voir la commande")
     commande_window.geometry("412x700")
@@ -137,24 +139,29 @@ def open_restaurant_window(index):
 
 
 
-    def add_to_commande (choix) : 
+    def add_to_commande (choix, prix) : 
         global global_list_commande
+        global global_list_commande_prix
         global_list_commande.append(choix)
+        global_list_commande_prix.append(prix)
         print (f"La {choix} a été ajouter au panier.")
         
+    def diplay_menu():
+        for key in list(data[index]["menus"].keys()):
+            menu_prix_frame = Frame(restaurant_window, bg="#3533cd")
+            menu_prix_frame.pack(pady=10, fill='x')
 
-    def diplay_menu () : 
-        for key in list ( data[index]["menus"].keys()) : 
-            menu_frame = Button(restaurant_window, text=key, height=2, width=50, command = lambda key=key : add_to_commande(key))
-            menu_frame.pack(pady=10)
-            diplays_prix (key)
-            print(key)
+            menu_button = Button(menu_prix_frame, text=key, height=2, width=50, 
+                                 command=lambda key=key: add_to_commande(key, data[index]["menus"][key]["prix"]))
+            menu_button.pack(side='left', padx=5)
 
+            diplays_prix(menu_prix_frame, key)
 
-    def diplays_prix(key):
+    """utilisation de copilot pour la fonction suivante"""
+    def diplays_prix(parent_frame, key):
         prix = data[index]["menus"][key]["prix"]
-        prix_frame = Label(restaurant_window, text=(str(prix) + " $"), font=("Calibri", 10))
-        prix_frame.pack(pady=10)
+        prix_label = Label(parent_frame, text=(str(prix) + " $"), font=("Calibri", 10))
+        prix_label.pack(side='left', padx=5)
 
 
 
@@ -179,4 +186,6 @@ def open_restaurant_window(index):
     diplay_menu ()
     restaurant_window.mainloop()
 
+global_list_commande = []
+global_list_commande_prix = []
 main_window()
