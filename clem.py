@@ -100,7 +100,7 @@ def commande_window():
                 print(f"Création du bouton pour l'élément {i}: {choice} au prix de {prix}")
 
                 # Création d'un bouton pour chaque élément de la liste
-                button_of_choice = Button(commande_window, text=f"{choice} - {prix} $", font="Calibri", 
+                button_of_choice = Button(commande_window, text=f"{choice}" + " " + f"{prix}  $", font="Calibri", 
                                             command=lambda item=(choice, prix): [delete_in_global_list(item), refresh_page(commande_window)])
                 button_of_choice.pack(pady=10)
 
@@ -136,6 +136,10 @@ def open_restaurant_window(index):
     display_restaurant_name.pack()
 
     global global_choice_prix 
+    """            
+        creation d'un tuple (choix, prix) pour pouvoir afficher le prix dans la commande
+        la commande et le prix sont donc lié
+    """
     for key in list(data[index]["menus"].keys()):
         prix = data[index]["menus"][key]["prix"]
         global_choice_prix.append((key, prix))
@@ -144,29 +148,20 @@ def open_restaurant_window(index):
     def add_to_commande (choix, prix) : 
         """"
             ajout de l'element choisi dans la liste global_list_commande
-            creation d'un tuple (choix, prix) pour pouvoir afficher le prix dans la commande
-            la commande et le prix sont donc lié
         """
         global global_list_commande
         global_list_commande.append((choix, prix))
         print (f"La {choix} a été ajouter au panier au prix de {prix}.")
         
     def diplay_menu():
-        for key in global_choice_prix:
-            menu_prix_frame = Frame(restaurant_window, bg="#3533cd")
-            menu_prix_frame.pack(pady=10, fill='x')
+        for key, value in global_choice_prix:
+            menu_button = Button(restaurant_window, text=(key + diplays_prix(key)), height=2, width=50, 
+                                 command=lambda key=key: add_to_commande(key, value))
+            menu_button.pack(pady=10)
 
-            menu_button = Button(menu_prix_frame, text=key, height=2, width=50, 
-                                 command=lambda key=key: add_to_commande(key, data[index]["menus"][key]["prix"]))
-            menu_button.pack(side='left', padx=5)
-
-            diplays_prix(menu_prix_frame, key)
-
-    """utilisation de copilot pour la fonction suivante"""
-    def diplays_prix(parent_frame, key):
+    def diplays_prix(key):
         prix = data[index]["menus"][key]["prix"]
-        prix_label = Label(parent_frame, text=(str(prix) + " $"), font=("Calibri", 10))
-        prix_label.pack(side='left', padx=5)
+        return f"  {prix} $"
 
 
 
