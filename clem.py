@@ -59,9 +59,9 @@ def main_window():
     main_user_window.mainloop()
 
 
-def commande_window(): 
-    global global_list_commande_prix
-    print(global_list_commande_prix)
+def commande_window():
+    global global_list_commande
+    print(global_list_commande)
 
     commande_window = Tk()
     commande_window.title("Voir la commande")
@@ -69,7 +69,7 @@ def commande_window():
 
     # Afficher le titre de la commande
 
-    global global_list_commande
+    
 
     def delete_in_global_list(item):
         # Suppression de l'élément dans global_list_commande
@@ -96,17 +96,15 @@ def commande_window():
             sous_label_text = Label(commande_window, text="Appuiez pour supprimer", font=("Calibri", 10))
             sous_label_text.pack()
 
-            for i, choice in enumerate(global_list_commande):
-                print(f"Création du bouton pour l'élément {i}: {choice}")
+            for i, (choice, prix) in enumerate(global_list_commande):
+                print(f"Création du bouton pour l'élément {i}: {choice} au prix de {prix}")
 
                 # Création d'un bouton pour chaque élément de la liste
-                button_of_choice = Button(commande_window, text=choice, font="Calibri", 
-                                            command=lambda i=i: [delete_in_global_list(global_list_commande[i]), refresh_page(commande_window)])
+                button_of_choice = Button(commande_window, text=f"{choice} - {prix} $", font="Calibri", 
+                                            command=lambda item=(choice, prix): [delete_in_global_list(item), refresh_page(commande_window)])
                 button_of_choice.pack(pady=10)
 
 
-
-    """les elements de la pages sont supprimé mais les elements restant pas réaffiché"""
 
 
 
@@ -137,17 +135,24 @@ def open_restaurant_window(index):
     display_restaurant_name = Label(restaurant_window, text=restaurant_name, font=(20))
     display_restaurant_name.pack()
 
+    global global_choice_prix 
+    for key in list(data[index]["menus"].keys()):
+        prix = data[index]["menus"][key]["prix"]
+        global_choice_prix.append((key, prix))
 
 
     def add_to_commande (choix, prix) : 
+        """"
+            ajout de l'element choisi dans la liste global_list_commande
+            creation d'un tuple (choix, prix) pour pouvoir afficher le prix dans la commande
+            la commande et le prix sont donc lié
+        """
         global global_list_commande
-        global global_list_commande_prix
-        global_list_commande.append(choix)
-        global_list_commande_prix.append(prix)
-        print (f"La {choix} a été ajouter au panier.")
+        global_list_commande.append((choix, prix))
+        print (f"La {choix} a été ajouter au panier au prix de {prix}.")
         
     def diplay_menu():
-        for key in list(data[index]["menus"].keys()):
+        for key in global_choice_prix:
             menu_prix_frame = Frame(restaurant_window, bg="#3533cd")
             menu_prix_frame.pack(pady=10, fill='x')
 
@@ -187,5 +192,5 @@ def open_restaurant_window(index):
     restaurant_window.mainloop()
 
 global_list_commande = []
-global_list_commande_prix = []
+global_choice_prix = []
 main_window()
