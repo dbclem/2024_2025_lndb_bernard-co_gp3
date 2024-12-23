@@ -99,7 +99,8 @@ def commande_window():
 
                 # Création d'un bouton pour chaque élément de la liste
                 button_of_choice = Button(commande_window, text=f"{choice}" + " " + f"{prix}  $", font="Calibri", 
-                                            command=lambda item=(choice, prix): [delete_in_global_list(item), refresh_page(commande_window)])
+                                            command=lambda item=(choice, prix): 
+                                            [delete_in_global_list(item), refresh_page(commande_window)])
                 button_of_choice.pack(pady=10)
 
 
@@ -109,6 +110,16 @@ def commande_window():
     display_commande ()
     commande_window.mainloop()
 
+
+def valide_window():
+    valide_window = Tk()
+    valide_window.title("Valider la commande")
+    valide_window.geometry("412x700")
+
+    main_valide_text = Label(valide_window, text="Votre commande a \n bien été validée", font=("Calibri", 20))
+    main_valide_text.pack()
+
+    valide_window.mainloop()
 
 
 
@@ -190,9 +201,11 @@ def open_restaurant_window(index):
                             [restaurant_window.destroy(), reset_commande(), main_window()])
     bouton_retour.pack(side=LEFT, padx=10)
 
-    bouton_validee = Button(button_frame, text="Voir la commande", font="Calibri", command=commande_window)
-    bouton_validee.pack(side=LEFT, padx=10)
+    bouton_voir_commande = Button(button_frame, text="Voir la commande", font="Calibri", command=commande_window)
+    bouton_voir_commande.pack(side=LEFT, padx=10)
 
+    bouton_valide = Button(button_frame, text="Valider", font="Calibri", command=valide_window)
+    bouton_valide.pack(side=LEFT, padx=10)
 
     diplay_menu ()
     restaurant_window.mainloop()
@@ -213,4 +226,9 @@ main_window()
 """probleme 2 :
     - une fois le programme lancé --> il marche normalement 
     - mais si on ferme la fenetre principale, une autre se reouvre automatiquement     - 
+"""
+
+"""probleme 3 :
+    - le prix total ne s'actualise pas dans la fenetre du restaurant
+        quand un supprime un element du panier
 """
