@@ -8,10 +8,6 @@ couleur : noir --> #000000
         bleu --> #3533cd
         degradé lineaire 90°
 """
-
-
-
-
 def reset_commande():
     global global_list_commande
     global_list_commande = []
@@ -190,7 +186,8 @@ def open_restaurant_window(index):
     button_frame = Frame(restaurant_window)
     button_frame.pack(side=BOTTOM, pady=20)
 
-    bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda : [restaurant_window.destroy(), reset_commande(), main_window()])
+    bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda : 
+                            [restaurant_window.destroy(), reset_commande(), main_window()])
     bouton_retour.pack(side=LEFT, padx=10)
 
     bouton_validee = Button(button_frame, text="Voir la commande", font="Calibri", command=commande_window)
@@ -205,3 +202,15 @@ global_choice_prix = []
 global_total_price = 0
 
 main_window()
+
+"""probleme :
+        - les formules s'affiche correctement la premeiere fois 
+        - mais lorsque l'on change de restaurant les formules ne s'affichent plus
+        - sur le meme restaurant les formules se cumulent elles s'affiche plusieurs fois 
+        - donc il faudrait corriger cela au niveau sans doute du bouton retour  
+"""
+
+"""probleme 2 :
+    - une fois le programme lancé --> il marche normalement 
+    - mais si on ferme la fenetre principale, une autre se reouvre automatiquement     - 
+"""
