@@ -1,7 +1,6 @@
 from data import*
 from tkinter import*
 from tools import*
-from clem import* 
 
 """
 couleur : noir --> #000000
@@ -27,6 +26,9 @@ def main_window():
     main_user_window = Tk()
     main_user_window.title("Bernard&co")
     main_user_window.geometry("412x700")
+    main_user_window.iconbitmap("images/logo_bernard&co.ico")
+    main_user_window.configure(bg="#3533cd")
+
 
 
 
