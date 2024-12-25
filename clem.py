@@ -217,7 +217,7 @@ def open_restaurant_window(index):
 
         button_retour_comande = Button(restaurant_window, text="Retour", font="Calibri", command=lambda : 
                             [refresh_restaurant_page(restaurant_window), diplay_menu()])
-        button_retour_comande.pack(BOTTOM, pady=10)
+        button_retour_comande.pack(side=BOTTOM, pady=10)
 
 
 
