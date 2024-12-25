@@ -59,34 +59,6 @@ def main_window():
     main_user_window.mainloop()
 
 
-def valide_window():
-    valide_window = Tk()
-    valide_window.title("Valider la commande")
-    valide_window.geometry("412x700")
-
-    main_valide_text = Label(valide_window, text="Votre commande a \n bien été validée", font=("Calibri", 20))
-    main_valide_text.pack()
-
-    valide_window.mainloop()
-
-
-# def commande_window():
-#     global global_list_commande
-#     print(global_list_commande)
-
-#     commande_window = Tk()
-#     commande_window.title("Voir la commande")
-#     commande_window.geometry("412x700")
-
-#     # Afficher le titre de la commande
-
-
-
-#     commande_window.mainloop()
-
-
-
-
 
 def open_restaurant_window(index):
     """
@@ -173,7 +145,7 @@ def open_restaurant_window(index):
                                         [refresh_restaurant_page(index), display_commande()])
         bouton_voir_commande.pack(side=LEFT, padx=10)
 
-        bouton_valide = Button(button_frame, text="Valider", font="Calibri", command=valide_window)
+        bouton_valide = Button(button_frame, text="Valider", font="Calibri", command=check_commande)
         bouton_valide.pack(side=LEFT, padx=10)
 
 
@@ -220,6 +192,24 @@ def open_restaurant_window(index):
         button_retour_comande.pack(side=BOTTOM, pady=10)
 
 
+
+    def valide_message ():
+        for widget in restaurant_window.winfo_children():
+            widget.destroy()
+
+
+        valide_message_text = f"Votre commande a bien été validée \n pour un montant de {global_total_price} $"
+        main_valide_text = Label(restaurant_window, text=valide_message_text, font=("Calibri", 20))
+        main_valide_text.pack(expand=True, anchor='center')
+
+
+    def check_commande () : 
+        if global_list_commande == [] : 
+            label_nothing = Label(restaurant_window, text="Votre panier est vide", font=("Calibri", 20))
+            label_nothing.pack(side=BOTTOM, pady=10)
+            label_nothing.after(2000, lambda : label_nothing.destroy())
+        else : 
+            valide_message()
 
     diplay_menu ()
     restaurant_window.mainloop()
