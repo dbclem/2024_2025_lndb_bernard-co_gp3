@@ -136,6 +136,7 @@ def open_restaurant_window(index):
             menu_button = Button(restaurant_window, text=(key + diplays_prix(key)), height=2, width=50, 
                                  command=lambda key=key, value=value: add_to_commande(key, value))
             menu_button.pack(pady=10)
+        naviagtion_button()
 
     def diplays_prix(key):
         prix = data[index]["menus"][key]["prix"]
@@ -158,21 +159,22 @@ def open_restaurant_window(index):
                                     validée --> validée la commande --> inactif pour l'insant
                                                 aligné avec le bouton retour il se place à sa gauche   
     """
-    
-    button_frame = Frame(restaurant_window)
-    button_frame.pack(side=BOTTOM, pady=20)
 
-    bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda : 
-                            [restaurant_window.destroy(), reset_commande(), main_window()])
-    bouton_retour.pack(side=LEFT, padx=10)
+    def naviagtion_button():    
+        button_frame = Frame(restaurant_window)
+        button_frame.pack(side=BOTTOM, pady=20)
 
-    bouton_voir_commande = Button(button_frame, text="Voir la commande", font="Calibri", 
-                                    command=lambda index = restaurant_window : 
-                                    [refresh_restaurant_page(index), display_commande()])
-    bouton_voir_commande.pack(side=LEFT, padx=10)
+        bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda : 
+                                [restaurant_window.destroy(), reset_commande(), main_window()])
+        bouton_retour.pack(side=LEFT, padx=10)
 
-    bouton_valide = Button(button_frame, text="Valider", font="Calibri", command=valide_window)
-    bouton_valide.pack(side=LEFT, padx=10)
+        bouton_voir_commande = Button(button_frame, text="Voir la commande", font="Calibri", 
+                                        command=lambda index = restaurant_window : 
+                                        [refresh_restaurant_page(index), display_commande()])
+        bouton_voir_commande.pack(side=LEFT, padx=10)
+
+        bouton_valide = Button(button_frame, text="Valider", font="Calibri", command=valide_window)
+        bouton_valide.pack(side=LEFT, padx=10)
 
 
 
@@ -213,7 +215,9 @@ def open_restaurant_window(index):
                                             display_commande(), update_total_price()])
                 button_of_choice.pack(pady=10)
 
-            # Afficher le prix total
+        button_retour_comande = Button(restaurant_window, text="Retour", font="Calibri", command=lambda : 
+                            [refresh_restaurant_page(restaurant_window), diplay_menu()])
+        button_retour_comande.pack(BOTTOM, pady=10)
 
 
 
