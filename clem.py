@@ -59,60 +59,6 @@ def main_window():
     main_user_window.mainloop()
 
 
-def commande_window():
-    global global_list_commande
-    print(global_list_commande)
-
-    commande_window = Tk()
-    commande_window.title("Voir la commande")
-    commande_window.geometry("412x700")
-
-    # Afficher le titre de la commande
-
-    
-
-    def delete_in_global_list(item):
-        # Suppression de l'élément dans global_list_commande
-        global global_list_commande
-        global_list_commande.remove(item)
-        print(f"Item {item} supprimé")
-
-    def refresh_page(window):
-        """Efface tous les widgets et réexécute le code pour recréer la page.
-            et reafficher les elements du panier et la titre de la page 
-        """
-        for widget in window.winfo_children():
-            widget.destroy()
-        display_commande ()
-
-    def display_commande () :
-        if global_list_commande == [] : 
-            label_nothing = Label(commande_window, text="Votre panier est vide", font="Calibri")
-            label_nothing.pack(pady=10)
-            
-        else : 
-            main_commande_text = Label(commande_window, text="Votre panier :" , font=("Calibri", 20))
-            main_commande_text.pack()
-            sous_label_text = Label(commande_window, text="Appuiez pour supprimer", font=("Calibri", 10))
-            sous_label_text.pack()
-
-            for i, (choice, prix) in enumerate(global_list_commande):
-                print(f"Création du bouton pour l'élément {i}: {choice} au prix de {prix}")
-
-                # Création d'un bouton pour chaque élément de la liste
-                button_of_choice = Button(commande_window, text=f"{choice}" + " " + f"{prix}  $", font="Calibri", 
-                                            command=lambda item=(choice, prix): 
-                                            [delete_in_global_list(item), refresh_page(commande_window)])
-                button_of_choice.pack(pady=10)
-
-
-
-
-
-    display_commande ()
-    commande_window.mainloop()
-
-
 def valide_window():
     valide_window = Tk()
     valide_window.title("Valider la commande")
@@ -122,6 +68,23 @@ def valide_window():
     main_valide_text.pack()
 
     valide_window.mainloop()
+
+
+# def commande_window():
+#     global global_list_commande
+#     print(global_list_commande)
+
+#     commande_window = Tk()
+#     commande_window.title("Voir la commande")
+#     commande_window.geometry("412x700")
+
+#     # Afficher le titre de la commande
+
+
+
+#     commande_window.mainloop()
+
+
 
 
 
@@ -203,14 +166,63 @@ def open_restaurant_window(index):
                             [restaurant_window.destroy(), reset_commande(), main_window()])
     bouton_retour.pack(side=LEFT, padx=10)
 
-    bouton_voir_commande = Button(button_frame, text="Voir la commande", font="Calibri", command=commande_window)
+    bouton_voir_commande = Button(button_frame, text="Voir la commande", font="Calibri", 
+                                    command=lambda index = restaurant_window : 
+                                    [refresh_restaurant_page(index), display_commande()])
     bouton_voir_commande.pack(side=LEFT, padx=10)
 
     bouton_valide = Button(button_frame, text="Valider", font="Calibri", command=valide_window)
     bouton_valide.pack(side=LEFT, padx=10)
 
+
+
+    def delete_in_global_list_total_price(item):
+        # Suppression de l'élément dans global_list_commande
+        global global_list_commande
+        global_list_commande.remove(item)
+        global global_total_price
+        global_total_price -= item[1]
+        print(f"Item {item} supprimé")
+
+    def refresh_restaurant_page(window):
+        """Efface tous les widgets et réexécute le code pour recréer la page.
+            et reafficher les elements du panier et la titre de la page 
+        """
+        for widget in window.winfo_children():
+            if widget != total_price_label:
+                widget.destroy()
+
+    def display_commande () :
+        if global_list_commande == [] : 
+            label_nothing = Label(restaurant_window, text="Votre panier est vide", font="Calibri")
+            label_nothing.pack(pady=10)
+            
+        else : 
+            main_commande_text = Label(restaurant_window, text="Votre panier :" , font=("Calibri", 20))
+            main_commande_text.pack()
+            sous_label_text = Label(restaurant_window, text="Appuiez pour supprimer", font=("Calibri", 10))
+            sous_label_text.pack()
+
+            for i, (choice, prix) in enumerate(global_list_commande):
+                print(f"Création du bouton pour l'élément {i}: {choice} au prix de {prix}")
+
+                # Création d'un bouton pour chaque élément de la liste
+                button_of_choice = Button(restaurant_window, text=f"{choice}" + " " + f"{prix}  $", font="Calibri", 
+                                            command=lambda item=(choice, prix): 
+                                            [delete_in_global_list_total_price(item), refresh_restaurant_page(restaurant_window), 
+                                            display_commande(), update_total_price()])
+                button_of_choice.pack(pady=10)
+
+            # Afficher le prix total
+
+
+
     diplay_menu ()
     restaurant_window.mainloop()
+
+
+
+
 
 global_list_commande = []
 global_choice_prix = []
@@ -228,9 +240,4 @@ main_window()
 """probleme 2 :
     - une fois le programme lancé --> il marche normalement 
     - mais si on ferme la fenetre principale, une autre se reouvre automatiquement     - 
-"""
-
-"""probleme 3 :
-    - le prix total ne s'actualise pas dans la fenetre du restaurant
-        quand un supprime un element du panier
 """
