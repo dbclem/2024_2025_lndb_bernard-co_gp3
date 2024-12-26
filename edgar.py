@@ -1,6 +1,5 @@
 from data import*
 from tkinter import*
-from tools import*
 
 """
 couleur : noir --> #000000
@@ -13,6 +12,10 @@ def reset_commande():
     global total_price
     total_price = 0
     print("Panier vidé")
+
+def destroy_widgets(window):
+    for widget in window.winfo_children():
+        widget.destroy()
 
 
 def main_window():
@@ -31,28 +34,28 @@ def main_window():
 
 
 
-
-    main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Calibri", 20))
-    main_text.pack(expand=True)
-    
-
-
-    """creation d'une frame pour y placer seulement les boutons qui mène a des restaurants"""
-    frame = Frame(main_user_window)
-    frame.pack(expand=True)
+    def display_restaurant_name () :  
+        main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Calibri", 20))
+        main_text.pack(expand=True)
+        
 
 
+        """creation d'une frame pour y placer seulement les boutons qui mène a des restaurants"""
+        frame = Frame(main_user_window)
+        frame.pack(expand=True)
 
-    for index, restaurant in enumerate(data):
-        """ enumerate --> Parcourt data recupère la position index et la valeur restaurant 
-                    index --> 0, 1, 2, ...
-                    restaurant --> {nom : restaurant}
 
-            open_restaurant_window prend i qui est index et qui se mais a jour a dynamiquement
-        """
-        Bouton_restaurant = Button(frame, text=restaurant["nom"], height=2, width=50, font="Calibri", 
-            command=lambda i=index: restaurant_window(i))
-        Bouton_restaurant.pack(pady=5)
+
+        for index, restaurant in enumerate(data):
+            """ enumerate --> Parcourt data recupère la position index et la valeur restaurant 
+                        index --> 0, 1, 2, ...
+                        restaurant --> {nom : restaurant}
+
+                open_restaurant_window prend i qui est index et qui se mais a jour a dynamiquement
+            """
+            Bouton_restaurant = Button(frame, text=restaurant["nom"], height=2, width=50, font="Calibri", 
+                command=lambda i=index: [restaurant_window(i), destroy_widgets(main_user_window)])
+            Bouton_restaurant.pack(pady=5)
 
 
     def restaurant_window(index):
@@ -63,11 +66,7 @@ def main_window():
                                                         restaurant_name eest donc facilement réutilisable 
         """
         
-        def destroy_widgets():
-            for widget in main_window.winfo_children():
-                widget.destroy()
-
-
+        
         global global_choice_prix 
         """            
             creation d'un tuple (choix, prix) pour pouvoir afficher le prix dans la commande
@@ -92,21 +91,18 @@ def main_window():
         def display_menu():
             global global_list_commande
             for key, value in global_choice_prix:
-                menu_button = Button(restaurant_window, text=(key + display_prix(key)), height=2, width=50, 
+                menu_button = Button(main_user_window, text=(f"{key} - {value} $" ), height=2, width=50, 
                                     command=lambda key=key, value=value: add_to_commande(key, value))
                 menu_button.pack(pady=10)
             naviagtion_button()
 
-        def display_prix(key):
-            prix = data[index]["menus"][key]["prix"]
-            return f"  {prix} $"
 
         def update_total_price():
             total_price_label.config(text=f"Prix total : {global_total_price} $")
 
     
     
-        total_price_label = Label(restaurant_window, text="", font="Calibri")
+        total_price_label = Label(main_user_window, text="", font="Calibri")
         total_price_label.pack(side=BOTTOM, pady=20)
 
 
@@ -120,16 +116,16 @@ def main_window():
         """
 
         def naviagtion_button():    
-            button_frame = Frame(restaurant_window)
+            button_frame = Frame(main_user_window)
             button_frame.pack(side=BOTTOM, pady=20)
 
-            bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda : 
-                                    [restaurant_window.destroy(), reset_commande(), main_window()])
+            bouton_retour = Button(button_frame, text="Retour", font="Calibri", command=lambda window=main_user_window: 
+                                    [destroy_widgets(window), reset_commande(), display_restaurant_name()])
             bouton_retour.pack(side=LEFT, padx=10)
 
             bouton_voir_commande = Button(button_frame, text="Voir la commande", font="Calibri", 
-                                            command=lambda index = restaurant_window : 
-                                            [refresh_restaurant_page(index), display_commande()])
+                                            command=lambda : 
+                                            [refresh_price(), display_commande()])
             bouton_voir_commande.pack(side=LEFT, padx=10)
 
             bouton_valide = Button(button_frame, text="Valider", font="Calibri", command=check_commande)
@@ -145,11 +141,11 @@ def main_window():
             global_total_price -= item[1]
             print(f"Item {item} supprimé")
 
-        def refresh_restaurant_page(window):
+        def refresh_price():
             """Efface tous les widgets et réexécute le code pour recréer la page.
                 et reafficher les elements du panier et la titre de la page 
             """
-            for widget in window.winfo_children():
+            for widget in main_user_window.winfo_children():
                 if widget != total_price_label:
                     widget.destroy()
 
@@ -168,19 +164,15 @@ def main_window():
                     print(f"Création du bouton pour l'élément {i}: {choice} au prix de {prix}")
 
                     # Création d'un bouton pour chaque élément de la liste
-                    button_of_choice = Button(restaurant_window, text=f"{choice}" + " " + f"{prix}  $", font="Calibri", 
+                    button_of_choice = Button(main_user_window, text=f"{choice}" + " " + f"{prix}  $", font="Calibri", 
                                                 command=lambda item=(choice, prix): 
-                                                [delete_in_global_list_total_price(item), refresh_restaurant_page(restaurant_window), 
+                                                [delete_in_global_list_total_price(item), refresh_price(), 
                                                 display_commande(), update_total_price()])
                     button_of_choice.pack(pady=10)
 
-            button_retour_comande = Button(restaurant_window, text="Retour", font="Calibri", command=lambda : 
-                                [refresh_restaurant_page(restaurant_window), display_menu()])
+            button_retour_comande = Button(main_user_window, text="Retour", font="Calibri", command=lambda : 
+                                [refresh_price(), display_menu()])
             button_retour_comande.pack(side=BOTTOM, pady=10)
-
-        def destroy_widgets():
-            for widget in restaurant_window.winfo_children():
-                widget.destroy()
 
 
         def temps_attente ():
@@ -195,11 +187,11 @@ def main_window():
             destroy_widgets()
 
             valide_message_text = f"Votre commande a bien été validée \n pour un montant de {global_total_price} $"
-            main_valide_text = Label(restaurant_window, text=valide_message_text, font=("Calibri", 20))
+            main_valide_text = Label(main_user_window, text=valide_message_text, font=("Calibri", 20))
             main_valide_text.pack(expand=True, anchor='center')
 
             temps_attente_text = f"Votre commande sera prête \n dans {temps_attente()} minutes"
-            main_temps_attente_text = Label(restaurant_window, text=temps_attente_text, font=("Calibri", 20))
+            main_temps_attente_text = Label(main_user_window, text=temps_attente_text, font=("Calibri", 20))
             main_temps_attente_text.pack(expand=True, anchor='center')
             
 
@@ -207,14 +199,16 @@ def main_window():
 
         def check_commande () : 
             if global_list_commande == [] : 
-                label_nothing = Label(restaurant_window, text="Votre panier est vide", font=("Calibri", 20))
+                label_nothing = Label(main_user_window, text="Votre panier est vide", font=("Calibri", 20))
                 label_nothing.pack(side=BOTTOM, pady=10)
                 label_nothing.after(2000, lambda : label_nothing.destroy())
             else : 
                 valide_message()
 
-        display_menu ()
-        main_user_window.mainloop()
+        display_menu()
+
+    display_restaurant_name()
+    main_user_window.mainloop()
 
 
 
