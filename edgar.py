@@ -7,6 +7,8 @@ couleur : noir --> #000000
         degradé lineaire 90°
 """
 def reset_commande():
+    global global_choice_price
+    global_choice_price = []
     global global_list_commande
     global_list_commande = []
     global total_price
@@ -54,7 +56,7 @@ def main_window():
                 open_restaurant_window prend i qui est index et qui se mais a jour a dynamiquement
             """
             Bouton_restaurant = Button(frame, text=restaurant["nom"], height=2, width=50, font="Calibri", 
-                command=lambda i=index: [restaurant_window(i), destroy_widgets(main_user_window)])
+                command=lambda i=index: [destroy_widgets(main_user_window), restaurant_window(i)])
             Bouton_restaurant.pack(pady=5)
 
 
@@ -67,14 +69,14 @@ def main_window():
         """
         
         
-        global global_choice_prix 
+        global global_choice_price 
         """            
             creation d'un tuple (choix, prix) pour pouvoir afficher le prix dans la commande
             la commande et le prix sont donc lié
         """
         for key in list(data[index]["menus"].keys()):
             prix = data[index]["menus"][key]["prix"]
-            global_choice_prix.append((key, prix))
+            global_choice_price.append((key, prix))
 
 
         def add_to_commande (choix, prix) : 
@@ -90,7 +92,7 @@ def main_window():
             
         def display_menu():
             global global_list_commande
-            for key, value in global_choice_prix:
+            for key, value in global_choice_price:
                 menu_button = Button(main_user_window, text=(f"{key} - {value} $" ), height=2, width=50, 
                                     command=lambda key=key, value=value: add_to_commande(key, value))
                 menu_button.pack(pady=10)
@@ -151,13 +153,13 @@ def main_window():
 
         def display_commande () :
             if global_list_commande == [] : 
-                label_nothing = Label(restaurant_window, text="Votre panier est vide", font="Calibri")
+                label_nothing = Label(main_user_window, text="Votre panier est vide", font="Calibri")
                 label_nothing.pack(pady=10)
                 
             else : 
-                main_commande_text = Label(restaurant_window, text="Votre panier :" , font=("Calibri", 20))
+                main_commande_text = Label(main_user_window, text="Votre panier :" , font=("Calibri", 20))
                 main_commande_text.pack()
-                sous_label_text = Label(restaurant_window, text="Appuiez pour supprimer", font=("Calibri", 10))
+                sous_label_text = Label(main_user_window, text="Appuiez pour supprimer", font=("Calibri", 10))
                 sous_label_text.pack()
 
                 for i, (choice, prix) in enumerate(global_list_commande):
@@ -184,7 +186,7 @@ def main_window():
 
 
         def valide_message ():
-            destroy_widgets()
+            destroy_widgets(main_user_window)
 
             valide_message_text = f"Votre commande a bien été validée \n pour un montant de {global_total_price} $"
             main_valide_text = Label(main_user_window, text=valide_message_text, font=("Calibri", 20))
@@ -215,7 +217,7 @@ def main_window():
 
 
 global_list_commande = []
-global_choice_prix = []
+global_choice_price = []
 global_total_price = 0
 
 main_window()
