@@ -27,7 +27,7 @@ def main_window():
     main_user_window.title("Bernard&co")
     main_user_window.geometry("412x700")
     main_user_window.iconbitmap("images/logo_bernard&co.ico")
-    main_user_window.configure(bg="#3533cd")
+    # main_user_window.configure(bg="#3533cd")
 
 
 
@@ -102,15 +102,15 @@ def open_restaurant_window(index):
         print(f"La {choix} a été ajoutée au panier au prix de {prix}.")
         update_total_price()
         
-    def diplay_menu():
+    def display_menu():
         global global_list_commande
         for key, value in global_choice_prix:
-            menu_button = Button(restaurant_window, text=(key + diplays_prix(key)), height=2, width=50, 
+            menu_button = Button(restaurant_window, text=(key + display_prix(key)), height=2, width=50, 
                                  command=lambda key=key, value=value: add_to_commande(key, value))
             menu_button.pack(pady=10)
         naviagtion_button()
 
-    def diplays_prix(key):
+    def display_prix(key):
         prix = data[index]["menus"][key]["prix"]
         return f"  {prix} $"
 
@@ -188,15 +188,16 @@ def open_restaurant_window(index):
                 button_of_choice.pack(pady=10)
 
         button_retour_comande = Button(restaurant_window, text="Retour", font="Calibri", command=lambda : 
-                            [refresh_restaurant_page(restaurant_window), diplay_menu()])
+                            [refresh_restaurant_page(restaurant_window), display_menu()])
         button_retour_comande.pack(side=BOTTOM, pady=10)
 
-
-
-    def valide_message ():
+    def destroy_widgets():
         for widget in restaurant_window.winfo_children():
             widget.destroy()
 
+
+    def valide_message ():
+        destroy_widgets()
 
         valide_message_text = f"Votre commande a bien été validée \n pour un montant de {global_total_price} $"
         main_valide_text = Label(restaurant_window, text=valide_message_text, font=("Calibri", 20))
@@ -211,7 +212,7 @@ def open_restaurant_window(index):
         else : 
             valide_message()
 
-    diplay_menu ()
+    display_menu ()
     restaurant_window.mainloop()
 
 
