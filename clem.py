@@ -196,12 +196,26 @@ def open_restaurant_window(index):
             widget.destroy()
 
 
+    def temps_attente ():
+        global global_list_commande
+        temps = 0 
+        for key, _ in global_list_commande : 
+            temps += data[index]["menus"][key]["temps"]
+        return temps
+
+
     def valide_message ():
         destroy_widgets()
 
         valide_message_text = f"Votre commande a bien été validée \n pour un montant de {global_total_price} $"
         main_valide_text = Label(restaurant_window, text=valide_message_text, font=("Calibri", 20))
         main_valide_text.pack(expand=True, anchor='center')
+
+        temps_attente_text = f"Votre commande sera prête \n dans {temps_attente()} minutes"
+        main_temps_attente_text = Label(restaurant_window, text=temps_attente_text, font=("Calibri", 20))
+        main_temps_attente_text.pack(expand=True, anchor='center')
+        
+
 
 
     def check_commande () : 
