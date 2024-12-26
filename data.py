@@ -44,17 +44,20 @@ formule_patus_1 = {
     "plat" : plat_patus,
     "dessert" : desserts_patus,
     "boisson" : boissons_patus,
-    "prix" : 12
+    "prix" : 12,
+    "temps" : 10
 }
 formule_patus_2 = { 
     "plat" : plat_patus,
     "dessert" : desserts_patus,
-    "prix" : 10
+    "prix" : 10,
+    "temps" : 7
 }
 formule_patus_3 = { 
     "plat" : plat_patus,
     "boisson" : boissons_patus,
-    "prix" : 9
+    "prix" : 9,
+    "temps" : 7
 }
 
 
