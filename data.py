@@ -129,18 +129,21 @@ petite_formule_casa = {
     "plat" : paninis_casa,
     "dessert" : desserts_casa, 
     "boisson" : boissons_casa,
-    "prix" : 12
+    "prix" : 12,
+    "temps" : 8
 }
 formule_XL_casa = {
     "plat" : paninis_XL_casa, 
     "boisson" : boissons_casa,
-    "prix" : 15
+    "prix" : 15,
+    "temps" : 15
 }
 garnde_formule_casa = {
     "plat" : grands_paninis_casa,
     "boisson" : boissons_casa,
     "dessert" : desserts_casa,
-    "prix" : 13.50
+    "prix" : 13.50,
+    "temps" : 10
 }
 
 menus_casa = {
@@ -213,18 +216,21 @@ boissons_grenier = {
 formule_grenier_1 = {
     "plat" : plats_grenier,
     "dessert" : desserts_grenier,
-    "prix" : 8 
+    "prix" : 8,
+    "temps" : 5 
 }
 formule_grenier_2 = {
     "plat" : plats_grenier,
     "boisson" : boissons_grenier,
-    "prix" : 8
+    "prix" : 8,
+    "temps" : 5
     }
 formule_grenier_3 = {
     "plat" : plats_grenier,
     "dessert" : desserts_grenier ,
     "boisson" : boissons_grenier,
-    "prix" : 10
+    "prix" : 10,
+    "temps" : 5
 }
 
 menus_grenier_a_pain = {
