@@ -8,8 +8,8 @@ couleur : noir --> #000000
         degradé lineaire 90°
 """
 def reset_commandes():
-    global global_choice_price
-    global_choice_price = []
+    global global_menus_price
+    global_menus_price = []
     global global_list_commande
     global_list_commande = []
     global total_price
@@ -55,7 +55,7 @@ def main_window():
                                                         restaurant_name eest donc facilement réutilisable 
         """
         
-        global global_choice_price 
+        global global_menus_price 
 
         """            
             creation d'un tuple (choix, prix) pour pouvoir afficher le prix dans la commande
@@ -63,7 +63,7 @@ def main_window():
         """
         for key in list(data[index]["menus"].keys()):
             prix = data[index]["menus"][key]["prix"]
-            global_choice_price.append((key, prix))
+            global_menus_price.append((key, prix))
 
 
         def add_to_commande (choix, prix) : 
@@ -77,7 +77,7 @@ def main_window():
         def display_the_menu (name, price):
             choice_the_menu_frame = Frame(main_user_window)
             choice_the_menu_frame.pack(expand=True)
-
+            global global_dico_final_choices
 
             for choice in list (data[index]["menus"][name] ) : 
                 if choice == "prix" or choice == "temps" : 
@@ -94,7 +94,7 @@ def main_window():
 
         def display_menus():
             global global_list_commande
-            for name, price in global_choice_price:
+            for name, price in global_menus_price:
                 menus_buttons = Button(main_user_window, text=(f"{name} - {price} $" ), height=2, width=50, 
                                     command=lambda name=name, price=price: display_the_menu(name, price))
                 menus_buttons.pack(pady=10)
@@ -207,8 +207,15 @@ def main_window():
 
 
 global_list_commande = []
-global_choice_price = []
+global_menus_price = []
 global_total_price = 0
+global_dico_final_choices = {
+    "name" : "",
+    "price" : 0,
+    "temps" : 0,
+    "plat" : "",
+    "dessert" : "",
+    "boisson" : ""
+}
 
 main_window()
-
