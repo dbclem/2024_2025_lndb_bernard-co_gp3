@@ -1,5 +1,6 @@
 from data import*
 from tkinter import*
+from tools import destroy_all_widgets
 
 """
 couleur : noir --> #000000
@@ -14,10 +15,6 @@ def reset_commandes():
     global total_price
     total_price = 0
     print("Panier vidé")
-
-def destroy_widgets(window):
-    for widget in window.winfo_children():
-        widget.destroy()
 
 
 def main_window():
@@ -46,7 +43,7 @@ def main_window():
                 open_restaurant_window prend i qui est index et qui se mais a jour a dynamiquement
             """
             restaurants_buttons = Button(restaurants_frame, text=restaurant["nom"], height=2, width=50, font="Calibri", 
-                command=lambda i=index: [destroy_widgets(main_user_window), restaurant_window(i)])
+                command=lambda i=index: [destroy_all_widgets(main_user_window), restaurant_window(i)])
             restaurants_buttons.pack(pady=5)
 
 
@@ -97,7 +94,7 @@ def main_window():
             nav_buttons_frame.pack(side=BOTTOM, pady=20)
 
             nav_retour_button = Button(nav_buttons_frame, text="Retour", font="Calibri", command=lambda window=main_user_window: 
-                                    [destroy_widgets(window), reset_commandes(), display_restaurants_names()])
+                                    [destroy_all_widgets(window), reset_commandes(), display_restaurants_names()])
             nav_retour_button.pack(side=LEFT, padx=10)
 
             nav_voir_commande_button = Button(nav_buttons_frame, text="Voir la commande", font="Calibri", 
@@ -164,7 +161,7 @@ def main_window():
             return temps
 
         def valide_message ():
-            destroy_widgets(main_user_window)
+            destroy_all_widgets(main_user_window)
 
             valide_message_text = f"Votre commande a bien été validée \n pour un montant de {global_total_price} $"
             main_valide_message_text = Label(main_user_window, text=valide_message_text, font=("Calibri", 20))
