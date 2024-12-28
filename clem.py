@@ -73,30 +73,44 @@ def main_window():
             global_total_price += prix
             print(f"La {choix} a été ajoutée au panier au prix de {prix}.")
             update_total_price()
+
+        def add_element_to_dico_final (element, key) :
+            global global_dico_final_choices
+            global_dico_final_choices[element] = key
+            print(global_dico_final_choices)
         
+        def element_in_commande (name, element, choice_the_menu_frame) :
+            main_element_frame = Frame(choice_the_menu_frame)
+            main_element_frame.pack(expand=True)
+            main_element_text = Label(main_element_frame, text=element, font=("Calibri", 10), underline=True)
+            main_element_text.pack(pady=10)
+            for key in list(data[index]["menus"][name][element].keys()) : 
+                element_buttons = Button(main_element_frame, text=key, height=2, width=50, 
+                                    command=lambda key=key, main_element_frame=main_element_frame: 
+                                    [add_element_to_dico_final(element, key), destroy_all_widgets(main_element_frame)])
+                element_buttons.pack(pady=10)
+
         def display_the_menu (name, price):
             choice_the_menu_frame = Frame(main_user_window)
             choice_the_menu_frame.pack(expand=True)
             global global_dico_final_choices
+            global_dico_final_choices["name"] = name
 
-            for choice in list (data[index]["menus"][name] ) : 
-                if choice == "prix" or choice == "temps" : 
-                    pass
+            for element in list (data[index]["menus"][name].keys()) : 
+                if element == "prix" or element == "temps" : 
+                    global_dico_final_choices["price"] = price
+                    global_dico_final_choices["temps"] = data[index]["menus"][name]["temps"]
                 else :
-                    choice_text = Label(choice_the_menu_frame, text=f"Choisissez votre {choice}", font="Calibri")
-                    choice_text.pack(pady=10)
-                    for subchoice in list (data[index]["menus"][name][choice].keys()) : 
-                        plats_button = Button(choice_the_menu_frame, text=subchoice, font="Calibri", 
-                                            command=lambda subchoice=subchoice: [add_to_commande(subchoice, price), 
-                                                                    destroy_all_widgets(choice_the_menu_frame)])
-                        plats_button.pack(pady=10)
+                    element_in_commande(name, element, choice_the_menu_frame)
+                    
             
 
         def display_menus():
             global global_list_commande
             for name, price in global_menus_price:
                 menus_buttons = Button(main_user_window, text=(f"{name} - {price} $" ), height=2, width=50, 
-                                    command=lambda name=name, price=price: display_the_menu(name, price))
+                                    command=lambda name=name, price=price:
+                                    [ display_the_menu(name, price)])
                 menus_buttons.pack(pady=10)
             naviagtion_button()
 
@@ -141,7 +155,7 @@ def main_window():
                     widget.destroy()
 
         def display_commande () :
-            if global_list_commande == [] : 
+            if global_dico_final_choices["name"] == "" : 
                 panier_vide_text = Label(main_user_window, text="Votre panier est vide", font="Calibri")
                 panier_vide_text.pack(pady=10)
                 
@@ -151,19 +165,24 @@ def main_window():
                 click_to_supp_text = Label(main_user_window, text="Appuiez pour supprimer", font=("Calibri", 10))
                 click_to_supp_text.pack()
 
-                for i, (choice, prix) in enumerate(global_list_commande):
-                    print(f"Création du bouton pour l'élément {i}: {choice} au prix de {prix}")
+                for key, value in global_dico_final_choices.items() : 
+                    if key != "name" and key != "price" and key != "temps" : 
+                        main_commande_text = Label(main_user_window, text=f"{key} : {value}", font=("Calibri", 10))
+                        main_commande_text.pack(pady=10)
 
-                    # Création d'un bouton pour chaque élément de la liste
-                    choiced_menu_button = Button(main_user_window, text=f"{choice}" + " " + f"{prix}  $", font="Calibri", 
-                                                command=lambda item=(choice, prix): 
-                                                [remove_in_global_list_command_total_price(item), refresh_price(), 
-                                                display_commande(), update_total_price()])
-                    choiced_menu_button.pack(pady=10)
+            #     for i, (choice, prix) in enumerate(global_list_commande):
+            #         print(f"Création du bouton pour l'élément {i}: {choice} au prix de {prix}")
 
-            retour_commande_button = Button(main_user_window, text="Retour", font="Calibri", command=lambda : 
-                                [refresh_price(), display_menus()])
-            retour_commande_button.pack(side=BOTTOM, pady=10)
+            #         # Création d'un bouton pour chaque élément de la liste
+            #         choiced_menu_button = Button(main_user_window, text=f"{choice}" + " " + f"{prix}  $", font="Calibri", 
+            #                                     command=lambda item=(choice, prix): 
+            #                                     [remove_in_global_list_command_total_price(item), refresh_price(), 
+            #                                     display_commande(), update_total_price()])
+            #         choiced_menu_button.pack(pady=10)
+
+            # retour_commande_button = Button(main_user_window, text="Retour", font="Calibri", command=lambda : 
+            #                     [refresh_price(), display_menus()])
+            # retour_commande_button.pack(side=BOTTOM, pady=10)
 
 
         def temps_attente ():
