@@ -31,28 +31,32 @@ def main_window():
     """
     global main_user_window
     main_user_window = Tk()
+    screen_width = main_user_window.winfo_screenwidth()
+    screen_height = main_user_window.winfo_screenheight()
     main_user_window.title("Bernard&co")
-    main_user_window.geometry("412x700")
+    main_user_window_width = screen_width // 2
+    main_user_window_height = screen_height
+    main_user_window.geometry(f"{main_user_window_width}x{main_user_window_height}")
     main_user_window.iconbitmap("images/logo_bernard&co.ico")
     # main_user_window.configure(bg="#3533cd")
 
 
 
     def display_restaurant_name () :  
-        main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 20))
+        main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 30))
         main_text.pack(expand=True)
         
 
 
         """creation d'une frame pour y placer seulement les boutons qui mène a des restaurants"""
-        frame = Frame(main_user_window, bg="#3533cd")
+        frame = Frame(main_user_window)
         frame.pack(expand=True)
 
 
 
         for index, restaurant in enumerate(data):
             image = Image.open(restaurant["image_path"])
-            image = image.resize((250, 150))  # Ajustez la taille de l'image
+            image = image.resize((300, 170))  # Ajustez la taille de l'image
             photo = ImageTk.PhotoImage(image)  # Convertir pour Tkinter
 
 
@@ -64,9 +68,7 @@ def main_window():
                 open_restaurant_window prend i qui est index et qui se mais a jour a dynamiquement
             """
             Bouton_restaurant = Button(frame, text=restaurant["nom"],
-                                       image = photo, compound = "left", padx = 20, height=170, width=450, font="Avenir", fg = "#000000",
-                                       # bg = "#000000", -> couleur de fond mais ça ne marche pas
-                                       #activebackground = "#3533cd", -> couleur de fond qui change quand on appuie sur le bouton mais ça ne marche pas
+                                       image = photo, compound = "right", padx = 100, height=170, width=820, font=("Avenir", 20), fg = "#000000",
                 command=lambda i=index: [destroy_widgets(main_user_window), restaurant_window(i)])
             Bouton_restaurant.image = photo
             Bouton_restaurant.pack(pady=5)
