@@ -72,7 +72,8 @@ patus_paninus = {
     "adresse" : "12 rue du Parchamp",
     "horaires" : horaires_patus,
     "avis" : 4.8,      
-    "menus" : menus_patus
+    "menus" : menus_patus,
+    "image_path" : "2024_2025_lndb_bernard-co_gp3/images/patus-paninus.jpeg"
 }
 #Patus paninus fin 
 
@@ -138,9 +139,8 @@ formule_XL_casa = {
     "prix" : 15,
     "temps" : 15
 }
-garnde_formule_casa = {
+grande_formule_casa = {
     "plat" : grands_paninis_casa,
-    "boisson" : boissons_casa,
     "dessert" : desserts_casa,
     "prix" : 13.50,
     "temps" : 10
@@ -149,7 +149,7 @@ garnde_formule_casa = {
 menus_casa = {
     "petite formule casa" : petite_formule_casa,
     "formule XL casa" : formule_XL_casa,
-    "garnde formule casa" : garnde_formule_casa 
+    "garnde formule casa" : grande_formule_casa 
 } 
 
 la_casa_del_panini = {
@@ -157,7 +157,8 @@ la_casa_del_panini = {
     "adresse" : "79 Avenue Jean Baptiste Clement",
     "horaires" : horaires_casa,
     "avis" : 4.8,      
-    "menus" : menus_casa 
+    "menus" : menus_casa,
+    "image_path" : "2024_2025_lndb_bernard-co_gp3/images/la_casa_del_panini.jpeg"
 }
 #Casa del panini fin
 
@@ -245,7 +246,8 @@ grenier_a_pain = {
     "adresse" : "12 rue du Parchamp",
     "horaires" : horaires_grenier_a_pain,
     "avis" : 4.8,      
-    "menus" : menus_grenier_a_pain
+    "menus" : menus_grenier_a_pain,
+    "image_path" : "2024_2025_lndb_bernard-co_gp3/images/le-grenier-a-pain.jpg" 
 } 
 #grenier a pain fin
 
