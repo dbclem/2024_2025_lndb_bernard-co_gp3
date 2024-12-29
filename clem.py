@@ -65,6 +65,13 @@ def main_window():
             prix = data[index]["menus"][key]["prix"]
             global_menus_price.append((key, prix))
 
+        def make_all_in_white(buttons):
+            for button in buttons:
+                button.config(bg="white")
+
+
+        def make_in_green(button):
+            button.config(bg="green")
 
         def add_to_commande (formule) : 
             global global_list_commande
@@ -82,22 +89,26 @@ def main_window():
                 choice_not_finished_text.after(2000, lambda : choice_not_finished_text.destroy())
             else : 
                 add_to_commande(dico_choices_in_the_menu)
-                
+                refresh_price(main_user_window)
+                display_menus()
+                print(global_list_commande)
 
         def add_element_to_dico_final (element, key, dico_choices_in_the_menu) :
             dico_choices_in_the_menu[element] = key
             
-        
         def element_in_commande (name, element, dico_choices_in_the_menu, choice_the_menu_frame) :
             main_element_frame = Frame(choice_the_menu_frame)
             main_element_frame.pack(expand=True)
             main_element_text = Label(main_element_frame, text=element, font=("Calibri", 10), underline=True)
             main_element_text.pack(pady=10)
+            buttons = []
             for key in list(data[index]["menus"][name][element].keys()) : 
-                element_buttons = Button(main_element_frame, text=key, height=2, width=50, 
-                                    command=lambda key=key : 
-                                    [add_element_to_dico_final(element, key, dico_choices_in_the_menu)])
-                element_buttons.pack(pady=10)
+                button = Button(main_element_frame, text=key, height=2, width=50, 
+                                    command=lambda key=key, button=button: 
+                                    [add_element_to_dico_final(element, key, dico_choices_in_the_menu),
+                                     make_all_in_white(buttons), make_in_green(button)])
+                button.pack(pady=10)
+                buttons.append(button)
 
         def display_the_menu (name, price):
             choice_the_menu_frame = Frame(main_user_window)
@@ -118,11 +129,14 @@ def main_window():
                 else :
                     element_in_commande(name, element, dico_choices_in_the_menu, choice_the_menu_frame)
 
-            retour_menus_button = Button(choice_the_menu_frame, text="Retour", font="Calibri", command=lambda : 
+            nav_in_the_menu_frame = Frame(choice_the_menu_frame)
+            nav_in_the_menu_frame.pack(side=BOTTOM, pady=10)
+            retour_menus_button = Button(nav_in_the_menu_frame, text="Retour", font="Calibri", command=lambda : 
                                          [destroy_all_widgets(choice_the_menu_frame), display_menus()])
-            retour_menus_button.pack(side=BOTTOM, pady=10)
-            valide_the_menu_button = Button(choice_the_menu_frame, text="Valider", font="Calibri", command=lambda : 
+            retour_menus_button.pack(side=LEFT, pady=10, padx=10)
+            valide_the_menu_button = Button(nav_in_the_menu_frame, text="Valider", font="Calibri", command=lambda : 
                                             [check_the_menu_not_empty(dico_choices_in_the_menu)]) 
+            valide_the_menu_button.pack(side=LEFT, pady=10, padx=10)
                     
             
 
@@ -131,7 +145,7 @@ def main_window():
             for name, price in global_menus_price:
                 menus_buttons = Button(main_user_window, text=(f"{name} - {price} $" ), height=2, width=50, 
                                     command=lambda name=name, price=price:
-                                    [destroy_all_widgets(main_user_window)
+                                    [refresh_price(main_user_window)
                                       ,display_the_menu(name, price)])
                 menus_buttons.pack(pady=10)
             naviagtion_button()
@@ -153,7 +167,7 @@ def main_window():
 
             nav_voir_commande_button = Button(nav_buttons_frame, text="Voir la commande", font="Calibri", 
                                             command=lambda : 
-                                            [refresh_price(), display_commande()])
+                                            [refresh_price(main_user_window), display_commande()])
             nav_voir_commande_button.pack(side=LEFT, padx=10)
 
             nav_valide_button = Button(nav_buttons_frame, text="Valider", font="Calibri", command=check_commande_not_empty)
@@ -161,23 +175,23 @@ def main_window():
 
 
 
-        def remove_in_global_list_command_total_price(item):
+        def remove_in_global_list_command_total_price(element):
             global global_list_commande
-            global_list_commande.remove(item)
+            global_list_commande.remove(element)
             global global_total_price
-            global_total_price -= item[1]
-            print(f"Item {item} supprimé")
+            global_total_price -= element["price"]
+            print(f"Item {element} supprimé")
 
-        def refresh_price():
+        def refresh_price(window):
             """Efface tous les widgets et réexécute le code pour recréer la page.
                 et reafficher les elements du panier et la titre de la page 
             """
-            for widget in main_user_window.winfo_children():
+            for widget in window.winfo_children():
                 if widget != total_price_label:
                     widget.destroy()
 
         def display_commande () :
-            if global_dico_final_choices["name"] == "" : 
+            if global_list_commande == [] : 
                 panier_vide_text = Label(main_user_window, text="Votre panier est vide", font="Calibri")
                 panier_vide_text.pack(pady=10)
                 
@@ -187,24 +201,19 @@ def main_window():
                 click_to_supp_text = Label(main_user_window, text="Appuiez pour supprimer", font=("Calibri", 10))
                 click_to_supp_text.pack()
 
-                for key, value in global_dico_final_choices.items() : 
-                    if key != "name" and key != "price" and key != "temps" : 
-                        main_commande_text = Label(main_user_window, text=f"{key} : {value}", font=("Calibri", 10))
-                        main_commande_text.pack(pady=10)
+                for element in global_list_commande:
+                    text = f"{element['name']} - {element['price']} $ \n {element['plat']} - {element['dessert']} - {element['boisson']}"
+                    element_of_commande_button = Button(main_user_window, text=text, font=("Calibri", 10), command=lambda : 
+                                                        [remove_in_global_list_command_total_price(element), refresh_price(main_user_window),
+                                                         display_commande(), update_total_price()])
+                    element_of_commande_button.pack(pady=10)
 
-            #     for i, (choice, prix) in enumerate(global_list_commande):
-            #         print(f"Création du bouton pour l'élément {i}: {choice} au prix de {prix}")
+            retour_commande_button = Button(main_user_window, text="Retour", font="Calibri", command=lambda : 
+                                [refresh_price(main_user_window), display_menus()])
+            retour_commande_button.pack(side=BOTTOM, pady=10)
 
-            #         # Création d'un bouton pour chaque élément de la liste
-            #         choiced_menu_button = Button(main_user_window, text=f"{choice}" + " " + f"{prix}  $", font="Calibri", 
-            #                                     command=lambda item=(choice, prix): 
-            #                                     [remove_in_global_list_command_total_price(item), refresh_price(), 
-            #                                     display_commande(), update_total_price()])
-            #         choiced_menu_button.pack(pady=10)
 
-            # retour_commande_button = Button(main_user_window, text="Retour", font="Calibri", command=lambda : 
-            #                     [refresh_price(), display_menus()])
-            # retour_commande_button.pack(side=BOTTOM, pady=10)
+            
 
 
         def temps_attente ():
@@ -215,8 +224,8 @@ def main_window():
             """
             global global_list_commande
             temps = 0 
-            for key, _ in global_list_commande : 
-                temps += data[index]["menus"][key]["temps"]
+            for key in global_list_commande : 
+                temps += key["temps"]
             return temps
 
         def valide_message ():
