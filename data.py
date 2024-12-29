@@ -149,7 +149,7 @@ grande_formule_casa = {
 menus_casa = {
     "petite formule casa" : petite_formule_casa,
     "formule XL casa" : formule_XL_casa,
-    "garnde formule casa" : garnde_formule_casa 
+    "garnde formule casa" : grande_formule_casa 
 } 
 
 la_casa_del_panini = {
