@@ -73,7 +73,7 @@ patus_paninus = {
     "horaires" : horaires_patus,
     "avis" : 4.8,      
     "menus" : menus_patus,
-    "image_path" : "2024_2025_lndb_bernard-co_gp3/images/patus-paninus.jpeg"
+    "image_path" : "2024_2025_lndb_bernard-co_gp3/images/patus-paninus.jpg"
 }
 #Patus paninus fin 
 
@@ -158,7 +158,7 @@ la_casa_del_panini = {
     "horaires" : horaires_casa,
     "avis" : 4.8,      
     "menus" : menus_casa,
-    "image_path" : "2024_2025_lndb_bernard-co_gp3/images/la_casa_del_panini.jpg"
+    "image_path" : "2024_2025_lndb_bernard-co_gp3/images/la_casa_del_panini.jpg" 
 }
 #Casa del panini fin
 
