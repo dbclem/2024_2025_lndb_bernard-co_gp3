@@ -65,13 +65,13 @@ def main_window():
             prix = data[index]["menus"][key]["prix"]
             global_menus_price.append((key, prix))
 
-        def make_all_in_white(buttons):
-            for button in buttons:
-                button.config(bg="white")
 
 
-        def make_in_green(button):
-            button.config(bg="green")
+
+        # def make_in_green(button):
+        #     global selected_button
+        #     button.config(bg="green")
+        #     selected_button = button
 
         def add_to_commande (formule) : 
             global global_list_commande
@@ -97,18 +97,23 @@ def main_window():
             dico_choices_in_the_menu[element] = key
             
         def element_in_commande (name, element, dico_choices_in_the_menu, choice_the_menu_frame) :
+            global selected_button
             main_element_frame = Frame(choice_the_menu_frame)
             main_element_frame.pack(expand=True)
             main_element_text = Label(main_element_frame, text=element, font=("Calibri", 10), underline=True)
             main_element_text.pack(pady=10)
-            buttons = []
             for key in list(data[index]["menus"][name][element].keys()) : 
-                button = Button(main_element_frame, text=key, height=2, width=50, 
-                                    command=lambda key=key, button=button: 
+                element_buttons = Button(main_element_frame, text=key, height=2, width=50, 
+                                    command=lambda key=key : 
                                     [add_element_to_dico_final(element, key, dico_choices_in_the_menu),
-                                     make_all_in_white(buttons), make_in_green(button)])
-                button.pack(pady=10)
-                buttons.append(button)
+                                      """update_selected_button(), element_buttons.config(bg="green"), 
+                                      selected_button == element_buttons"""])
+                element_buttons.pack(pady=10)
+
+        def update_selected_button():
+            global selected_button
+            if selected_button != None:
+                selected_button.config(bg="white")
 
         def display_the_menu (name, price):
             choice_the_menu_frame = Frame(main_user_window)
@@ -259,13 +264,6 @@ def main_window():
 global_list_commande = []
 global_menus_price = []
 global_total_price = 0
-global_dico_final_choices = {
-    "name" : "",
-    "price" : 0,
-    "temps" : 0,
-    "plat" : "",
-    "dessert" : "",
-    "boisson" : ""
-}
+selected_button = None
 
 main_window()
