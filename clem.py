@@ -66,42 +66,63 @@ def main_window():
             global_menus_price.append((key, prix))
 
 
-        def add_to_commande (choix, prix) : 
+        def add_to_commande (formule) : 
             global global_list_commande
             global global_total_price
-            global_list_commande.append((choix, prix))
-            global_total_price += prix
-            print(f"La {choix} a été ajoutée au panier au prix de {prix}.")
+            global_list_commande.append(formule)
+            global_total_price += formule["price"]
+            print(f"La {formule['name']} a été ajoutée au panier au prix de {formule['price']}.")
             update_total_price()
 
-        def add_element_to_dico_final (element, key) :
-            global global_dico_final_choices
-            global_dico_final_choices[element] = key
-            print(global_dico_final_choices)
+        def check_the_menu_not_empty(dico_choices_in_the_menu) : 
+            """fonction pas encore terminée : suggestion --> hecker si un bouton de chaque catégorie a été cliqué"""
+            if dico_choices_in_the_menu["plat"] == "" :
+                choice_not_finished_text = Label(main_user_window, text="Veuillez choisir un plat", font=("Calibri", 20))
+                choice_not_finished_text.pack(side=BOTTOM, pady=10)
+                choice_not_finished_text.after(2000, lambda : choice_not_finished_text.destroy())
+            else : 
+                add_to_commande(dico_choices_in_the_menu)
+                
+
+        def add_element_to_dico_final (element, key, dico_choices_in_the_menu) :
+            dico_choices_in_the_menu[element] = key
+            
         
-        def element_in_commande (name, element, choice_the_menu_frame) :
+        def element_in_commande (name, element, dico_choices_in_the_menu, choice_the_menu_frame) :
             main_element_frame = Frame(choice_the_menu_frame)
             main_element_frame.pack(expand=True)
             main_element_text = Label(main_element_frame, text=element, font=("Calibri", 10), underline=True)
             main_element_text.pack(pady=10)
             for key in list(data[index]["menus"][name][element].keys()) : 
                 element_buttons = Button(main_element_frame, text=key, height=2, width=50, 
-                                    command=lambda key=key, main_element_frame=main_element_frame: 
-                                    [add_element_to_dico_final(element, key), destroy_all_widgets(main_element_frame)])
+                                    command=lambda key=key : 
+                                    [add_element_to_dico_final(element, key, dico_choices_in_the_menu)])
                 element_buttons.pack(pady=10)
 
         def display_the_menu (name, price):
             choice_the_menu_frame = Frame(main_user_window)
             choice_the_menu_frame.pack(expand=True)
-            global global_dico_final_choices
-            global_dico_final_choices["name"] = name
+            dico_choices_in_the_menu = {
+                                        "name" : name,
+                                        "price" : 0,
+                                        "temps" : 0,
+                                        "plat" : "",
+                                        "dessert" : "",
+                                        "boisson" : ""
+                                    }
 
             for element in list (data[index]["menus"][name].keys()) : 
                 if element == "prix" or element == "temps" : 
-                    global_dico_final_choices["price"] = price
-                    global_dico_final_choices["temps"] = data[index]["menus"][name]["temps"]
+                    dico_choices_in_the_menu["price"] = price
+                    dico_choices_in_the_menu["temps"] = data[index]["menus"][name]["temps"]
                 else :
-                    element_in_commande(name, element, choice_the_menu_frame)
+                    element_in_commande(name, element, dico_choices_in_the_menu, choice_the_menu_frame)
+
+            retour_menus_button = Button(choice_the_menu_frame, text="Retour", font="Calibri", command=lambda : 
+                                         [destroy_all_widgets(choice_the_menu_frame), display_menus()])
+            retour_menus_button.pack(side=BOTTOM, pady=10)
+            valide_the_menu_button = Button(choice_the_menu_frame, text="Valider", font="Calibri", command=lambda : 
+                                            [check_the_menu_not_empty(dico_choices_in_the_menu)]) 
                     
             
 
@@ -110,7 +131,8 @@ def main_window():
             for name, price in global_menus_price:
                 menus_buttons = Button(main_user_window, text=(f"{name} - {price} $" ), height=2, width=50, 
                                     command=lambda name=name, price=price:
-                                    [ display_the_menu(name, price)])
+                                    [destroy_all_widgets(main_user_window)
+                                      ,display_the_menu(name, price)])
                 menus_buttons.pack(pady=10)
             naviagtion_button()
 

@@ -3,7 +3,7 @@ from tkinter import*
 from PIL import Image, ImageTk
 
 """
-couleur : noir --> #000000
+couleur : noir --> #FFFFFF
         bleu --> #3533cd
         degradé lineaire 90°
 police : Avenir
@@ -45,7 +45,7 @@ def main_window():
 
 
         """creation d'une frame pour y placer seulement les boutons qui mène a des restaurants"""
-        frame = Frame(main_user_window)
+        frame = Frame(main_user_window, bg="#3533cd")
         frame.pack(expand=True)
 
 
