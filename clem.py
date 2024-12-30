@@ -18,8 +18,8 @@ couleur : noir --> #000000
 
 
 def reset_commandes():
-    global global_menus_price
-    global_menus_price = []
+    global global_tuple_menu_price
+    global_tuple_menu_price = []
     global global_list_commande
     global_list_commande = []
     global total_price
@@ -65,26 +65,25 @@ def main_window():
                                                         restaurant_name eest donc facilement réutilisable 
         """
         
-        global global_menus_price 
-
+        global global_tuple_menu_price 
         """            
             creation d'un tuple (choix, prix) pour pouvoir afficher le prix dans la commande
             la commande et le prix sont donc lié
         """
         for key in list(data[index]["menus"].keys()):
             prix = data[index]["menus"][key]["prix"]
-            global_menus_price.append((key, prix))
+            global_tuple_menu_price.append((key, prix))
 
 
 
 
-        def on_button_click(index):
-            global global_buttons
-            # Remettre tous les boutons en blanc
-            for i, button in enumerate(global_buttons):
-                button.config(bg="white")
-            # Mettre le bouton cliqué en vert
-            global_buttons[index].config(bg="green")
+        # def on_button_click(index):
+        #     global global_buttons
+        #     # Remettre tous les boutons en blanc
+        #     for i, button in enumerate(global_buttons):
+        #         button.config(bg="white")
+        #     # Mettre le bouton cliqué en vert
+        #     global_buttons[index].config(bg="green")
 
         def add_to_commande (formule) : 
             global global_list_commande
@@ -110,18 +109,15 @@ def main_window():
             dico_choices_in_the_menu[element] = key
             
         def element_in_commande (name, element, dico_choices_in_the_menu, choice_the_menu_frame) :
-            main_element_frame = Frame(choice_the_menu_frame)
-            main_element_frame.pack(expand=True)
-            main_element_text = Label(main_element_frame, text=element, font=("Calibri", 10), underline=True)
+            main_element_text = Label(choice_the_menu_frame, text=element, font=("Calibri", 10), underline=True)
             main_element_text.pack(pady=10)
 
             global global_buttons
             global_buttons = []
             for i, key in enumerate(list(data[index]["menus"][name][element].keys())) : 
-                element_buttons = Button(main_element_frame, text=key, height=2, width=50, 
+                element_buttons = Button(choice_the_menu_frame, text=key, height=2, width=50, 
                                     command=lambda i=i, key=key : 
-                                    [add_element_to_dico_final(element, key, dico_choices_in_the_menu),
-                                      on_button_click(i)])
+                                    [add_element_to_dico_final(element, key, dico_choices_in_the_menu)])
                 element_buttons.pack(pady=10)
                 global_buttons.append(element_buttons)
 
@@ -156,15 +152,13 @@ def main_window():
             
 
         def display_menus():
-            global global_list_commande
-            for name, price in global_menus_price:
+            for name, price in global_tuple_menu_price:
                 menus_buttons = Button(main_user_window, text=(f"{name} - {price} $" ), height=2, width=50, 
                                     command=lambda name=name, price=price:
                                     [refresh_price(main_user_window)
                                       ,display_the_menu(name, price)])
                 menus_buttons.pack(pady=10)
             naviagtion_button()
-
 
         def update_total_price():
             total_price_label.config(text=f"Prix total : {global_total_price} $")    
@@ -187,7 +181,6 @@ def main_window():
 
             nav_valide_button = Button(nav_buttons_frame, text="Valider", font="Calibri", command=check_commande_not_empty)
             nav_valide_button.pack(side=LEFT, padx=10)
-
 
 
         def remove_in_global_list_command_total_price(element):
@@ -272,7 +265,7 @@ def main_window():
 
 
 global_list_commande = []
-global_menus_price = []
+global_tuple_menu_price = []
 global_total_price = 0
 global_buttons = []
 main_window()
