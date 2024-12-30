@@ -7,6 +7,16 @@ couleur : noir --> #000000
         bleu --> #3533cd
         degradé lineaire 90°
 """
+"""
+    pour cassandre :
+    tu peux commencer le design a partir de ca, la code apres va pas bcp bouger 
+    il reste deux problemes a regler : la couleur verte des boutons 
+    et la verification des choix dans le menu
+
+    et il reste a rajouter une option petit fain pour prendre qlq chode a l'unité
+"""
+
+
 def reset_commandes():
     global global_menus_price
     global_menus_price = []
@@ -68,10 +78,13 @@ def main_window():
 
 
 
-        # def make_in_green(button):
-        #     global selected_button
-        #     button.config(bg="green")
-        #     selected_button = button
+        def on_button_click(index):
+            global global_buttons
+            # Remettre tous les boutons en blanc
+            for i, button in enumerate(global_buttons):
+                button.config(bg="white")
+            # Mettre le bouton cliqué en vert
+            global_buttons[index].config(bg="green")
 
         def add_to_commande (formule) : 
             global global_list_commande
@@ -97,23 +110,20 @@ def main_window():
             dico_choices_in_the_menu[element] = key
             
         def element_in_commande (name, element, dico_choices_in_the_menu, choice_the_menu_frame) :
-            global selected_button
             main_element_frame = Frame(choice_the_menu_frame)
             main_element_frame.pack(expand=True)
             main_element_text = Label(main_element_frame, text=element, font=("Calibri", 10), underline=True)
             main_element_text.pack(pady=10)
-            for key in list(data[index]["menus"][name][element].keys()) : 
-                element_buttons = Button(main_element_frame, text=key, height=2, width=50, 
-                                    command=lambda key=key : 
-                                    [add_element_to_dico_final(element, key, dico_choices_in_the_menu),
-                                      """update_selected_button(), element_buttons.config(bg="green"), 
-                                      selected_button == element_buttons"""])
-                element_buttons.pack(pady=10)
 
-        def update_selected_button():
-            global selected_button
-            if selected_button != None:
-                selected_button.config(bg="white")
+            global global_buttons
+            global_buttons = []
+            for i, key in enumerate(list(data[index]["menus"][name][element].keys())) : 
+                element_buttons = Button(main_element_frame, text=key, height=2, width=50, 
+                                    command=lambda i=i, key=key : 
+                                    [add_element_to_dico_final(element, key, dico_choices_in_the_menu),
+                                      on_button_click(i)])
+                element_buttons.pack(pady=10)
+                global_buttons.append(element_buttons)
 
         def display_the_menu (name, price):
             choice_the_menu_frame = Frame(main_user_window)
@@ -264,6 +274,5 @@ def main_window():
 global_list_commande = []
 global_menus_price = []
 global_total_price = 0
-selected_button = None
-
+global_buttons = []
 main_window()
