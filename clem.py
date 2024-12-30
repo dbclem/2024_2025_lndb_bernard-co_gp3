@@ -108,22 +108,20 @@ def main_window():
         def add_element_to_dico_final (element, key, dico_choices_in_the_menu) :
             dico_choices_in_the_menu[element] = key
             
-        def element_in_commande (name, element, dico_choices_in_the_menu, choice_the_menu_frame) :
-            main_element_text = Label(choice_the_menu_frame, text=element, font=("Calibri", 10), underline=True)
+        def element_in_commande (name, element, dico_choices_in_the_menu) :
+            main_element_text = Label(main_user_window, text=element, font=("Calibri", 10), underline=True)
             main_element_text.pack(pady=10)
 
             global global_buttons
             global_buttons = []
             for i, key in enumerate(list(data[index]["menus"][name][element].keys())) : 
-                element_buttons = Button(choice_the_menu_frame, text=key, height=2, width=50, 
+                element_buttons = Button(main_user_window, text=key, height=2, width=50, 
                                     command=lambda i=i, key=key : 
                                     [add_element_to_dico_final(element, key, dico_choices_in_the_menu)])
                 element_buttons.pack(pady=10)
                 global_buttons.append(element_buttons)
 
         def display_the_menu (name, price):
-            choice_the_menu_frame = Frame(main_user_window)
-            choice_the_menu_frame.pack(expand=True)
             dico_choices_in_the_menu = {
                                         "name" : name,
                                         "price" : 0,
@@ -138,18 +136,20 @@ def main_window():
                     dico_choices_in_the_menu["price"] = price
                     dico_choices_in_the_menu["temps"] = data[index]["menus"][name]["temps"]
                 else :
-                    element_in_commande(name, element, dico_choices_in_the_menu, choice_the_menu_frame)
+                    element_in_commande(name, element, dico_choices_in_the_menu)
 
-            nav_in_the_menu_frame = Frame(choice_the_menu_frame)
+            nav_in_the_menu_frame = Frame(main_user_window)
             nav_in_the_menu_frame.pack(side=BOTTOM, pady=10)
             retour_menus_button = Button(nav_in_the_menu_frame, text="Retour", font="Calibri", command=lambda : 
-                                         [destroy_all_widgets(choice_the_menu_frame), display_menus()])
+                                         [destroy_all_widgets(main_user_window), display_menus()])
             retour_menus_button.pack(side=LEFT, pady=10, padx=10)
             valide_the_menu_button = Button(nav_in_the_menu_frame, text="Valider", font="Calibri", command=lambda : 
                                             [check_the_menu_not_empty(dico_choices_in_the_menu)]) 
             valide_the_menu_button.pack(side=LEFT, pady=10, padx=10)
                     
             
+        def display_petite_faim () : 
+            pass
 
         def display_menus():
             for name, price in global_tuple_menu_price:
@@ -158,6 +158,8 @@ def main_window():
                                     [refresh_price(main_user_window)
                                       ,display_the_menu(name, price)])
                 menus_buttons.pack(pady=10)
+            
+            display_petite_faim () 
             naviagtion_button()
 
         def update_total_price():
@@ -221,7 +223,7 @@ def main_window():
             retour_commande_button.pack(side=BOTTOM, pady=10)
 
 
-            
+             
 
 
         def temps_attente ():
