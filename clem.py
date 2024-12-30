@@ -13,7 +13,7 @@ couleur : noir --> #000000
     il reste deux problemes a regler : la couleur verte des boutons 
     et la verification des choix dans le menu
 
-    et il reste a rajouter une option petit fain pour prendre qlq chode a l'unité
+    et il reste a rajouter une option petit fain pour prendre qlq chode a l'unité   
 """
 
 
