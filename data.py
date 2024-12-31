@@ -10,23 +10,16 @@ horaires_patus = {
     "dimanche" : "Fermé",    
 }
 
-paninis_patus = { 
+plat_patus = { 
     "Tout Simple" : 7,
     "Végétarien" : 7,
-    "Burger" : 7
-}
-pâtes_patus = {
+    "Burger" : 7,
     "Carbo'" : 8,
     "Bolo'" : 8,
     "Mac n' cheese" : 8,
     "Pesto" : 8
 }
 
-
-plat_patus = {  
-    "paninis" : paninis_patus,
-    "pates" : pâtes_patus
-}
 desserts_patus = {
     "Cookie froid" : 3,
     "Cookie chaud" : 3,
@@ -41,20 +34,20 @@ boissons_patus = {
 }
 
 formule_patus_1 = {
-    "plat" : paninis_patus,
+    "plat" : plat_patus,
     "dessert" : desserts_patus,
     "boisson" : boissons_patus,
     "prix" : 12,
     "temps" : 10
 }
 formule_patus_2 = { 
-    "plat" : paninis_patus,
+    "plat" : plat_patus,
     "dessert" : desserts_patus,
     "prix" : 10,
     "temps" : 7
 }
 formule_patus_3 = { 
-    "plat" : paninis_patus,
+    "plat" : plat_patus,
     "boisson" : boissons_patus,
     "prix" : 9,
     "temps" : 7

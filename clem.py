@@ -22,6 +22,8 @@ def reset_commandes():
     global_tuple_menu_price = []
     global global_list_commande
     global_list_commande = []
+    global global_dico_all_choices_price
+    global_dico_all_choices_price = []
     global total_price
     total_price = 0
     print("Panier vidé")
@@ -73,6 +75,37 @@ def main_window():
         for key in list(data[index]["menus"].keys()):
             prix = data[index]["menus"][key]["prix"]
             global_tuple_menu_price.append((key, prix))
+
+
+        global global_dico_all_choices_price
+        unique_items = set()
+        """
+            ici set permet de ne pas avoir de doublon dans les choix
+        """
+        for menu_name, menu in data[index]["menus"].items():
+            for item_name, item_price in menu["plat"].items():
+                dico_for_each_choice = {
+                    "name": item_name,
+                    "price": item_price,
+                }
+                unique_items.add(tuple(dico_for_each_choice.items()))
+            if "dessert" in menu:
+                for item_name, item_price in menu["dessert"].items():
+                    dico_for_each_choice = {
+                        "name": item_name,
+                        "price": item_price,
+                    }
+                    unique_items.add(tuple(dico_for_each_choice.items()))
+            if "boisson" in menu:
+                for item_name, item_price in menu["boisson"].items():
+                    dico_for_each_choice = {
+                        "name": item_name,
+                        "price": item_price,
+                    }
+                    unique_items.add(tuple(dico_for_each_choice.items()))
+
+        # Convertir les tuples de retour en dictionnaires
+        global_dico_all_choices_price = [dict(item) for item in unique_items]
 
 
 
@@ -149,7 +182,22 @@ def main_window():
                     
             
         def display_petite_faim () : 
-            pass
+            nav_petite_faim_frame = Frame(main_user_window)    
+            nav_petite_faim_frame.pack(side=TOP, pady=10)
+            retour_petite_faim_button = Button(nav_petite_faim_frame, text="Retour", font="Calibri", command=lambda :
+                                            [refresh_price(main_user_window), display_menus()]) 
+            retour_petite_faim_button.pack(side=LEFT, pady=10, padx=10)
+
+            for element in global_dico_all_choices_price:
+                petite_faim_buttons = Button(main_user_window, text=(f"{element['name']} - {element['price']} $" ), height=2, width=50, 
+                                    command=lambda element=element:
+                                    [add_to_commande(element), refresh_price(main_user_window),
+                                     update_total_price(), display_petite_faim(),
+                                     print(global_list_commande)])
+                petite_faim_buttons.pack(pady=10)
+
+
+                  
 
         def display_menus():
             for name, price in global_tuple_menu_price:
@@ -159,7 +207,10 @@ def main_window():
                                       ,display_the_menu(name, price)])
                 menus_buttons.pack(pady=10)
             
-            display_petite_faim () 
+            petite_faim_button = Button(main_user_window, text="Petite faim", height=2, width=50, 
+                                    command=lambda : 
+                                    [refresh_price(main_user_window), display_petite_faim()])
+            petite_faim_button.pack(pady=10)
             naviagtion_button()
 
         def update_total_price():
@@ -212,7 +263,10 @@ def main_window():
                 click_to_supp_text.pack()
 
                 for element in global_list_commande:
-                    text = f"{element['name']} - {element['price']} $ \n {element['plat']} - {element['dessert']} - {element['boisson']}"
+                    if "plat" not in element : 
+                        text = f"{element['name']} - {element['price']} $"
+                    else :
+                        text = f"{element['name']} - {element['price']} $ \n {element['plat']} - {element['dessert']} - {element['boisson']}"
                     element_of_commande_button = Button(main_user_window, text=text, font=("Calibri", 10), command=lambda : 
                                                         [remove_in_global_list_command_total_price(element), refresh_price(main_user_window),
                                                          display_commande(), update_total_price()])
@@ -235,7 +289,11 @@ def main_window():
             global global_list_commande
             temps = 0 
             for key in global_list_commande : 
-                temps += key["temps"]
+                if key["temps"] not in key :
+                    if key["name"] in data[index]["menus"] :
+                        temps += data[index]["menus"][key]["temps"] 
+                else : 
+                    temps += key["temps"]
             return temps
 
         def valide_message ():
@@ -268,6 +326,6 @@ def main_window():
 
 global_list_commande = []
 global_tuple_menu_price = []
+global_dico_all_choices_price = []
 global_total_price = 0
-global_buttons = []
 main_window()
