@@ -155,6 +155,15 @@ def main_window():
                 global_buttons.append(element_buttons)
 
         def display_the_menu (name, price):
+            nav_in_the_menu_frame = Frame(main_user_window)
+            nav_in_the_menu_frame.pack(side=TOP, pady=10)
+            retour_menus_button = Button(nav_in_the_menu_frame, text="Retour", font="Calibri", command=lambda : 
+                                         [destroy_all_widgets(main_user_window), display_menus()])
+            retour_menus_button.pack(side=LEFT, pady=10, padx=10)
+            valide_the_menu_button = Button(nav_in_the_menu_frame, text="Valider", font="Calibri", command=lambda : 
+                                            [check_the_menu_not_empty(dico_choices_in_the_menu)]) 
+            valide_the_menu_button.pack(side=LEFT, pady=10, padx=10)
+                    
             dico_choices_in_the_menu = {
                                         "name" : name,
                                         "price" : 0,
@@ -171,15 +180,7 @@ def main_window():
                 else :
                     element_in_commande(name, element, dico_choices_in_the_menu)
 
-            nav_in_the_menu_frame = Frame(main_user_window)
-            nav_in_the_menu_frame.pack(side=BOTTOM, pady=10)
-            retour_menus_button = Button(nav_in_the_menu_frame, text="Retour", font="Calibri", command=lambda : 
-                                         [destroy_all_widgets(main_user_window), display_menus()])
-            retour_menus_button.pack(side=LEFT, pady=10, padx=10)
-            valide_the_menu_button = Button(nav_in_the_menu_frame, text="Valider", font="Calibri", command=lambda : 
-                                            [check_the_menu_not_empty(dico_choices_in_the_menu)]) 
-            valide_the_menu_button.pack(side=LEFT, pady=10, padx=10)
-                    
+
             
         def display_petite_faim () : 
             nav_petite_faim_frame = Frame(main_user_window)    
@@ -267,7 +268,7 @@ def main_window():
                         text = f"{element['name']} - {element['price']} $"
                     else :
                         text = f"{element['name']} - {element['price']} $ \n {element['plat']} - {element['dessert']} - {element['boisson']}"
-                    element_of_commande_button = Button(main_user_window, text=text, font=("Calibri", 10), command=lambda : 
+                    element_of_commande_button = Button(main_user_window, text=text, font=("Calibri", 10), command=lambda element=element: 
                                                         [remove_in_global_list_command_total_price(element), refresh_price(main_user_window),
                                                          display_commande(), update_total_price()])
                     element_of_commande_button.pack(pady=10)
@@ -277,25 +278,6 @@ def main_window():
             retour_commande_button.pack(side=BOTTOM, pady=10)
 
 
-             
-
-
-        def temps_attente ():
-            """
-                Calcul du temps d'attente en fonction des menus choisis
-                key --> nom du menu
-                _ --> valeur du menu qui n'est pas utilisé
-            """
-            global global_list_commande
-            temps = 0 
-            for key in global_list_commande : 
-                if key["temps"] not in key :
-                    if key["name"] in data[index]["menus"] :
-                        temps += data[index]["menus"][key]["temps"] 
-                else : 
-                    temps += key["temps"]
-            return temps
-
         def valide_message ():
             destroy_all_widgets(main_user_window)
 
@@ -303,10 +285,6 @@ def main_window():
             main_valide_message_text = Label(main_user_window, text=valide_message_text, font=("Calibri", 20))
             main_valide_message_text.pack(expand=True, anchor='center')
 
-            temps_attente_text = f"Votre commande sera prête \n dans {temps_attente()} minutes"
-            main_temps_attente_text = Label(main_user_window, text=temps_attente_text, font=("Calibri", 20))
-            main_temps_attente_text.pack(expand=True, anchor='center')
-            
         def check_commande_not_empty () : 
             if global_list_commande == [] : 
                 panier_vide_text = Label(main_user_window, text="Votre panier est vide", font=("Calibri", 20))
