@@ -82,7 +82,7 @@ def main_window():
         """
             ici set permet de ne pas avoir de doublon dans les choix
         """
-        for menu_name, menu in data[index]["menus"].items():
+        for menu_keys, menu in data[index]["menus"].items():
             for item_name, item_price in menu["plat"].items():
                 dico_for_each_choice = {
                     "name": item_name,
@@ -109,15 +109,6 @@ def main_window():
 
 
 
-
-        # def on_button_click(index):
-        #     global global_buttons
-        #     # Remettre tous les boutons en blanc
-        #     for i, button in enumerate(global_buttons):
-        #         button.config(bg="white")
-        #     # Mettre le bouton cliqué en vert
-        #     global_buttons[index].config(bg="green")
-
         def add_to_commande (formule) : 
             global global_list_commande
             global global_total_price
@@ -142,24 +133,23 @@ def main_window():
             dico_choices_in_the_menu[element] = key
             
         def element_in_commande (name, element, dico_choices_in_the_menu) :
-            main_element_text = Label(main_user_window, text=element, font=("Calibri", 10), underline=True)
+            main_element_text = Label(main_user_window, text=element, font=("Calibri", 10))
             main_element_text.pack(pady=10)
 
-            global global_buttons
-            global_buttons = []
-            for i, key in enumerate(list(data[index]["menus"][name][element].keys())) : 
+            for key in list(data[index]["menus"][name][element].keys()) : 
                 element_buttons = Button(main_user_window, text=key, height=2, width=50, 
-                                    command=lambda i=i, key=key : 
+                                    command=lambda key=key : 
                                     [add_element_to_dico_final(element, key, dico_choices_in_the_menu)])
                 element_buttons.pack(pady=10)
-                global_buttons.append(element_buttons)
 
         def display_the_menu (name, price):
             nav_in_the_menu_frame = Frame(main_user_window)
             nav_in_the_menu_frame.pack(side=TOP, pady=10)
+
             retour_menus_button = Button(nav_in_the_menu_frame, text="Retour", font="Calibri", command=lambda : 
                                          [destroy_all_widgets(main_user_window), display_menus()])
             retour_menus_button.pack(side=LEFT, pady=10, padx=10)
+            
             valide_the_menu_button = Button(nav_in_the_menu_frame, text="Valider", font="Calibri", command=lambda : 
                                             [check_the_menu_not_empty(dico_choices_in_the_menu)]) 
             valide_the_menu_button.pack(side=LEFT, pady=10, padx=10)
