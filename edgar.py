@@ -45,7 +45,7 @@ def main_operateur_window():
 
     # Label des commandes terminées
     label_commande = Label(commande_frame, text="Commandes terminées", font=("Helvetica", 15), bg="white")
-    label_commande.pack(padx=100, pady=10)
+    label_commande.pack(padx=85, pady=10)
 
     operateur_window.mainloop()
 
