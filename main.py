@@ -1,5 +1,6 @@
 from data import*
 from tkinter import*
+from edgar import main_operateur_window
 from tools import destroy_all_widgets
 from PIL import Image, ImageTk
 
@@ -45,8 +46,33 @@ def main_window():
     main_user_window.iconbitmap("images/logo_bernard&co.ico")
     # main_user_window.configure(bg="#3533cd")
 
+    def validate_admin(username, password) : 
+        if username == dico_mdp["username"] and password == dico_mdp["password"] : 
+            main_user_window.destroy()
+            main_operateur_window()
+
+    def display_admin_check() : 
+        destroy_all_widgets(main_user_window)
+            # Ajouter un label et un champ de texte pour le nom d'utilisateur
+        username_label = Label(main_user_window, text="Nom d'utilisateur", font=("Avenir", 12))
+        username_label.pack(pady=5)
+        username_entry = Entry(main_user_window, font=("Avenir", 12))
+        username_entry.pack(pady=5)
+        
+        # Ajouter un label et un champ de texte pour le mot de passe
+        password_label = Label(main_user_window, text="Mot de passe", font=("Avenir", 12))
+        password_label.pack(pady=5)
+        password_entry = Entry(main_user_window, show="*", font=("Avenir", 12))
+        password_entry.pack(pady=5)
+    
+        # Ajouter un bouton de validation
+        validate_button = Button(main_user_window, text="Valider", font=("Avenir", 12), command=lambda: validate_admin(username_entry.get(), password_entry.get()))
+        validate_button.pack(pady=10)
 
     def display_restaurants_names () :  
+        admin_button = Button(main_user_window, text="Admin", font=("Avenir", 10), command=lambda : display_admin_check())
+        admin_button.pack(side=TOP, pady=10)
+
         main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 20))
         main_text.pack(expand=True)
 
@@ -70,6 +96,8 @@ def main_window():
             Bouton_restaurant.image = photo
             Bouton_restaurant.pack(pady=5)
             #add picture of restaurant
+        
+
 
 
     def restaurant_window(index):
