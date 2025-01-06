@@ -1,0 +1,23 @@
+
+fenetre client opérationel :
+    choix du restaurant 
+    proposition de toutes les formules possibles ou des choix a l'unité
+    les choix sont ajoutés à un panier 
+    possiblité de retirer les elements qu'on veut 
+    enfin pouvoir valider pour envoyer la commande au restaurant 
+    le prix est réactif et affiché en bas de page 
+    images ajoutées à la page main
+    
+
+
+    problèmes:
+    -temps petites faim
+    -indicateur visiuels sélection des éléments du menu
+    -si l'ensemble des éléments sont choisi, le menu peut être ajouté
+    -scroll à ajouté
+
+
+
+
+
+
