@@ -7,7 +7,6 @@ fenetre client opérationel :
     enfin pouvoir valider pour envoyer la commande au restaurant 
     le prix est réactif et affiché en bas de page 
     images ajoutées à la page main
-    
 
 
     problèmes:
@@ -15,6 +14,12 @@ fenetre client opérationel :
     -indicateur visiuels sélection des éléments du menu
     -si l'ensemble des éléments sont choisi, le menu peut être ajouté
     -scroll à ajouté
+
+fenetre opérateur : 
+    WIP
+    une partie de notre travail pour les prochaines semaines 
+
+Nous avons effectué 50% de notre objectif 
 
 
 
