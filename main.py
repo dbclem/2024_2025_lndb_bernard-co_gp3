@@ -1,6 +1,6 @@
 from data import*
 from tkinter import*
-from edgar import main_operateur_window
+# from edgar import main_operateur_window
 from tools import destroy_all_widgets
 from PIL import Image, ImageTk
 
@@ -49,23 +49,21 @@ def main_window():
     def validate_admin(username, password) : 
         if username == dico_mdp["username"] and password == dico_mdp["password"] : 
             main_user_window.destroy()
-            main_operateur_window()
+            """main_operateur_window()"""
 
     def display_admin_check() : 
         destroy_all_widgets(main_user_window)
-            # Ajouter un label et un champ de texte pour le nom d'utilisateur
+
         username_label = Label(main_user_window, text="Nom d'utilisateur", font=("Avenir", 12))
         username_label.pack(pady=5)
         username_entry = Entry(main_user_window, font=("Avenir", 12))
         username_entry.pack(pady=5)
         
-        # Ajouter un label et un champ de texte pour le mot de passe
         password_label = Label(main_user_window, text="Mot de passe", font=("Avenir", 12))
         password_label.pack(pady=5)
         password_entry = Entry(main_user_window, show="*", font=("Avenir", 12))
         password_entry.pack(pady=5)
     
-        # Ajouter un bouton de validation
         validate_button = Button(main_user_window, text="Valider", font=("Avenir", 12), command=lambda: validate_admin(username_entry.get(), password_entry.get()))
         validate_button.pack(pady=10)
 
@@ -214,6 +212,9 @@ def main_window():
 
             
         def display_petite_faim () : 
+            Scrollbar_petite_faim = Scrollbar(main_user_window, orient=VERTICAL)
+            Scrollbar_petite_faim.pack(side=RIGHT, fill=Y)
+
             nav_petite_faim_frame = Frame(main_user_window)    
             nav_petite_faim_frame.pack(side=TOP, pady=10)
             retour_petite_faim_button = Button(nav_petite_faim_frame, text="Retour", font="Avenir", command=lambda :
