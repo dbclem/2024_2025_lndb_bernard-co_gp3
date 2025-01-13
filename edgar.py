@@ -1,4 +1,5 @@
 from tkinter import *
+from main import global_list_commande
 
 
 def main_operateur_window():
@@ -46,6 +47,53 @@ def main_operateur_window():
     # Label des commandes terminées
     label_commande = Label(commande_frame, text="Commandes terminées", font=("Helvetica", 15), bg="white")
     label_commande.pack(padx=85, pady=10)
+
+
+    def add_command_from_user_window ():
+        """
+        Fonction qui affiche la fenêtre pour ajouter une commande
+        """
+        global add_command_window
+        add_command_window = Toplevel(operateur_window)
+        add_command_window.title("Ajouter une commande")
+        add_command_window.geometry("500x500")
+        add_command_window.config(bg="white")
+        add_command_window.resizable(False, False)
+
+        # creation de la frame principale
+        add_command_frame = Frame(add_command_window, bg="white")
+        add_command_frame.pack(fill=BOTH, expand=True)
+
+        # Label de la page
+        label = Label(add_command_frame, text="Ajouter une commande", font=("Helvetica", 20), bg="white")
+        label.pack(pady=20)
+
+        # creation de la frame des plats
+        plat_frame = Frame(add_command_frame, bg="white", width=500, height=500, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        plat_frame.pack(side=LEFT, expand=True)
+
+        # Label des plats
+        label_plat = Label(plat_frame, text="Plats", font=("Helvetica", 15), bg="white")
+        label_plat.pack(padx=100, pady=10)
+
+        # creation de la frame des desserts
+        dessert_frame = Frame(add_command_frame, bg="white", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        dessert_frame.pack(side=LEFT, expand=True)
+
+        # Label des desserts
+        label_dessert = Label(dessert_frame, text="Desserts", font=("Helvetica", 15), bg="white")
+        label_dessert.pack(padx=100, pady=10)
+
+        # creation de la frame des boissons
+        boisson_frame = Frame(add_command_frame, bg="white", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        boisson_frame.pack(side=LEFT, expand=True)
+
+        # Label des boissons
+        label_boisson = Label(boisson_frame, text="Boissons", font=("Helvetica", 15), bg="white")
+        label_boisson.pack(padx=85, pady=10)
+
+        # creation de la frame des boutons
+        button_frame = Frame(add_command_frame, bg="white", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)        
 
     operateur_window.mainloop()
 
