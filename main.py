@@ -267,6 +267,10 @@ def main_window():
 
             nav_valide_button = Button(nav_buttons_frame, text="Valider", font="Avenir", command=check_commande_not_empty)
             nav_valide_button.pack(side=LEFT, padx=10)
+            def change_button_color(event):
+                nav_valide_button.config(bg="green")  
+            nav_valide_button.bind("<Button-1>", change_button_color)
+
 
 
         def remove_in_global_list_command_total_price(element):
