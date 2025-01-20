@@ -127,7 +127,7 @@ def main_window():
                     "name": item_name,
                     "price": item_price,
                 }
-                unique_items.add(tuple(dico_for_each_choice.items()))
+                unique_items.add(tuple(sorted(dico_for_each_choice.items())))
             if "dessert" in menu:
                 for item_name, item_price in menu["dessert"].items():
                     dico_for_each_choice = {
@@ -157,9 +157,19 @@ def main_window():
             update_total_price()
 
         def check_the_menu_not_empty(dico_choices_in_the_menu) : 
-            """fonction pas encore terminée : suggestion --> hecker si un bouton de chaque catégorie a été cliqué"""
-            if dico_choices_in_the_menu["plat"] == "" :
-                choice_not_finished_text = Label(main_user_window, text="Veuillez choisir un plat", font=("Avenir", 20))
+            """fonction pas encore terminée : suggestion --> checker si un bouton de chaque catégorie a été cliqué"""
+            
+            need_to_verif = True
+            is_not_valid = False
+            while need_to_verif :
+                for value in dico_choices_in_the_menu.values() :
+                    if value == "" :
+                        is_not_valid = True
+                        need_to_verif = False
+                need_to_verif = False
+
+            if is_not_valid :
+                choice_not_finished_text = Label(main_user_window, text="Vous n'avez pas fini votre commande !", font=("Avenir", 20))
                 choice_not_finished_text.pack(side=BOTTOM, pady=10)
                 choice_not_finished_text.after(2000, lambda : choice_not_finished_text.destroy())
             else : 
@@ -198,8 +208,6 @@ def main_window():
                                         "price" : 0,
                                         "temps" : 0,
                                         "plat" : "",
-                                        "dessert" : "",
-                                        "boisson" : ""
                                     }
 
             for element in list (data[index]["menus"][name].keys()) : 
