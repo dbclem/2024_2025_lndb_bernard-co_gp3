@@ -1,5 +1,5 @@
 from tkinter import *
-
+from main import *
 
 def main_operateur_window():
     """
@@ -47,6 +47,15 @@ def main_operateur_window():
     label_commande = Label(commande_frame, text="Commandes terminées", font=("Helvetica", 15), bg="white")
     label_commande.pack(padx=85, pady=10)
 
+
+    global_list_commande = [dico.keys() for dico in global_list_commande]
+    # creation de la fonction qui ajoute les commandes demandées
+    def add_commandes ():
+        global_list_commande
+        for commande in global_list_commande:
+            commande_label = Label(demande_frame, text=commande, font=("Helvetica", 10), bg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
+            commande_label.pack(pady=10)
+    add_commandes()
     operateur_window.mainloop()
 
 main_operateur_window()
