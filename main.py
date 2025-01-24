@@ -283,6 +283,7 @@ def main_window():
 
             nav_valide_button = Button(nav_buttons_frame, text="Valider", font="Avenir", command=check_commande_not_empty)
             nav_valide_button.pack(side=LEFT, padx=10)
+            
             def change_button_color(event):
                 nav_valide_button.config(bg="green")  
             nav_valide_button.bind("<Button-1>", change_button_color)
@@ -332,17 +333,19 @@ def main_window():
 
         def valide_message (index):
             destroy_all_widgets(main_user_window)
+            frame_nav_valide = Frame(main_user_window)
+            frame_nav_valide.pack(side=TOP, pady=10)
 
             valide_message_text = f"Votre commande a bien été validée \n pour un montant de {global_total_price} €"
             main_valide_message_text = Label(main_user_window, text=valide_message_text, font=("Avenir", 20))
             main_valide_message_text.pack(expand=True, anchor='center')
 
-            retour_a_la_commande_button = Button(main_user_window, text="revenir a la commande", font=("Avenir", 10),
+            retour_a_la_commande_button = Button(frame_nav_valide, text="revenir a la commande", font=("Avenir", 10),
                                                  command= lambda i=index : [destroy_all_widgets(main_user_window), restaurant_window(i)])
-            retour_a_la_commande_button.pack(side=LEFT)
-            nouvelle_commande_button = Button(main_user_window, text="Faire une nouvelle commande", font=("Avenir", 10),
-                                                 command= lambda : [main_user_window.destroy(), main_window])
-            nouvelle_commande_button.pack(side=LEFT)
+            retour_a_la_commande_button.pack(side=LEFT, padx=10)
+            nouvelle_commande_button = Button(frame_nav_valide, text="Faire une nouvelle commande", font=("Avenir", 10),
+                                                 command= lambda : [main_user_window.destroy(), reset_commandes(), main_window()])
+            nouvelle_commande_button.pack(side=LEFT, padx=10)
 
 
         def check_commande_not_empty () : 
@@ -351,7 +354,7 @@ def main_window():
                 panier_vide_text.pack(side=BOTTOM, pady=10)
                 panier_vide_text.after(2000, lambda : panier_vide_text.destroy())
             else : 
-                valide_message()
+                valide_message(index)
 
         display_menus()
 

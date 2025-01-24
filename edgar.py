@@ -1,6 +1,8 @@
 from tkinter import *
 from main import *
 
+global_list_commande_user = []
+
 def main_operateur_window():
     """
     Fonction qui affiche la fenêtre de l'opérateur
@@ -15,6 +17,13 @@ def main_operateur_window():
     operateur_window.geometry(f"{operateur_window_width}x{operateur_window_height}")
     operateur_window.config(bg="white")
     
+    def add_global_list_command_user(global_list_commande):
+        global global_list_commande_user
+        if global_list_commande_user != global_list_commande:
+            global_list_commande_user.append(global_list_commande)
+        return global_list_commande_user
+    add_global_list_command_user(global_list_commande)
+
     # creation de la frame principale
     main_frame = Frame(operateur_window, bg="white")
     main_frame.pack(fill=BOTH, expand=True)
@@ -47,15 +56,15 @@ def main_operateur_window():
     label_commande = Label(commande_frame, text="Commandes terminées", font=("Helvetica", 15), bg="white")
     label_commande.pack(padx=85, pady=10)
 
-
-    global_list_commande = [dico.keys() for dico in global_list_commande]
     # creation de la fonction qui ajoute les commandes demandées
     def add_commandes ():
-        global_list_commande
-        for commande in global_list_commande:
+        global_list_commande_user
+        for commande in global_list_commande_user :
             commande_label = Label(demande_frame, text=commande, font=("Helvetica", 10), bg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
             commande_label.pack(pady=10)
     add_commandes()
     operateur_window.mainloop()
+
+    
 
 main_operateur_window()
