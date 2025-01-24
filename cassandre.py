@@ -127,7 +127,7 @@ def main_window():
                     "name": item_name,
                     "price": item_price,
                 }
-                unique_items.add(tuple(dico_for_each_choice.items()))
+                unique_items.add(tuple(sorted(dico_for_each_choice.items())))
             if "dessert" in menu:
                 for item_name, item_price in menu["dessert"].items():
                     dico_for_each_choice = {
@@ -157,19 +157,19 @@ def main_window():
             update_total_price()
 
         def check_the_menu_not_empty(dico_choices_in_the_menu) : 
-            """fonction pas encore terminée : suggestion --> hecker si un bouton de chaque catégorie a été cliqué"""
-            if dico_choices_in_the_menu["plat"] == "" :
-                choice_not_finished_text = Label(main_user_window, text="Veuillez choisir un plat", font=("Avenir", 20))
-                choice_not_finished_text.pack(side=BOTTOM, pady=10)
-                choice_not_finished_text.after(2000, lambda : choice_not_finished_text.destroy())
-            else : 
-                add_to_commande(dico_choices_in_the_menu)
-                refresh_price(main_user_window)
-                display_menus()
-                print(global_list_commande)
-        def check_the_dessert_selection (dico_choices_in_the_menu) :
-            if dico_choices_in_the_menu["dessert"] == "" :
-                choice_not_finished_text = Label(main_user_window, text="Veuillez choisir un dessert", font=("Avenir", 20))
+            """fonction pas encore terminée : suggestion --> checker si un bouton de chaque catégorie a été cliqué"""
+            
+            need_to_verif = True
+            is_not_valid = False
+            while need_to_verif :
+                for value in dico_choices_in_the_menu.values() :
+                    if value == "" :
+                        is_not_valid = True
+                        need_to_verif = False
+                need_to_verif = False
+
+            if is_not_valid :
+                choice_not_finished_text = Label(main_user_window, text="Vous n'avez pas fini votre commande !", font=("Avenir", 20))
                 choice_not_finished_text.pack(side=BOTTOM, pady=10)
                 choice_not_finished_text.after(2000, lambda : choice_not_finished_text.destroy())
             else : 
@@ -200,7 +200,7 @@ def main_window():
             retour_menus_button.pack(side=LEFT, pady=10, padx=10)
             
             valide_the_menu_button = Button(nav_in_the_menu_frame, text="Valider", font="Avenir", command=lambda : 
-                                            [check_the_menu_not_empty(dico_choices_in_the_menu)], [check_the_dessert_selection(dico_choices_in_the_menu)])
+                                            [check_the_menu_not_empty(dico_choices_in_the_menu)]) 
             valide_the_menu_button.pack(side=LEFT, pady=10, padx=10)
                     
             dico_choices_in_the_menu = {
@@ -208,8 +208,6 @@ def main_window():
                                         "price" : 0,
                                         "temps" : 0,
                                         "plat" : "",
-                                        "dessert" : "",
-                                        "boisson" : ""
                                     }
 
             for element in list (data[index]["menus"][name].keys()) : 
@@ -324,12 +322,20 @@ def main_window():
             retour_commande_button.pack(side=BOTTOM, pady=10)
 
 
-        def valide_message ():
+        def valide_message (index):
             destroy_all_widgets(main_user_window)
 
             valide_message_text = f"Votre commande a bien été validée \n pour un montant de {global_total_price} $"
             main_valide_message_text = Label(main_user_window, text=valide_message_text, font=("Avenir", 20))
             main_valide_message_text.pack(expand=True, anchor='center')
+
+            retour_a_la_commande_button = Button(main_user_window, text="revenir a la commande", font=("Avenir", 10),
+                                                 command= lambda i=index : [destroy_all_widgets(main_user_window), restaurant_window(i)])
+            retour_a_la_commande_button.pack(side=LEFT)
+            nouvelle_commande_button = Button(main_user_window, text="Faire une nouvelle commande", font=("Avenir", 10),
+                                                 command= lambda : [main_user_window.destroy(), main_window])
+            nouvelle_commande_button.pack(side=LEFT)
+
 
         def check_commande_not_empty () : 
             if global_list_commande == [] : 
