@@ -73,6 +73,9 @@ def main_window():
         admin_button = Button(main_user_window, text="Admin", font=("Avenir", 10), command=lambda : display_admin_check())
         admin_button.pack(side=TOP, pady=10)
 
+        main_text_frame = Frame(main_user_window, bd = 2, relief = "solid", padx = 10, pady = 10, highlightbackground="#FFCC99")
+        main_text_frame.pack(expand=True)
+
         main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 20))
         main_text.pack(expand=True)
 
