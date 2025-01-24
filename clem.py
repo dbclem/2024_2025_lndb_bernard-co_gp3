@@ -316,11 +316,12 @@ def main_window():
                     if "plat" not in element : 
                         text = f"{element['name']} - {element['price']} $"
                     else :
-                        text = f"{element['name']} - {element['price']} $ \n {element['plat']} - {element['dessert']} - {element['boisson']}"
-                    element_of_commande_button = Button(main_user_window, text=text, font=("Avenir", 10), command=lambda element=element: 
-                                                        [remove_in_global_list_command_total_price(element), refresh_price(main_user_window),
-                                                         display_commande(), update_total_price()])
-                    element_of_commande_button.pack(pady=10)
+                        text = " - ".join([f"{value} $" if key == "price" else f"{value}" for key, value in element.items() if key != "temps"])
+
+                        element_of_commande_button = Button(main_user_window, text=text, font=("Avenir", 10), command=lambda element=element: 
+                                                            [remove_in_global_list_command_total_price(element), refresh_price(main_user_window),
+                                                            display_commande(), update_total_price()])
+                        element_of_commande_button.pack(pady=10)
 
             retour_commande_button = Button(main_user_window, text="Retour", font="Avenir", command=lambda : 
                                 [refresh_price(main_user_window), display_menus()])
