@@ -83,7 +83,6 @@ def main_window():
             image = Image.open(restaurant["image_path"])
             image = image.resize((180, 100))  # Ajustez la taille de l'image
             photo = ImageTk.PhotoImage(image)  # Convertir pour Tkinter
-
             """ enumerate --> Parcourt data recupère la position index et la valeur restaurant 
                         index --> 0, 1, 2, ...
                         restaurant --> {nom : restaurant}
@@ -159,16 +158,14 @@ def main_window():
             update_total_price()
 
         def check_the_menu_not_empty(dico_choices_in_the_menu) : 
-            """fonction pas encore terminée : suggestion --> checker si un bouton de chaque catégorie a été cliqué"""
-            
-            need_to_verif = True
             is_not_valid = False
-            while need_to_verif :
-                for value in dico_choices_in_the_menu.values() :
-                    if value == "" :
-                        is_not_valid = True
-                        need_to_verif = False
-                need_to_verif = False
+            for value in dico_choices_in_the_menu.values() :
+                if value == "" :
+                    is_not_valid = True
+                    break
+                else : 
+                    is_not_valid = False
+        
 
             if is_not_valid :
                 choice_not_finished_text = Label(main_user_window, text="Vous n'avez pas fini votre commande !", font=("Avenir", 20))
@@ -209,7 +206,6 @@ def main_window():
                                         "name" : name,
                                         "price" : 0,
                                         "temps" : 0,
-                                        "plat" : "",
                                     }
 
             for element in list (data[index]["menus"][name].keys()) : 
@@ -217,6 +213,7 @@ def main_window():
                     dico_choices_in_the_menu["price"] = price
                     dico_choices_in_the_menu["temps"] = data[index]["menus"][name]["temps"]
                 else :
+                    dico_choices_in_the_menu[element] = ""  
                     element_in_commande(name, element, dico_choices_in_the_menu)
 
 
@@ -315,11 +312,12 @@ def main_window():
                     if "plat" not in element : 
                         text = f"{element['name']} - {element['price']} €"
                     else :
-                        text = f"{element['name']} - {element['price']} € \n {element['plat']} - {element['dessert']} - {element['boisson']}"
-                    element_of_commande_button = Button(main_user_window, text=text, font=("Avenir", 10), command=lambda element=element: 
-                                                        [remove_in_global_list_command_total_price(element), refresh_price(main_user_window),
-                                                         display_commande(), update_total_price()])
-                    element_of_commande_button.pack(pady=10)
+                        text = " - ".join([f"{value} $" if key == "price" else f"{value}" for key, value in element.items() if key != "temps"])
+
+                        element_of_commande_button = Button(main_user_window, text=text, font=("Avenir", 10), command=lambda element=element: 
+                                                            [remove_in_global_list_command_total_price(element), refresh_price(main_user_window),
+                                                            display_commande(), update_total_price()])
+                        element_of_commande_button.pack(pady=10)
 
             retour_commande_button = Button(main_user_window, text="Retour", font="Avenir", command=lambda : 
                                 [refresh_price(main_user_window), display_menus()])
