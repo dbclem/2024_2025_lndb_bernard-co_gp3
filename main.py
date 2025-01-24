@@ -69,12 +69,6 @@ def main_window():
         validate_button = Button(main_user_window, text="Valider", font=("Avenir", 12), command=lambda: validate_admin(username_entry.get(), password_entry.get()))
         validate_button.pack(pady=10)
 
-    def create_rounded_rectangle_image(width, height, radius, color):
-        image = Image.new('RGBA', (width, height), (255, 0, 0, 0))
-        draw = ImageDraw.Draw(image)
-        draw.rounded_rectangle((0, 0, width, height), radius, fill=color)
-    return image
-
     def display_restaurants_names () :  
         admin_button = Button(main_user_window, text="Admin", font=("Avenir", 10), command=lambda : display_admin_check())
         admin_button.pack(side=TOP, pady=10)
@@ -263,11 +257,8 @@ def main_window():
             naviagtion_button()
 
         def update_total_price():
-<<<<<<< HEAD
             total_price_label.config(text=f"Prix total : {global_total_price} €")    
-=======
             total_price_label.config(text=f"price total : {global_total_price} $")    
->>>>>>> b303add3757a8faad16b37746bb968e6f479f87c
     
         total_price_label = Label(main_user_window, text="", font="Avenir")
         total_price_label.pack(side=BOTTOM, pady=20)
