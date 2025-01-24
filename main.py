@@ -108,12 +108,12 @@ def main_window():
         
         global global_tuple_menu_price 
         """            
-            creation d'un tuple (choix, prix) pour pouvoir afficher le prix dans la commande
-            la commande et le prix sont donc lié
+            creation d'un tuple (choix, price) pour pouvoir afficher le price dans la commande
+            la commande et le price sont donc lié
         """
         for key in list(data[index]["menus"].keys()):
-            prix = data[index]["menus"][key]["prix"]
-            global_tuple_menu_price.append((key, prix))
+            price = data[index]["menus"][key]["price"]
+            global_tuple_menu_price.append((key, price))
 
 
         global global_dico_all_choices_price
@@ -153,7 +153,7 @@ def main_window():
             global global_total_price
             global_list_commande.append(formule)
             global_total_price += formule["price"]
-            print(f"La {formule['name']} a été ajoutée au panier au prix de {formule['price']}.")
+            print(f"La {formule['name']} a été ajoutée au panier au price de {formule['price']}.")
             update_total_price()
 
         def check_the_menu_not_empty(dico_choices_in_the_menu) : 
@@ -211,7 +211,7 @@ def main_window():
                                     }
 
             for element in list (data[index]["menus"][name].keys()) : 
-                if element == "prix" or element == "temps" : 
+                if element == "price" or element == "temps" : 
                     dico_choices_in_the_menu["price"] = price
                     dico_choices_in_the_menu["temps"] = data[index]["menus"][name]["temps"]
                 else :
@@ -255,7 +255,7 @@ def main_window():
             naviagtion_button()
 
         def update_total_price():
-            total_price_label.config(text=f"Prix total : {global_total_price} $")    
+            total_price_label.config(text=f"price total : {global_total_price} $")    
     
         total_price_label = Label(main_user_window, text="", font="Avenir")
         total_price_label.pack(side=BOTTOM, pady=20)
