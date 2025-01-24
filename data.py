@@ -37,19 +37,19 @@ formule_patus_1 = {
     "plat" : plat_patus,
     "dessert" : desserts_patus,
     "boisson" : boissons_patus,
-    "prix" : 12,
+    "price" : 12,
     "temps" : 10
 }
 formule_patus_2 = { 
     "plat" : plat_patus,
     "dessert" : desserts_patus,
-    "prix" : 10,
+    "price" : 10,
     "temps" : 7
 }
 formule_patus_3 = { 
     "plat" : plat_patus,
     "boisson" : boissons_patus,
-    "prix" : 9,
+    "price" : 9,
     "temps" : 7
 }
 
@@ -123,19 +123,19 @@ petite_formule_casa = {
     "plat" : paninis_casa,
     "dessert" : desserts_casa, 
     "boisson" : boissons_casa,
-    "prix" : 12,
+    "price" : 12,
     "temps" : 8
 }
 formule_XL_casa = {
     "plat" : paninis_XL_casa, 
     "boisson" : boissons_casa,
-    "prix" : 15,
+    "price" : 15,
     "temps" : 15
 }
 grande_formule_casa = {
     "plat" : grands_paninis_casa,
     "dessert" : desserts_casa,
-    "prix" : 13.50,
+    "price" : 13.50,
     "temps" : 10
 }
 
@@ -210,20 +210,20 @@ boissons_grenier = {
 formule_grenier_1 = {
     "plat" : plats_grenier,
     "dessert" : desserts_grenier,
-    "prix" : 8,
+    "price" : 8,
     "temps" : 5 
 }
 formule_grenier_2 = {
     "plat" : plats_grenier,
     "boisson" : boissons_grenier,
-    "prix" : 8,
+    "price" : 8,
     "temps" : 5
     }
 formule_grenier_3 = {
     "plat" : plats_grenier,
     "dessert" : desserts_grenier ,
     "boisson" : boissons_grenier,
-    "prix" : 10,
+    "price" : 10,
     "temps" : 5
 }
 

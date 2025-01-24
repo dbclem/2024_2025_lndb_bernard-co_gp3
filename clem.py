@@ -108,12 +108,12 @@ def main_window():
         
         global global_tuple_menu_price 
         """            
-            creation d'un tuple (choix, prix) pour pouvoir afficher le prix dans la commande
-            la commande et le prix sont donc lié
+            creation d'un tuple (choix, price) pour pouvoir afficher le price dans la commande
+            la commande et le price sont donc lié
         """
         for key in list(data[index]["menus"].keys()):
-            prix = data[index]["menus"][key]["prix"]
-            global_tuple_menu_price.append((key, prix))
+            price = data[index]["menus"][key]["price"]
+            global_tuple_menu_price.append((key, price))
 
 
         global global_dico_all_choices_price
@@ -153,22 +153,25 @@ def main_window():
             global global_total_price
             global_list_commande.append(formule)
             global_total_price += formule["price"]
-            print(f"La {formule['name']} a été ajoutée au panier au prix de {formule['price']}.")
+            print(f"La {formule['name']} a été ajoutée au panier au price de {formule['price']}.")
             update_total_price()
 
         def check_the_menu_not_empty(dico_choices_in_the_menu) : 
-            """fonction pas encore terminée : suggestion --> checker si un bouton de chaque catégorie a été cliqué"""
-            
-            need_to_verif = True
+            """
+                verifie si le menu a été rempli entièrement
+            """
             is_not_valid = False
-            while need_to_verif :
-                for value in dico_choices_in_the_menu.values() :
-                    if value == "" :
-                        is_not_valid = True
-                        need_to_verif = False
-                need_to_verif = False
+            for value in dico_choices_in_the_menu.values() : 
+                print(dico_choices_in_the_menu)
+                if value == "" : 
+                    is_not_valid = True
+                    print("Vous n'avez pas fini votre commande !")
+                    break
+                else :
+                    is_not_valid = False
+                    print("Commande validée")
 
-            if is_not_valid :
+            if is_not_valid == True:
                 choice_not_finished_text = Label(main_user_window, text="Vous n'avez pas fini votre commande !", font=("Avenir", 20))
                 choice_not_finished_text.pack(side=BOTTOM, pady=10)
                 choice_not_finished_text.after(2000, lambda : choice_not_finished_text.destroy())
@@ -211,10 +214,11 @@ def main_window():
                                     }
 
             for element in list (data[index]["menus"][name].keys()) : 
-                if element == "prix" or element == "temps" : 
+                if element == "price" or element == "temps" : 
                     dico_choices_in_the_menu["price"] = price
                     dico_choices_in_the_menu["temps"] = data[index]["menus"][name]["temps"]
                 else :
+                    dico_choices_in_the_menu[element] = ""
                     element_in_commande(name, element, dico_choices_in_the_menu)
 
 
