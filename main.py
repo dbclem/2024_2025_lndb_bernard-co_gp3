@@ -8,6 +8,7 @@ from PIL import Image, ImageTk
 couleur : noir --> #000000
         bleu --> #3533cd
         degradé lineaire 90°
+        beige boutons --> #FFCC99
 """
 """
     pour cassandre :
@@ -40,6 +41,7 @@ def main_window():
     screen_width = main_user_window.winfo_screenwidth()
     screen_height = main_user_window.winfo_screenheight()
     main_user_window.title("Bernard&co")
+    main_user_window.configure(bg = "#DEF4FA")
     main_user_window_width = screen_width // 2
     main_user_window_height = screen_height
     main_user_window.geometry(f"{main_user_window_width}x{main_user_window_height}")
@@ -79,9 +81,8 @@ def main_window():
 
         for index, restaurant in enumerate(data):
             image = Image.open(restaurant["image_path"])
-            image = image.resize((300, 170))  # Ajustez la taille de l'image
+            image = image.resize((180, 100))  # Ajustez la taille de l'image
             photo = ImageTk.PhotoImage(image)  # Convertir pour Tkinter
-
             """ enumerate --> Parcourt data recupère la position index et la valeur restaurant 
                         index --> 0, 1, 2, ...
                         restaurant --> {nom : restaurant}
@@ -89,10 +90,10 @@ def main_window():
                 open_restaurant_window prend i qui est index et qui se mais a jour a dynamiquement
             """
             Bouton_restaurant = Button(restaurants_frame, text=restaurant["nom"],
-                                       image = photo, compound = "right", padx = 100, height=170, width=820, font=("Avenir", 20), fg = "#000000",
+                                       image = photo, compound = "right", padx = 70, height=80, width=460, font=("Avenir", 20), fg = "#FFFFFF", bg = "#0066FF",
                 command=lambda i=index: [destroy_all_widgets(main_user_window), restaurant_window(i)])
             Bouton_restaurant.image = photo
-            Bouton_restaurant.pack(pady=5)
+            Bouton_restaurant.pack(pady=10)
             #add picture of restaurant
         
 
@@ -108,12 +109,12 @@ def main_window():
         
         global global_tuple_menu_price 
         """            
-            creation d'un tuple (choix, prix) pour pouvoir afficher le prix dans la commande
-            la commande et le prix sont donc lié
+            creation d'un tuple (choix, price) pour pouvoir afficher le price dans la commande
+            la commande et le price sont donc lié
         """
         for key in list(data[index]["menus"].keys()):
-            prix = data[index]["menus"][key]["prix"]
-            global_tuple_menu_price.append((key, prix))
+            price = data[index]["menus"][key]["price"]
+            global_tuple_menu_price.append((key, price))
 
 
         global global_dico_all_choices_price
@@ -153,20 +154,18 @@ def main_window():
             global global_total_price
             global_list_commande.append(formule)
             global_total_price += formule["price"]
-            print(f"La {formule['name']} a été ajoutée au panier au prix de {formule['price']}.")
+            print(f"La {formule['name']} a été ajoutée au panier au price de {formule['price']}.")
             update_total_price()
 
         def check_the_menu_not_empty(dico_choices_in_the_menu) : 
-            """fonction pas encore terminée : suggestion --> checker si un bouton de chaque catégorie a été cliqué"""
-            
-            need_to_verif = True
             is_not_valid = False
-            while need_to_verif :
-                for value in dico_choices_in_the_menu.values() :
-                    if value == "" :
-                        is_not_valid = True
-                        need_to_verif = False
-                need_to_verif = False
+            for value in dico_choices_in_the_menu.values() :
+                if value == "" :
+                    is_not_valid = True
+                    break
+                else : 
+                    is_not_valid = False
+        
 
             if is_not_valid :
                 choice_not_finished_text = Label(main_user_window, text="Vous n'avez pas fini votre commande !", font=("Avenir", 20))
@@ -207,14 +206,14 @@ def main_window():
                                         "name" : name,
                                         "price" : 0,
                                         "temps" : 0,
-                                        "plat" : "",
                                     }
 
             for element in list (data[index]["menus"][name].keys()) : 
-                if element == "prix" or element == "temps" : 
+                if element == "price" or element == "temps" : 
                     dico_choices_in_the_menu["price"] = price
                     dico_choices_in_the_menu["temps"] = data[index]["menus"][name]["temps"]
                 else :
+                    dico_choices_in_the_menu[element] = ""  
                     element_in_commande(name, element, dico_choices_in_the_menu)
 
 
@@ -230,7 +229,7 @@ def main_window():
             retour_petite_faim_button.pack(side=LEFT, pady=10, padx=10)
 
             for element in global_dico_all_choices_price:
-                petite_faim_buttons = Button(main_user_window, text=(f"{element['name']} - {element['price']} $" ), height=2, width=50, 
+                petite_faim_buttons = Button(main_user_window, text=(f"{element['name']} - {element['price']} €" ), height=2, width=50, 
                                     command=lambda element=element:
                                     [add_to_commande(element), refresh_price(main_user_window),
                                      update_total_price(), display_petite_faim(),
@@ -242,7 +241,7 @@ def main_window():
 
         def display_menus():
             for name, price in global_tuple_menu_price:
-                menus_buttons = Button(main_user_window, text=(f"{name} - {price} $" ), height=2, width=50, 
+                menus_buttons = Button(main_user_window, text=(f"{name} - {price} €" ), height=2, width=50, 
                                     command=lambda name=name, price=price:
                                     [refresh_price(main_user_window)
                                       ,display_the_menu(name, price)])
@@ -255,7 +254,8 @@ def main_window():
             naviagtion_button()
 
         def update_total_price():
-            total_price_label.config(text=f"Prix total : {global_total_price} $")    
+            total_price_label.config(text=f"Prix total : {global_total_price} €")    
+            total_price_label.config(text=f"price total : {global_total_price} $")    
     
         total_price_label = Label(main_user_window, text="", font="Avenir")
         total_price_label.pack(side=BOTTOM, pady=20)
@@ -310,13 +310,14 @@ def main_window():
 
                 for element in global_list_commande:
                     if "plat" not in element : 
-                        text = f"{element['name']} - {element['price']} $"
+                        text = f"{element['name']} - {element['price']} €"
                     else :
-                        text = f"{element['name']} - {element['price']} $ \n {element['plat']} - {element['dessert']} - {element['boisson']}"
-                    element_of_commande_button = Button(main_user_window, text=text, font=("Avenir", 10), command=lambda element=element: 
-                                                        [remove_in_global_list_command_total_price(element), refresh_price(main_user_window),
-                                                         display_commande(), update_total_price()])
-                    element_of_commande_button.pack(pady=10)
+                        text = " - ".join([f"{value} $" if key == "price" else f"{value}" for key, value in element.items() if key != "temps"])
+
+                        element_of_commande_button = Button(main_user_window, text=text, font=("Avenir", 10), command=lambda element=element: 
+                                                            [remove_in_global_list_command_total_price(element), refresh_price(main_user_window),
+                                                            display_commande(), update_total_price()])
+                        element_of_commande_button.pack(pady=10)
 
             retour_commande_button = Button(main_user_window, text="Retour", font="Avenir", command=lambda : 
                                 [refresh_price(main_user_window), display_menus()])
@@ -328,7 +329,7 @@ def main_window():
             frame_nav_valide = Frame(main_user_window)
             frame_nav_valide.pack(side=TOP, pady=10)
 
-            valide_message_text = f"Votre commande a bien été validée \n pour un montant de {global_total_price} $"
+            valide_message_text = f"Votre commande a bien été validée \n pour un montant de {global_total_price} €"
             main_valide_message_text = Label(main_user_window, text=valide_message_text, font=("Avenir", 20))
             main_valide_message_text.pack(expand=True, anchor='center')
 
