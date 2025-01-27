@@ -6,7 +6,7 @@ from PIL import Image, ImageTk
 
 """
 couleur : noir --> #000000
-        bleu --> #3533cd
+        bleu --> #0066FF
         degradé lineaire 90°
         beige boutons --> #FFCC99
 """
@@ -70,13 +70,13 @@ def main_window():
         validate_button.pack(pady=10)
 
     def display_restaurants_names () :  
-        admin_button = Button(main_user_window, text="Admin", font=("Avenir", 10), command=lambda : display_admin_check())
-        admin_button.pack(side=TOP, pady=10)
+        admin_button = Button(main_user_window, text="Admin", font=("Avenir", 15),  fg = "#FFFFFF", bg="#0066FF", command=lambda : display_admin_check())
+        admin_button.pack(side=TOP, pady=20, padx=20)
 
         main_text_frame = Frame(main_user_window, bd = 2, relief = "solid", padx = 10, pady = 10, highlightbackground="#FFCC99")
         main_text_frame.pack(expand=True)
 
-        main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 20))
+        main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 20), bg="#0066FF", fg = "#FFFFFF")
         main_text.pack(expand=True)
 
         restaurants_frame = Frame(main_user_window)
