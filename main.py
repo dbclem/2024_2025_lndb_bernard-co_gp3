@@ -46,7 +46,6 @@ def main_window():
     main_user_window_height = screen_height
     main_user_window.geometry(f"{main_user_window_width}x{main_user_window_height}")
     main_user_window.iconbitmap("images/logo_bernard&co.ico")
-    # main_user_window.configure(bg="#3533cd")
 
     def validate_admin(username, password) : 
         if username == dico_mdp["username"] and password == dico_mdp["password"] : 
@@ -79,7 +78,7 @@ def main_window():
         main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 20), bg="#0066FF", fg = "#FFFFFF")
         main_text.pack(expand=True)
 
-        restaurants_frame = Frame(main_user_window)
+        restaurants_frame = Frame(main_user_window, bg = "#DEF4FA", bd=2, relief="solid", padx=10, pady=10, highlightbackground="#FFCC99")
         restaurants_frame.pack(expand=True)
 
         for index, restaurant in enumerate(data):

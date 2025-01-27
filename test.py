@@ -8,8 +8,8 @@ main_user_window = ttk.Window(themename="cosmo")
 style = ttk.Style()
 style.configure("Gradient.TButton", font=("Avenir", 12), padding=10)
 style.map("Gradient.TButton",
-          background=[("active", "#FFFFFF"), ("!active", "#0066FF")],
-          relief=[("pressed", "sunken"), ("!pressed", "raised")])
+          background=[("active", "#FFFFFF"), ("!active", "#0066FF")],)
+
 
 # Créez un bouton avec le style personnalisé
 button = ttk.Button(main_user_window, text="Bouton Restaurant", style="Gradient.TButton")

@@ -187,9 +187,18 @@ quiches_grenier = {
     "lardons, brocolis" : 4.50
 }
 plats_grenier = {
-"sandwichs" : sandwichs_grenier,
-"salades" : salades_grenier,
-"quiches" : quiches_grenier
+    "jambon, emmental" : 4,
+    "poulet, cruidités" : 4,
+    "thon, crudités" : 4,
+    "poulet, avocat" : 4,
+    "saumon, fumé" : 4,
+    "tomate, mozza" : 5,
+    "chèvre, noix" : 5,
+    "courgette, aubergine" : 5, 
+    "lorraine" : 4.50,
+    "saumon, épinard" : 4.50,
+    "courgettes" : 4.50,
+    "lardons, brocolis" : 4.50
 
 }
 
