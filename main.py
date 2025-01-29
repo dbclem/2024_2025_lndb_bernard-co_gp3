@@ -166,17 +166,21 @@ def main_window():
         def add_element_to_dico_final (element, key, dico_choices_in_the_menu) :
             dico_choices_in_the_menu[element] = key
             
-        def element_in_commande (name, element, dico_choices_in_the_menu) :
-            main_element_frame = Frame(main_user_window, bd=2, relief="solid", padx=5, pady=5, bg="#DEF4FA")
-            main_element_frame.pack(pady=10)
-            main_element_text = Label(main_element_frame, text=element, font=("Avenir", 15), bg="#DEF4FA")
-            main_element_text.pack()
+        def display_element_in_commande (name, element, dico_choices_in_the_menu, i) :
+            main_element_in_commande_frame = Frame(main_user_window, bg="#DEF4FA", bd=2, relief="solid")
+            main_element_in_commande_frame.pack(side=TOP, pady=10)
+
+            main_element_text = Label(main_element_in_commande_frame, text=element, font=("Avenir", 15), bg="#DEF4FA", bd=1, relief="solid")
+            main_element_text.grid(row=0, column=i, padx=5, pady=5)
+
+            row_one_frame = Frame(main_element_in_commande_frame)
+            row_one_frame.grid(row=1, column=i, padx=5, pady=5)
 
             for key in list(data[index]["menus"][name][element].keys()) : 
-                element_buttons = Button(main_user_window, text=key, height=2, width=50, fg = "#FFFFFF", bg = "#0066FF",
-                                    command=lambda key=key : 
-                                    [add_element_to_dico_final(element, key, dico_choices_in_the_menu)])
-                element_buttons.pack(pady=10)
+                element_buttons = Button(row_one_frame, text=key, height=2, width=50, fg = "#FFFFFF", bg = "#0066FF", bd=1, relief="solid",
+                            command=lambda key=key : 
+                            [add_element_to_dico_final(element, key, dico_choices_in_the_menu)])
+                element_buttons.pack(pady=5)
 
         def display_the_menu (name, price):
             nav_in_the_menu_frame = Frame(main_user_window, bg="#DEF4FA")
@@ -195,17 +199,16 @@ def main_window():
                                         "price" : 0,
                                         "temps" : 0,
                                     }
-
+            i = 0
             for element in list (data[index]["menus"][name].keys()) : 
                 if element == "price" or element == "temps" : 
                     dico_choices_in_the_menu["price"] = price
                     dico_choices_in_the_menu["temps"] = data[index]["menus"][name]["temps"]
                 else :
+                    i += 1
                     dico_choices_in_the_menu[element] = ""  
-                    element_in_commande(name, element, dico_choices_in_the_menu)
+                    display_element_in_commande(name, element, dico_choices_in_the_menu, i)
 
-
-            
         def display_petite_faim () : 
 
             nav_petite_faim_frame = Frame(main_user_window, bg="#DEF4FA")    
