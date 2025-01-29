@@ -14,9 +14,9 @@ plat_patus = {
     "Tout Simple" : 7,
     "Végétarien" : 7,
     "Burger" : 7,
-    "Carbo'" : 8,
-    "Bolo'" : 8,
-    "Mac n' cheese" : 8,
+    "Carbo" : 8,
+    "Bolo" : 8,
+    "Mac n'cheese" : 8,
     "Pesto" : 8
 }
 
@@ -100,7 +100,7 @@ grands_paninis_casa = {
     "raclette" : 12,
     "chita" : 12,
     "grand classico" : 12,
-    "grand ;rimini" : 12,
+    "grand rimini" : 12,
     "grand roma" : 12,
     "grand venezia" : 12,
     "grand 3 fromages" : 12,
