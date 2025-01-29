@@ -223,8 +223,6 @@ def main_window():
 
             
         def display_petite_faim () : 
-            Scrollbar_petite_faim = Scrollbar(main_user_window, orient=VERTICAL)
-            Scrollbar_petite_faim.pack(side=RIGHT, fill=Y)
 
             nav_petite_faim_frame = Frame(main_user_window, bg="#DEF4FA")    
             nav_petite_faim_frame.pack(side=TOP, pady=10)
@@ -232,8 +230,10 @@ def main_window():
                                             [refresh_price(main_user_window), display_menus()]) 
             retour_petite_faim_button.pack(side=LEFT, pady=10, padx=10)
 
+            main_petite_faim_frame = Frame(main_user_window, bd=2, relief="solid", padx=5, pady=5, bg="#DEF4FA")
+            main_petite_faim_frame.pack(pady=10)
             for element in global_dico_all_choices_price:
-                petite_faim_buttons = Button(main_user_window, text=(f"{element['name']} - {element['price']} €" ), height=2, width=50, fg = "#FFFFFF", bg = "#0066FF", 
+                petite_faim_buttons = Button(main_petite_faim_frame, text=(f"{element['name']} - {element['price']} €" ), height=2, width=50, fg = "#FFFFFF", bg = "#0066FF", 
                                     command=lambda element=element:
                                     [add_to_commande(element), refresh_price(main_user_window),
                                      update_total_price(), display_petite_faim(),
@@ -318,10 +318,10 @@ def main_window():
                     else :
                         text = " - ".join([f"{value} $" if key == "price" else f"{value}" for key, value in element.items() if key != "temps"])
 
-                        element_of_commande_button = Button(main_user_window, text=text, font=("Avenir", 10), fg = "#FFFFFF", bg = "#0066FF", command=lambda element=element: 
-                                                            [remove_in_global_list_command_total_price(element), refresh_price(main_user_window),
-                                                            display_commande(), update_total_price()])
-                        element_of_commande_button.pack(pady=10)
+                    element_of_commande_button = Button(main_user_window, text=text, font=("Avenir", 10), fg = "#FFFFFF", bg = "#0066FF", command=lambda element=element: 
+                                                        [remove_in_global_list_command_total_price(element), refresh_price(main_user_window),
+                                                        display_commande(), update_total_price()])
+                    element_of_commande_button.pack(pady=10)
 
             retour_commande_button = Button(main_user_window, text="Retour", font="Avenir", fg = "#FFFFFF", bg = "#0066FF", command=lambda : 
                                 [refresh_price(main_user_window), display_menus()])
