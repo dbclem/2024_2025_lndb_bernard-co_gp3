@@ -5,20 +5,10 @@ from tools import destroy_all_widgets
 from PIL import Image, ImageTk
 
 """
-couleur : noir --> #000000
-        bleu --> #0066FF
-        degradé lineaire 90°
-        beige boutons --> #FFCC99
+couleur :
+        bleu foncé pour les boutons--> #0066FF
+        bleu clair pour l'arriere plan --> #DEF4FA
 """
-"""
-    pour cassandre :
-    tu peux commencer le design a partir de ca, la code apres va pas bcp bouger 
-    il reste deux problemes a regler : la couleur verte des boutons 
-    et la verification des choix dans le menu
-
-    et il reste a rajouter une option petit fain pour prendre qlq chode a l'unité   
-"""
-
 
 def reset_commandes():
     global global_tuple_menu_price
@@ -72,14 +62,9 @@ def main_window():
         admin_button = Button(main_user_window, text="Admin", font=("Avenir", 15),  fg = "#FFFFFF", bg="#0066FF", command=lambda : display_admin_check())
         admin_button.pack(side=TOP, pady=20, padx=20)
 
-        main_text_frame = Frame(main_user_window, bd = 2, relief = "solid", padx = 10, pady = 10, highlightbackground="#FFCC99")
-        main_text_frame.pack(expand=True)
-
         main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 20), bg="#0066FF", fg = "#FFFFFF")
-        main_text.pack(expand=True)
+        main_text.place(relx=0.5, rely=0.2, anchor=CENTER)
 
-        restaurants_frame = Frame(main_user_window, bg = "#DEF4FA", bd=2, relief="solid", padx=10, pady=10, highlightbackground="#FFCC99")
-        restaurants_frame.pack(expand=True)
 
         for index, restaurant in enumerate(data):
             image = Image.open(restaurant["image_path"])
@@ -91,12 +76,11 @@ def main_window():
 
                 open_restaurant_window prend i qui est index et qui se mais a jour a dynamiquement
             """
-            Bouton_restaurant = Button(restaurants_frame, text=restaurant["nom"],
+            Bouton_restaurant = Button(main_user_window, text=restaurant["nom"],
                                        image = photo, compound = "right", padx = 70, height=80, width=460, font=("Avenir", 20), fg = "#FFFFFF", bg = "#0066FF",
                 command=lambda i=index: [destroy_all_widgets(main_user_window), restaurant_window(i)])
             Bouton_restaurant.image = photo
-            Bouton_restaurant.pack(pady=10)
-            #add picture of restaurant
+            Bouton_restaurant.place(relx=0.5, rely=0.5 + index * 0.1, anchor=CENTER)
         
 
 
@@ -316,6 +300,7 @@ def main_window():
                     if "plat" not in element : 
                         text = f"{element['name']} - {element['price']} €"
                     else :
+                        # commande faite a partir de chatgpt qui permet de modifier réactivement le texte
                         text = " - ".join([f"{value} $" if key == "price" else f"{value}" for key, value in element.items() if key != "temps"])
 
                     element_of_commande_button = Button(main_user_window, text=text, font=("Avenir", 10), fg = "#FFFFFF", bg = "#0066FF", command=lambda element=element: 
