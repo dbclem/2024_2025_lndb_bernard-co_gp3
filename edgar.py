@@ -1,7 +1,7 @@
 from tkinter import *
-from main import *
+from main import global_liste_commande_operateur
 
-global_list_commande_user = []
+
 
 def main_operateur_window():
     """
@@ -17,13 +17,6 @@ def main_operateur_window():
     operateur_window.geometry(f"{operateur_window_width}x{operateur_window_height}")
     operateur_window.config(bg="white")
     
-    def add_global_list_command_user(global_list_commande):
-        global global_list_commande_user
-        if global_list_commande_user != global_list_commande:
-            global_list_commande_user.append(global_list_commande)
-        return global_list_commande_user
-    add_global_list_command_user(global_list_commande)
-
     # creation de la frame principale
     main_frame = Frame(operateur_window, bg="white")
     main_frame.pack(fill=BOTH, expand=True)
@@ -58,8 +51,8 @@ def main_operateur_window():
 
     # creation de la fonction qui ajoute les commandes demandées
     def add_commandes ():
-        global_list_commande_user
-        for commande in global_list_commande_user :
+        global_liste_commande_operateur
+        for commande in global_liste_commande_operateur :
             commande_label = Label(demande_frame, text=commande, font=("Helvetica", 10), bg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
             commande_label.pack(pady=10)
     add_commandes()

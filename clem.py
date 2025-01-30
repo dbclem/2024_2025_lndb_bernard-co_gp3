@@ -330,17 +330,18 @@ def main_window():
 
         def valide_message (index):
             destroy_all_widgets(main_user_window)
-            frame_nav_valide = Frame(main_user_window)
-            frame_nav_valide.pack(side=TOP, pady=10)
 
-            valide_message_text = f"Votre commande a bien été validée \n pour un montant de {global_total_price} $"
+            valide_message_text = f"Votre commande s'élève à un montant de {global_total_price} $"
             main_valide_message_text = Label(main_user_window, text=valide_message_text, font=("Avenir", 20))
             main_valide_message_text.pack(expand=True, anchor='center')
+            
+            frame_nav_valide = Frame(main_user_window)
+            frame_nav_valide.pack(pady=10)
 
-            retour_a_la_commande_button = Button(frame_nav_valide, text="revenir a la commande", font=("Avenir", 10),
+            retour_a_la_commande_button = Button(frame_nav_valide, text="Revenir a la commande", font=("Avenir", 10),
                                                  command= lambda i=index : [destroy_all_widgets(main_user_window), restaurant_window(i)])
             retour_a_la_commande_button.pack(side=LEFT, padx=10)
-            nouvelle_commande_button = Button(frame_nav_valide, text="Faire une nouvelle commande", font=("Avenir", 10),
+            nouvelle_commande_button = Button(frame_nav_valide, text="Payer :", font=("Avenir", 10),
                                                  command= lambda : [main_user_window.destroy(), reset_commandes(), main_window()])
             nouvelle_commande_button.pack(side=LEFT, padx=10)
 

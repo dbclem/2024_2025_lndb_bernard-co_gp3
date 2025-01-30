@@ -10,14 +10,18 @@ couleur :
         bleu clair pour l'arriere plan --> #DEF4FA
 """
 
+
 def reset_commandes():
+    global global_liste_commande_operateur
     global global_tuple_menu_price
-    global_tuple_menu_price = []
     global global_list_commande
-    global_list_commande = []
     global global_dico_all_choices_price
-    global_dico_all_choices_price = []
     global total_price
+    global_liste_commande_operateur.append(global_list_commande)
+    print(global_liste_commande_operateur, "commandes opérateur")
+    global_tuple_menu_price = []
+    global_list_commande = []
+    global_dico_all_choices_price = []
     total_price = 0
     print("Panier vidé")
 
@@ -61,8 +65,7 @@ def main_window():
     def display_restaurants_names () :  
         admin_button = Button(main_user_window, text="Admin", font=("Avenir", 15),  fg = "#FFFFFF", bg="#0066FF", command=lambda : display_admin_check())
         admin_button.pack(side=TOP, pady=20, padx=20)
-
-        main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 20), bg="#0066FF", fg = "#FFFFFF")
+        main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 20, "bold"), bg="#0066FF", fg = "#FFFFFF", padx=20, pady=10)
         main_text.place(relx=0.5, rely=0.2, anchor=CENTER)
 
 
@@ -80,7 +83,7 @@ def main_window():
                                        image = photo, compound = "right", padx = 70, height=80, width=460, font=("Avenir", 20), fg = "#FFFFFF", bg = "#0066FF",
                 command=lambda i=index: [destroy_all_widgets(main_user_window), restaurant_window(i)])
             Bouton_restaurant.image = photo
-            Bouton_restaurant.place(relx=0.5, rely=0.5 + index * 0.1, anchor=CENTER)
+            Bouton_restaurant.place(relx=0.5, rely=0.5 + index * 0.08, anchor=CENTER)
         
 
 
@@ -318,17 +321,20 @@ def main_window():
 
         def valide_message (index):
             destroy_all_widgets(main_user_window)
-            frame_nav_valide = Frame(main_user_window, bg="#DEF4FA")
-            frame_nav_valide.pack(side=TOP, pady=10)
 
-            valide_message_text = f"Votre commande a bien été validée \n pour un montant de {global_total_price} €"
-            main_valide_message_text = Label(main_user_window, text=valide_message_text, font=("Avenir", 20), bg="#DEF4FA")
-            main_valide_message_text.pack(expand=True, anchor='center')
+            finish_frame = Frame(main_user_window, bg="#DEF4FA")
+            finish_frame.place(relx=0.5, rely=0.5, anchor=CENTER)
 
-            retour_a_la_commande_button = Button(frame_nav_valide, text="revenir a la commande", font=("Avenir", 10), fg = "#FFFFFF", bg = "#0066FF",
+            valide_message_text = f"Votre commande s'élève à un montant de {global_total_price} €"
+            main_valide_message_text = Label(finish_frame, text=valide_message_text, font=("Avenir", 20), bg="#DEF4FA")
+            main_valide_message_text.pack(side=TOP, pady=10)
+
+            nav_finish_frame = Frame(finish_frame, bg="#DEF4FA")
+            nav_finish_frame.pack(side=BOTTOM, pady=10)
+            retour_a_la_commande_button = Button(nav_finish_frame, text="revenir a la commande", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0066FF",
                                                  command= lambda i=index : [destroy_all_widgets(main_user_window), restaurant_window(i)])
             retour_a_la_commande_button.pack(side=LEFT, padx=10)
-            nouvelle_commande_button = Button(frame_nav_valide, text="Faire une nouvelle commande", font=("Avenir", 10), fg = "#FFFFFF", bg = "#0066FF",
+            nouvelle_commande_button = Button(nav_finish_frame, text="Payer", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0066FF",
                                                  command= lambda : [main_user_window.destroy(), reset_commandes(), main_window()])
             nouvelle_commande_button.pack(side=LEFT, padx=10)
 
@@ -354,4 +360,5 @@ global_list_commande = []
 global_tuple_menu_price = []
 global_dico_all_choices_price = []
 global_total_price = 0
+global_liste_commande_operateur = []
 main_window()
