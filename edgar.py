@@ -1,7 +1,8 @@
 from tkinter import *
-from main import global_liste_commande_operateur
+"""from main import global_liste_commande_operateur"""
 
 
+global_liste_commande_operateur = ["commande 1", "commande 2", "commande 3", "commande 4", "commande 5"]
 
 def main_operateur_window():
     """
@@ -14,7 +15,7 @@ def main_operateur_window():
     operateur_window.title("Opérateur")
     operateur_window_width = screen_width // 2
     operateur_window_height = screen_height
-    operateur_window.geometry(f"{operateur_window_width}x{operateur_window_height}")
+    operateur_window.geometry(f"{operateur_window_width}x{operateur_window_height}+{screen_width // 2}+0")
     operateur_window.config(bg="white")
     
     # creation de la frame principale
