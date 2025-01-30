@@ -18,7 +18,6 @@ def reset_commandes():
     global global_dico_all_choices_price
     global global_total_price
     global_liste_commande_operateur.append(global_list_commande)
-    print(global_liste_commande_operateur, "commandes opérateur")
     global_tuple_menu_price = []
     global_list_commande = []
     global_dico_all_choices_price = []
@@ -38,8 +37,9 @@ def main_window():
     main_user_window.configure(bg = "#DEF4FA")
     main_user_window_width = screen_width // 2
     main_user_window_height = screen_height
-    main_user_window.geometry(f"{main_user_window_width}x{main_user_window_height}")
+    main_user_window.geometry(f"{main_user_window_width}x{main_user_window_height}+0+0")
     main_user_window.iconbitmap("images/logo_bernard&co.ico")
+
 
     def validate_admin(username, password) : 
         if username == dico_mdp["username"] and password == dico_mdp["password"] : 
@@ -249,11 +249,11 @@ def main_window():
             total_price_label.config(text=f"Prix total : {global_total_price} €")     
     
         total_price_label = Label(main_user_window, text="", font="Avenir", bg="#DEF4FA")
-        total_price_label.pack(side=BOTTOM, pady=20)
+        total_price_label.place(relx=0.5, rely=0.9, anchor=CENTER)
 
         def navigation_in_menus_page():    
             nav_buttons_frame = Frame(main_user_window, bg="#DEF4FA")
-            nav_buttons_frame.pack(side=BOTTOM, pady=20)
+            nav_buttons_frame.place(relx=0.5, rely=0.85, anchor=CENTER)
 
             nav_retour_button = Button(nav_buttons_frame, text="Retour", font="Avenir", fg = "#FFFFFF", bg = "#0066FF", command=lambda window=main_user_window: 
                                     [destroy_all_widgets(window), reset_commandes(), display_restaurants_names()])
