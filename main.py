@@ -16,13 +16,13 @@ def reset_commandes():
     global global_tuple_menu_price
     global global_list_commande
     global global_dico_all_choices_price
-    global total_price
+    global global_total_price
     global_liste_commande_operateur.append(global_list_commande)
     print(global_liste_commande_operateur, "commandes opérateur")
     global_tuple_menu_price = []
     global_list_commande = []
     global_dico_all_choices_price = []
-    total_price = 0
+    global_total_price = 0
     print("Panier vidé")
 
 
@@ -243,16 +243,15 @@ def main_window():
                                     command=lambda : 
                                     [refresh_price(main_user_window), petite_faim_page()])
             petite_faim_button.pack(pady=10)
-            naviagtion_button()
+            navigation_in_menus_page()
 
         def update_total_price():
-            total_price_label.config(text=f"Prix total : {global_total_price} €")    
-            total_price_label.config(text=f"price total : {global_total_price} $")    
+            total_price_label.config(text=f"Prix total : {global_total_price} €")     
     
         total_price_label = Label(main_user_window, text="", font="Avenir", bg="#DEF4FA")
         total_price_label.pack(side=BOTTOM, pady=20)
 
-        def naviagtion_button():    
+        def navigation_in_menus_page():    
             nav_buttons_frame = Frame(main_user_window, bg="#DEF4FA")
             nav_buttons_frame.pack(side=BOTTOM, pady=20)
 
@@ -333,7 +332,7 @@ def main_window():
                                                  command= lambda i=index : [destroy_all_widgets(main_user_window), restaurant_page(i)])
             retour_a_la_commande_button.pack(side=LEFT, padx=10)
             nouvelle_commande_button = Button(nav_finish_frame, text="Payer", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0066FF",
-                                                 command= lambda : [main_user_window.destroy(), reset_commandes(), main_window()])
+                                                 command= lambda : [main_user_window.destroy(), reset_commandes()])
             nouvelle_commande_button.pack(side=LEFT, padx=10)
 
 
