@@ -256,7 +256,8 @@ grenier_a_pain = {
 
 data = [ patus_paninus, la_casa_del_panini, grenier_a_pain ]
 
-dico_mdp = {
-    'username' : 'clem',
-    'password' : '1234'
-}
+liste_mdp = [
+    {'username': 'clem', 'password': '123456'},
+    {'username': 'edgar', 'password': 'qsdfgh'},
+    {'username': 'cass', 'password': 'azerty'}
+]

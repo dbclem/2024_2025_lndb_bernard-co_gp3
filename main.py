@@ -1,6 +1,6 @@
 from data import*
 from tkinter import*
-# from edgar import main_operateur_window
+#from edgar import main_operateur_window
 from tools import destroy_all_widgets
 from PIL import Image, ImageTk
 
@@ -42,24 +42,31 @@ def main_window():
 
 
     def validate_admin(username, password) : 
-        if username == dico_mdp["username"] and password == dico_mdp["password"] : 
+        # any() retourne True si au moins un élément de l'itérable est vrai
+        user_valid = any(user["username"] == username and user["password"] == password for user in liste_mdp)
+        if user_valid:
             main_user_window.destroy()
-            """main_operateur_window()"""
+            # main_operateur_window()  
+        else:
+            error_label = Label(main_user_window, text="Nom d'utilisateur ou mot de passe incorrect", font=("Avenir", 12), fg="red")
+            error_label.pack(pady=5)
+            error_label.after(2000, error_label.destroy)
+
 
     def display_admin_check() : 
         destroy_all_widgets(main_user_window)
 
-        username_label = Label(main_user_window, text="Nom d'utilisateur", font=("Avenir", 12))
+        username_label = Label(main_user_window, text="Nom d'utilisateur", font=("Avenir", 12), bg="#DEF4FA")
         username_label.pack(pady=5)
-        username_entry = Entry(main_user_window, font=("Avenir", 12))
+        username_entry = Entry(main_user_window, font=("Avenir", 12), bg="#0066FF", fg="white")
         username_entry.pack(pady=5)
         
-        password_label = Label(main_user_window, text="Mot de passe", font=("Avenir", 12))
+        password_label = Label(main_user_window, text="Mot de passe", font=("Avenir", 12), bg="#DEF4FA")
         password_label.pack(pady=5)
-        password_entry = Entry(main_user_window, show="*", font=("Avenir", 12))
+        password_entry = Entry(main_user_window, show="*", font=("Avenir", 12), bg="#0066FF", fg="white")
         password_entry.pack(pady=5)
     
-        validate_button = Button(main_user_window, text="Valider", font=("Avenir", 12), command=lambda: validate_admin(username_entry.get(), password_entry.get()))
+        validate_button = Button(main_user_window, text="Valider", font=("Avenir", 12), bg="#0066FF", fg="white", command=lambda: validate_admin(username_entry.get(), password_entry.get()))
         validate_button.pack(pady=10)
 
     def display_restaurants_names () :  
