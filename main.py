@@ -3,6 +3,7 @@ from tkinter import*
 #from edgar import main_operateur_window
 from tools import destroy_all_widgets
 from PIL import Image, ImageTk
+from customtkinter import*
 
 """
 couleur :
@@ -183,17 +184,17 @@ def main_window():
             main_element_text = Label(main_element_in_commande_frame, text=element, font=("Avenir", 15), fg = "#FFFFFF", bg="#1A355B", bd=1, relief="solid")
             main_element_text.grid(row=0, column=i, padx=5, pady=5)
 
-            row_one_frame = Frame(main_element_in_commande_frame)
+            row_one_frame = Frame(main_element_in_commande_frame, bg = "#1A355B")
             row_one_frame.grid(row=1, column=i, padx=5, pady=5)
 
             for key in list(data[index]["menus"][name][element].keys()) : 
-                element_buttons = Button(row_one_frame, text=key, height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56", bd=1, relief="solid",
+                element_buttons = Button(row_one_frame, text=key, height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56", # relief="solid", #bd=1,
                             command=lambda key=key : 
                             [add_element_to_dico_final(element, key, dico_choices_in_the_menu)])
                 element_buttons.pack(pady=5)
 
         def in_menu_page (name, price):
-            nav_in_the_menu_frame = Frame(main_user_window, bg="#1A355B")
+            nav_in_the_menu_frame = Frame(main_user_window, bg="#0d2c56")
             nav_in_the_menu_frame.pack(side=TOP, pady=10)
 
             retour_menus_button = Button(nav_in_the_menu_frame, text="Retour", font="Avenir", fg = "#FFFFFF", bg = "#0d2c56", command=lambda : 
