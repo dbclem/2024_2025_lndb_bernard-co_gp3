@@ -71,7 +71,8 @@ def main_window():
         validate_button.pack(pady=10)
 
     def display_restaurants_names () :  
-        admin_button = Button(main_user_window, text="Admin", font=("Avenir", 15),  fg = "#FFFFFF", bg="#0d2c56", command=lambda : display_admin_check())
+        admin_button = Button(main_user_window, text="Admin", font=("Avenir", 15),  fg = "#FFFFFF", bg="#0d2c56", 
+                              activebackground = "#1A355B", activeforeground = "#FFFFFF", command=lambda : display_admin_check())
         admin_button.pack(side=TOP, pady=20, padx=20)
         main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 20, "bold"), bg="#1A355B", fg = "#FFFFFF", padx=20, pady=10)
         main_text.place(relx=0.5, rely=0.2, anchor=CENTER)
@@ -88,7 +89,8 @@ def main_window():
                 open_restaurant_page prend i qui est index et qui se mais a jour a dynamiquement
             """
             Bouton_restaurant = Button(main_user_window, text=restaurant["nom"],
-                                       image = photo, compound = "right", padx = 70, height=80, width=460, font=("Avenir", 20), fg = "#FFFFFF", bg = "#0d2c56",
+                                       image = photo, compound = "right", padx = 70, height=80, width=460, font=("Avenir", 20), fg = "#FFFFFF", bg = "#0d2c56", 
+                                       activebackground = "#1A355B", activeforeground = "#FFFFFF",
                 command=lambda i=index: [destroy_all_widgets(main_user_window), restaurant_page(i)])
             Bouton_restaurant.image = photo
             Bouton_restaurant.place(relx=0.5, rely=0.5 + index * 0.1, anchor=CENTER)
@@ -190,7 +192,8 @@ def main_window():
             row_one_frame.grid(row=1, column=i, padx=5, pady=5)
 
             for key in list(data[index]["menus"][name][element].keys()) : 
-                element_buttons = Button(row_one_frame, text=key, height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56", # relief="solid", #bd=1,
+                element_buttons = Button(row_one_frame, text=key, height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56", 
+                                         activebackground = "#1A355B", activeforeground = "#FFFFFF",
                             command=lambda key=key : 
                             [add_element_to_dico_final(element, key, dico_choices_in_the_menu)])
                 element_buttons.pack(pady=5)
@@ -199,11 +202,11 @@ def main_window():
             nav_in_the_menu_frame = Frame(main_user_window, bg="#0d2c56")
             nav_in_the_menu_frame.pack(side=TOP, pady=10)
 
-            retour_menus_button = Button(nav_in_the_menu_frame, text="Retour", font="Avenir", fg = "#FFFFFF", bg = "#0d2c56", command=lambda : 
+            retour_menus_button = Button(nav_in_the_menu_frame, text="Retour", font="Avenir", fg = "#FFFFFF", bg = "#0d2c56", activebackground = "#1A355B", activeforeground = "#FFFFFF", command=lambda : 
                                          [destroy_all_widgets(main_user_window), menus_page()])
             retour_menus_button.pack(side=LEFT, pady=10, padx=10)
             
-            valide_the_menu_button = Button(nav_in_the_menu_frame, text="Valider", font="Avenir", fg = "#FFFFFF", bg = "#0d2c56", command=lambda : 
+            valide_the_menu_button = Button(nav_in_the_menu_frame, text="Valider", font="Avenir", fg = "#FFFFFF", bg = "#0d2c56",  command=lambda : 
                                             [check_if_the_menu_not_empty(dico_choices_in_the_menu)]) 
             valide_the_menu_button.pack(side=LEFT, pady=10, padx=10)
                     
@@ -226,7 +229,7 @@ def main_window():
 
             nav_petite_faim_frame = Frame(main_user_window, bg="#1A355B")    
             nav_petite_faim_frame.pack(side=TOP, pady=10)
-            retour_petite_faim_button = Button(nav_petite_faim_frame, text="Retour", font="Avenir", fg = "#FFFFFF", bg = "#0d2c56", command=lambda :
+            retour_petite_faim_button = Button(nav_petite_faim_frame, text="Retour", font="Avenir", fg = "#FFFFFF", bg = "#0d2c56",  command=lambda :
                                             [refresh_price(main_user_window), menus_page()]) 
             retour_petite_faim_button.pack(side=LEFT, pady=10, padx=10)
 
@@ -333,7 +336,7 @@ def main_window():
             finish_frame.place(relx=0.5, rely=0.5, anchor=CENTER)
 
             valide_page_text = f"Votre commande s'élève à un montant de {global_total_price} €"
-            main_valide_page_text = Label(finish_frame, text=valide_page_text, font=("Avenir", 20), bg="#1A355B")
+            main_valide_page_text = Label(finish_frame, text=valide_page_text, font=("Avenir", 20), bg="#1A355B", fg = "#FFFFFF")
             main_valide_page_text.pack(side=TOP, pady=10)
 
             nav_finish_frame = Frame(finish_frame, bg="#1A355B")
