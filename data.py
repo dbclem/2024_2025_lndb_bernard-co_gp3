@@ -14,9 +14,9 @@ plat_patus = {
     "Tout Simple" : 7,
     "Végétarien" : 7,
     "Burger" : 7,
-    "Carbo'" : 8,
-    "Bolo'" : 8,
-    "Mac n' cheese" : 8,
+    "Carbo" : 8,
+    "Bolo" : 8,
+    "Mac n'cheese" : 8,
     "Pesto" : 8
 }
 
@@ -100,7 +100,7 @@ grands_paninis_casa = {
     "raclette" : 12,
     "chita" : 12,
     "grand classico" : 12,
-    "grand ;rimini" : 12,
+    "grand rimini" : 12,
     "grand roma" : 12,
     "grand venezia" : 12,
     "grand 3 fromages" : 12,
@@ -187,9 +187,18 @@ quiches_grenier = {
     "lardons, brocolis" : 4.50
 }
 plats_grenier = {
-"sandwichs" : sandwichs_grenier,
-"salades" : salades_grenier,
-"quiches" : quiches_grenier
+    "jambon, emmental" : 4,
+    "poulet, cruidités" : 4,
+    "thon, crudités" : 4,
+    "poulet, avocat" : 4,
+    "saumon, fumé" : 4,
+    "tomate, mozza" : 5,
+    "chèvre, noix" : 5,
+    "courgette, aubergine" : 5, 
+    "lorraine" : 4.50,
+    "saumon, épinard" : 4.50,
+    "courgettes" : 4.50,
+    "lardons, brocolis" : 4.50
 
 }
 
@@ -247,7 +256,8 @@ grenier_a_pain = {
 
 data = [ patus_paninus, la_casa_del_panini, grenier_a_pain ]
 
-dico_mdp = {
-    'username' : 'clem',
-    'password' : '1234'
-}
+liste_mdp = [
+    {'username': 'clem', 'password': '123456'},
+    {'username': 'edgar', 'password': 'qsdfgh'},
+    {'username': 'cass', 'password': 'azerty'}
+]

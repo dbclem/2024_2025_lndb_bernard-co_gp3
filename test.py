@@ -1,42 +1,73 @@
-import tkinter as tk
-from main import*
+from tkinter import *
 
-# programming = ['Java', 'Python', 'C++', 
-            #    'C#', 'JavaScript', 'NodeJS', 
-            #    'Kotlin', 'VB.Net', 'MySql', 'SQLite']
-programming = []
+class RoundedFrame(Canvas):
+    def __init__(self, parent, width, height, radius, **kwargs):
+        Canvas.__init__(self, parent, width=width, height=height, **kwargs)
+        self.radius = radius
+        self.width = width
+        self.height = height
+        self.draw_rounded_frame()
 
-for element in global_dico_all_choices_price:
-    petite_faim_buttons = Button(main_user_window, text=(f"{element['name']} - {element['price']} $" ), height=2, width=50, 
-                        command=lambda element=element:
-                        [add_to_commande(element), refresh_price(main_user_window),
-                            update_total_price(), display_petite_faim(),
-                            print(global_list_commande)])
-    petite_faim_buttons.pack(pady=10)
+    def draw_rounded_frame(self):
+        points = [
+            self.radius, 0,
+            self.width - self.radius, 0,
+            self.width, 0,
+            self.width, self.radius,
+            self.width, self.height - self.radius,
+            self.width, self.height,
+            self.width - self.radius, self.height,
+            self.radius, self.height,
+            0, self.height,
+            0, self.height - self.radius,
+            0, self.radius,
+            0, 0
+        ]
+        self.create_polygon(points, smooth=True, fill="#3533cd", outline="#3533cd")
 
-# Création de la fenêtre principale
-window = tk.Tk()
-window.title("Exemple de Scrollbar")
-window.geometry("275x100")
+def create_rounded_button(canvas, x, y, width, height, radius, text, command):
+    points = [
+        x + radius, y,
+        x + width - radius, y,
+        x + width, y,
+        x + width, y + radius,
+        x + width, y + height - radius,
+        x + width, y + height,
+        x + width - radius, y + height,
+        x + radius, y + height,
+        x, y + height,
+        x, y + height - radius,
+        x, y + radius,
+        x, y
+    ]
+    button = canvas.create_polygon(points, smooth=True, fill="#3533cd", outline="#3533cd")
+    canvas.create_text(x + width / 2, y + height / 2, text=text, fill="white", font=("Helvetica", 12))
+    canvas.tag_bind(button, "<Button-1>", lambda event: command())
 
-# Création du widget Listbox
-listbox = tk.Listbox(window)
+def main_window():
+    """
+    la page affiche sous forme de liste tous les restaurants disponibles
+    """
+    global main_user_window
+    main_user_window = Tk()
+    screen_width = main_user_window.winfo_screenwidth()
+    screen_height = main_user_window.winfo_screenheight()
+    main_user_window.title("Bernard&co")
+    main_user_window_width = screen_width // 2
+    main_user_window_height = screen_height
+    main_user_window.geometry(f"{main_user_window_width}x{main_user_window_height}")
+    main_user_window.iconbitmap("images/logo_bernard&co.ico")
+    # main_user_window.configure(bg="#3533cd")
 
-# Création du widget Scrollbar
-scrollbar = tk.Scrollbar(window)
+    canvas = Canvas(main_user_window, width=main_user_window_width, height=main_user_window_height)
+    canvas.pack()
 
+    create_rounded_button(canvas, 50, 50, 200, 50, 20, "Bouton 1", lambda: print("Bouton 1 cliqué"))
+    create_rounded_button(canvas, 50, 150, 200, 50, 20, "Bouton 2", lambda: print("Bouton 2 cliqué"))
 
-# Configuration de la relation entre le Listbox et le Scrollbar
-listbox.config(yscrollcommand=scrollbar.set)
-scrollbar.config(command=listbox.yview)
+    rounded_frame = RoundedFrame(canvas, 300, 200, 20)
+    rounded_frame.place(x=300, y=50)
 
-# Ajout des éléments à la liste
-for item in programming:
-    listbox.insert(tk.END, item)
+    main_user_window.mainloop()
 
-# Placement des widgets dans la fenêtre
-listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-# Lancement de la boucle principale
-window.mainloop()
+main_window()
