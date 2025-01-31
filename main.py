@@ -7,8 +7,6 @@ from PIL import Image, ImageTk
 """
 couleur :
         bleu foncé pour les boutons--> #0d2c56    
-        bleu foncé pour les boutons--> #091A32
-        bleu clair pour l'arriere plan --> #1A355B
         bleu clair pour l'arriere plan --> #1A355B
 """
 
@@ -50,7 +48,7 @@ def main_window():
             main_user_window.destroy()
             # main_operateur_window()  
         else:
-            error_label = Label(main_user_window, text="Nom d'utilisateur ou mot de passe incorrect", font=("Avenir", 12), fg="red")
+            error_label = Label(main_user_window, text="Nom d'utilisateur ou mot de passe incorrect", font=("Avenir", 12), fg="red", bg="#1A355B")
             error_label.pack(pady=5)
             error_label.after(2000, error_label.destroy)
 
@@ -182,7 +180,7 @@ def main_window():
             main_element_in_commande_frame = Frame(main_user_window, bg="#1A355B", bd=2, relief="solid")
             main_element_in_commande_frame.pack(side=TOP, pady=10)
 
-            main_element_text = Label(main_element_in_commande_frame, text=element, font=("Avenir", 15), bg="#1A355B", bd=1, relief="solid")
+            main_element_text = Label(main_element_in_commande_frame, text=element, font=("Avenir", 15), fg = "#FFFFFF", bg="#1A355B", bd=1, relief="solid")
             main_element_text.grid(row=0, column=i, padx=5, pady=5)
 
             row_one_frame = Frame(main_element_in_commande_frame)
@@ -257,7 +255,7 @@ def main_window():
         def update_total_price():
             total_price_label.config(text=f"Prix total : {global_total_price} €")     
     
-        total_price_label = Label(main_user_window, text="", font="Avenir", bg="#1A355B")
+        total_price_label = Label(main_user_window, text="", font="Avenir", bg="#1A355B", fg = "#FFFFFF")
         total_price_label.place(relx=0.5, rely=0.9, anchor=CENTER)
 
         def navigation_in_menus_page():    
@@ -299,13 +297,13 @@ def main_window():
 
         def all_commande_page () :
             if global_list_commande == [] : 
-                panier_vide_text = Label(main_user_window, text="Votre panier est vide", font="Avenir", bg="#1A355B")
+                panier_vide_text = Label(main_user_window, text="Votre panier est vide", font="Avenir", fg = "#FFFFFF", bg="#1A355B")
                 panier_vide_text.pack(pady=10)
                 
             else : 
-                main_commande_text = Label(main_user_window, text="Votre panier :" , font=("Avenir", 20), bg="#1A355B")
+                main_commande_text = Label(main_user_window, text="Votre panier :" , font=("Avenir", 20), fg = "#FFFFFF", bg="#1A355B")
                 main_commande_text.pack()
-                click_to_supp_text = Label(main_user_window, text="Appuiez pour supprimer", font=("Avenir", 10), bg="#1A355B")
+                click_to_supp_text = Label(main_user_window, text="Appuiez pour supprimer", font=("Avenir", 10), fg = "#FFFFFF", bg="#1A355B")
                 click_to_supp_text.pack()
 
                 for element in global_list_commande:
@@ -322,7 +320,7 @@ def main_window():
 
             retour_commande_button = Button(main_user_window, text="Retour", font="Avenir", fg = "#FFFFFF", bg = "#0d2c56", command=lambda : 
                                 [refresh_price(main_user_window), menus_page()])
-            retour_commande_button.pack(side=BOTTOM, pady=10)
+            retour_commande_button.place(relx=0.5, rely=0.9, anchor=CENTER)
 
 
         def valide_page (index):
