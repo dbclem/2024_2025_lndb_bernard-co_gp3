@@ -104,7 +104,9 @@ def main_window():
                                                         restaurant_name eest donc facilement réutilisable 
         """
         
-        global global_tuple_menu_price 
+        global global_tuple_menu_price
+        global_tuple_menu_price = []
+
         """            
             creation d'un tuple (choix, price) pour pouvoir afficher le price dans la commande
             la commande et le price sont donc lié
@@ -321,7 +323,7 @@ def main_window():
 
             retour_commande_button = Button(main_user_window, text="Retour", font="Avenir", fg = "#FFFFFF", bg = "#0d2c56", command=lambda : 
                                 [refresh_price(main_user_window), menus_page()])
-            retour_commande_button.place(relx=0.5, rely=0.9, anchor=CENTER)
+            retour_commande_button.place(relx=0.5, rely=0.85, anchor=CENTER)
 
 
         def valide_page (index):
