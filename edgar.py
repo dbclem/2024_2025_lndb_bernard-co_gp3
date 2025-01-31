@@ -1,8 +1,11 @@
 from tkinter import *
 """from main import global_liste_commande_operateur"""
 
-
-global_liste_commande_operateur = ["commande 11111111111111111111111111", "commande 2", "commande 3", "commande 4", "commande 5"]
+def destroy_all_widgets(frame):
+    for widget in frame.winfo_children():
+        widget.destroy()
+        
+global_liste_commande_operateur = ["commande 1", "commande 2", "commande 3", "commande 4", "commande 5"]
 
 def main_operateur_window():
     """
@@ -52,11 +55,26 @@ def main_operateur_window():
 
     # creation de la fonction qui ajoute les commandes demandées
     def add_commandes ():
+        print(global_liste_commande_operateur)
         global_liste_commande_operateur
         for commande in global_liste_commande_operateur :
-            commande_label = Label(demande_frame, text=commande, font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
+            commande_frame = Frame(demande_frame, bg="#1A355B", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+            commande_frame.pack(pady=10)
+            commande_label = Label(commande_frame, text=commande, font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
             commande_label.pack(pady=10)
+            accepter_button = Button(commande_frame, text="Accepter", font=("Helvetica", 10), bg="#1A355B", fg="white"
+                                     , highlightbackground="black", highlightcolor="black", highlightthickness=1, command=lambda commande=commande: accepter_commande(commande))
+            accepter_button.pack(pady=10,side=LEFT)
+            refuser_button = Button(commande_frame, text="Refuser", font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black"
+                                    , highlightcolor="black", highlightthickness=1, command=lambda commande=commande: [refuser_commande(commande), destroy_all_widgets(demande_frame), add_commandes()])
+            refuser_button.pack(pady=10)
+
     add_commandes()
+
+    def refuser_commande(commande):
+        global_liste_commande_operateur.remove(commande)
+        print(global_liste_commande_operateur)
+
     operateur_window.mainloop()
 
     
