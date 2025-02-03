@@ -6,6 +6,9 @@ def destroy_all_widgets(frame):
         widget.destroy()
         
 global_liste_commande_operateur = ["commande 1", "commande 2", "commande 3", "commande 4", "commande 5"]
+global_liste_en_cours = []
+global_list_commande_terminees = []
+
 
 def main_operateur_window():
     """
@@ -58,15 +61,19 @@ def main_operateur_window():
         print(global_liste_commande_operateur)
         global_liste_commande_operateur
         for commande in global_liste_commande_operateur :
+
             commande_frame = Frame(demande_frame, bg="#1A355B", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
             commande_frame.pack(pady=10)
+
             commande_label = Label(commande_frame, text=commande, font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
             commande_label.pack(pady=10)
+
             accepter_button = Button(commande_frame, text="Accepter", font=("Helvetica", 10), bg="#1A355B", fg="white"
-                                     , highlightbackground="black", highlightcolor="black", highlightthickness=1, command=lambda commande=commande: accepter_commande(commande))
+                                    , highlightbackground="black", highlightcolor="black", highlightthickness=1, command=lambda commande=commande: [accepter_commande(commande), destroy_all_widgets(demande_frame), add_commandes(), add_commandes_en_cours()])
             accepter_button.pack(pady=10,side=LEFT)
-            refuser_button = Button(commande_frame, text="Refuser", font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black"
-                                    , highlightcolor="black", highlightthickness=1, command=lambda commande=commande: [refuser_commande(commande), destroy_all_widgets(demande_frame), add_commandes()])
+
+            refuser_button = Button(commande_frame, text="Refuser", font=("Helvetica", 10), bg="#1A355B", fg="white"
+                                    , highlightbackground="black", highlightcolor="black", highlightthickness=1, command=lambda commande=commande: [refuser_commande(commande), destroy_all_widgets(demande_frame), add_commandes()])
             refuser_button.pack(pady=10)
 
     add_commandes()
@@ -74,6 +81,36 @@ def main_operateur_window():
     def refuser_commande(commande):
         global_liste_commande_operateur.remove(commande)
         print(global_liste_commande_operateur)
+
+    def accepter_commande(commande):
+        if commande in global_liste_en_cours :
+            global_list_commande_terminees.append(commande)
+            global_liste_en_cours.remove(commande)
+        else :
+            global_liste_en_cours.append(commande)
+            global_liste_commande_operateur.remove(commande)
+        print(global_liste_en_cours)
+        print(global_liste_commande_operateur)
+        print(global_list_commande_terminees)
+
+    # creation de la fonction qui ajoute les commandes en cours
+    def add_commandes_en_cours ():
+        global global_liste_en_cours
+        for commande in global_liste_en_cours :
+
+            en_cours_frame = Frame(process_frame, bg="#1A355B", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+            en_cours_frame.pack(pady=10)
+
+            en_cours_label = Label(en_cours_frame, text=commande, font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
+            en_cours_label.pack(pady=10)
+
+            terminer_button = Button(en_cours_frame, text="Terminer", font=("Helvetica", 10), bg="#1A355B", fg="white"
+                                    , highlightbackground="black", highlightcolor="black", highlightthickness=1)#, command=lambda commande=commande: [terminer_commande(commande), destroy_all_widgets(process_frame), add_commandes_en_cours()])
+            terminer_button.pack(pady=10,side=LEFT)
+    
+
+
+
 
     operateur_window.mainloop()
 
