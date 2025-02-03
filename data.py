@@ -210,8 +210,8 @@ desserts_grenier = {
     "paris-brest" : 4
 }
 boissons_grenier = {
-    "eau plate" : 2.50,
-    "eau gazeuse" : 2.50,
+    "eau plate" : 2,
+    "eau gazeuse" : 2,
     "minute maid orange" : 2.50,
     "ice-tea" : 2.50,
     "coca-cola" : 2.50

@@ -57,18 +57,28 @@ def main_window():
     def display_admin_check() : 
         destroy_all_widgets(main_user_window)
 
-        username_label = Label(main_user_window, text="Nom d'utilisateur", font=("Avenir", 12), bg="#1A355B")
+        username_label = Label(main_user_window, text="Nom d'utilisateur", font=("Avenir", 12),fg = "#FFFFFF", bg="#1A355B")
         username_label.pack(pady=5)
         username_entry = Entry(main_user_window, font=("Avenir", 12), bg="#0d2c56", fg="white")
         username_entry.pack(pady=5)
         
-        password_label = Label(main_user_window, text="Mot de passe", font=("Avenir", 12), bg="#1A355B")
+        password_label = Label(main_user_window, text="Mot de passe", font=("Avenir", 12), fg = "#FFFFFF", bg="#1A355B")
         password_label.pack(pady=5)
         password_entry = Entry(main_user_window, show="*", font=("Avenir", 12), bg="#0d2c56", fg="white")
         password_entry.pack(pady=5)
     
-        validate_button = Button(main_user_window, text="Valider", font=("Avenir", 12), bg="#0d2c56", fg="white", command=lambda: validate_admin(username_entry.get(), password_entry.get()))
-        validate_button.pack(pady=10)
+
+        nav_buttons_frame = Frame(main_user_window, bg="#1A355B")
+        nav_buttons_frame.place(relx=0.5, rely=0.18, anchor=CENTER)
+
+        validate_button = Button(nav_buttons_frame, text="Valider", font=("Avenir", 12), bg="#0d2c56", fg="white", activebackground = "#0d2c56", activeforeground= "#FFFFFF",
+                                 command=lambda: validate_admin(username_entry.get(), password_entry.get()))
+        validate_button.pack(side = RIGHT, padx = 10)
+        nav_retour_button = Button(nav_buttons_frame, text="Retour ",  font=("Avenir", 12), fg = "#FFFFFF", bg = "#0d2c56",
+                                    activebackground = "#0d2c56", activeforeground = "#FFFFFF", command=lambda window=main_user_window: 
+                                    [destroy_all_widgets(window), reset_commandes(), display_restaurants_names()])
+        nav_retour_button.pack(side=LEFT)
+
 
     def display_restaurants_names () :  
         admin_button = Button(main_user_window, text="Admin", font=("Avenir", 15),  fg = "#FFFFFF", bg="#0d2c56", 
