@@ -11,6 +11,9 @@ couleur :
         bleu clair pour l'arriere plan --> #1A355B
 """
 
+
+#wip --> probeleme daffichage avec le prix 
+
 main_user_window = Tk()
 screen_width = main_user_window.winfo_screenwidth()
 screen_height = main_user_window.winfo_screenheight()
@@ -235,6 +238,7 @@ def refresh_whitout_widjet(window, widjet):
     for widget in window.winfo_children():
         if widget != widjet:
             widget.destroy()
+
 
 def all_commande_page (index, total_price_label) :
     if global_list_commande == [] : 
