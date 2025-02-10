@@ -202,6 +202,14 @@ def main_window():
 
             canva_scroll_menu.configure(yscrollcommand = canva_scroll_menu.set)
             canva_scroll_menu.bind ('<Configure>', lambda e : canva_scroll_menu.configure(scrollregion = canva_scroll_menu.bbox("all")))
+            
+            second_frame = Frame(canva_scroll_menu)
+            canva_scroll_menu.create_window ((0,0), window = second_frame, anchor = "nw")
+            for display_elements_of_the_menu in range (50):
+                Button (second_frame, text = f'Button {display_elements_of_the_menu}').grid(row = display_elements_of_the_menu, column = 0)
+
+            my_label = Label(second_frame, text = f"Element {element}").grid(row = 3, column = 2)
+
             #### video adding a full screen scrollbar (codemy.com)_10:35
 
         def in_menu_page (name, price):
