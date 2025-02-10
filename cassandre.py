@@ -4,6 +4,7 @@ from tkinter import*
 from tools import destroy_all_widgets
 from PIL import Image, ImageTk
 from customtkinter import*
+from tkinter import ttk
 
 """
 couleur :
@@ -192,6 +193,16 @@ def main_window():
                             command=lambda key=key : 
                             [add_element_to_dico_final(element, key, dico_choices_in_the_menu)])
                 element_buttons.pack(pady=5)
+
+            canva_scroll_menu = Canvas(row_one_frame)
+            canva_scroll_menu.pack (side = LEFT, fill = BOTH, expand = 1)
+            #add a scrollbar to canvas
+            scrollbar_menu = ttk.Scrollbar(row_one_frame, orient = VERTICAL, command = canva_scroll_menu.yview)
+            scrollbar_menu.pack (side = RIGHT, fill= Y)
+
+            canva_scroll_menu.configure(yscrollcommand = canva_scroll_menu.set)
+            canva_scroll_menu.bind ('<Configure>', lambda e : canva_scroll_menu.configure(scrollregion = canva_scroll_menu.bbox("all")))
+            #### video adding a full screen scrollbar (codemy.com)_10:35
 
         def in_menu_page (name, price):
             nav_in_the_menu_frame = Frame(main_user_window, bg="#0d2c56")
