@@ -119,7 +119,7 @@ def add_element_to_dico_final (element, key, dico_choices_in_the_menu) :
 
 def display_add_message(window, element) : 
     global  main_user_window_width
-    add_message_frame = Frame(window, bg="#1A355B", bd=2, relief="solid")
+    add_message_frame = Frame(window, bg="#1A355B", bd=2, relief="solid", highlightbackground="#FFFFFF", highlightthickness=2)
     add_message_frame.place(x=main_user_window_width - 10, y=20, anchor=NE)
     add_message = Label(add_message_frame, text=f"{element} a été sélectionné ! ", font=("Avenir", 15), bg="#1A355B", fg="#FFFFFF")
     add_message.pack(side=TOP, pady=10)
@@ -127,10 +127,10 @@ def display_add_message(window, element) :
 
 
 def display_elements_of_the_menu (index, name, element, dico_choices_in_the_menu, i) :
-    main_element_in_commande_frame = Frame(main_user_window, bg="#1A355B", bd=2, relief="solid")
+    main_element_in_commande_frame = Frame(main_user_window, bg="#1A355B")
     main_element_in_commande_frame.pack(side=TOP, pady=10)
 
-    main_element_text = Label(main_element_in_commande_frame, text=element, font=("Avenir", 15), fg = "#FFFFFF", bg="#1A355B", bd=1, relief="solid")
+    main_element_text = Label(main_element_in_commande_frame, text=element, font=("Avenir", 15), fg = "#FFFFFF", bg="#1A355B")
     main_element_text.grid(row=0, column=i, padx=5, pady=5)
 
     row_one_frame = Frame(main_element_in_commande_frame, bg = "#1A355B")
