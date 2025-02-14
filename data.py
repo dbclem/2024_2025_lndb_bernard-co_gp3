@@ -81,7 +81,6 @@ horaires_casa = {
 
 paninis_casa = {
     "classico" : 8,
-    "rimini" : 8,
     "roma" : 8,
     "3 fromages" : 8,
     "seguin" : 8
@@ -94,18 +93,11 @@ paninis_XL_casa = {
 grands_paninis_casa = {
     "grec" : 12,
     "burger" : 12,
-    "raclette" : 12,
-    "chita" : 12,
-    "grand classico" : 12,
-    "grand rimini" : 12,
     "grand roma" : 12,
-    "grand venezia" : 12,
     "grand 3 fromages" : 12,
-    "grand seguin" : 12
     }
 desserts_casa = {
     "cookie" : 4,
-    "donut" : 4,
     "panini nutella" : 4
 }
 boissons_casa = {
@@ -113,7 +105,6 @@ boissons_casa = {
     "Ice-Tea" : 2.50,
     "Oasis" : 2.50,
     "Fanta" : 2.50,
-    "Schweppes agrumes" : 2.50
 }
 
 petite_formule_casa = {
@@ -168,49 +159,33 @@ horaires_grenier_a_pain = {
 sandwichs_grenier = {
     "jambon, emmental" : 4,
     "poulet, cruidités" : 4,
-    "thon, crudités" : 4,
-    "poulet, avocat" : 4,
-    "saumon, fumé" : 4
+    "poulet, avocat" : 4
 }
 salades_grenier = {
     "tomate, mozza" : 5,
     "chèvre, noix" : 5,
     "courgette, aubergine" : 5
 }
-quiches_grenier = {
-    "lorraine" : 4.50,
-    "saumon, épinard" : 4.50,
-    "courgettes" : 4.50,
-    "lardons, brocolis" : 4.50
-}
+
 plats_grenier = {
     "jambon, emmental" : 4,
     "poulet, cruidités" : 4,
-    "thon, crudités" : 4,
     "poulet, avocat" : 4,
-    "saumon, fumé" : 4,
     "tomate, mozza" : 5,
     "chèvre, noix" : 5,
-    "courgette, aubergine" : 5, 
-    "lorraine" : 4.50,
-    "saumon, épinard" : 4.50,
-    "courgettes" : 4.50,
-    "lardons, brocolis" : 4.50
+    "courgette, aubergine" : 5
 
 }
 
 desserts_grenier = {
-    "tarte citron" : 4,
     "tarte framboise" : 4,
     "flan" : 4,
-    "éclair chocolat" : 4,
-    "paris-brest" : 4
+    "éclair chocolat" : 4
 }
 boissons_grenier = {
     "eau plate" : 2,
     "eau gazeuse" : 2,
     "minute maid orange" : 2.50,
-    "ice-tea" : 2.50,
     "coca-cola" : 2.50
 }
 formule_grenier_1 = {
