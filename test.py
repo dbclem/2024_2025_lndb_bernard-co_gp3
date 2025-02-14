@@ -1,6 +1,5 @@
 from tkinter import *
 from customtkinter import*
-from main import *
 from tkinter import ttk
 
 # class RoundedFrame(Canvas):

@@ -14,7 +14,6 @@ plat_patus = {
     "Tout Simple" : 7,
     "Végétarien" : 7,
     "Burger" : 7,
-    "Carbo" : 8,
     "Bolo" : 8,
     "Mac n'cheese" : 8,
     "Pesto" : 8
@@ -29,8 +28,7 @@ boissons_patus = {
     "Coca-Cola" : 2,
     "Ice-Tea" : 2,
     "Oasis" : 2,
-    "Fanta" : 2,
-    "Schweppes_agrumes" : 2
+    "Fanta" : 2
 }
 
 formule_patus_1 = {
@@ -85,7 +83,6 @@ paninis_casa = {
     "classico" : 8,
     "rimini" : 8,
     "roma" : 8,
-    "venezia" : 8,
     "3 fromages" : 8,
     "seguin" : 8
 }

@@ -194,13 +194,13 @@ def petite_faim_page (index, total_price_label) :
     main_petite_faim_frame = Frame(main_user_window, bd=2, relief="solid", padx=5, pady=5, bg="#1A355B")
     main_petite_faim_frame.pack(pady=10)
     for element in global_dico_all_choices_price:
-        petite_faim_buttons = Button(main_petite_faim_frame, text=(f"{element['name']} - {element['price']} €" ), height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56",
+        petite_faim_buttons = Button(main_petite_faim_frame, text=(f"{element['name']} - {element['price']} €" ), height=1, width=50, fg = "#FFFFFF", bg = "#0d2c56",
                             activebackground = "#1A355B", activeforeground = "#FFFFFF", 
                             command=lambda element=element:
                             [add_to_commande(element, total_price_label), refresh_whitout_widjet(main_user_window, total_price_label),
                                 update_total_price(total_price_label), petite_faim_page(index, total_price_label),
                                 print(global_list_commande)])
-        petite_faim_buttons.pack(pady=10)
+        petite_faim_buttons.pack(pady= 6)
 
 def update_total_price(total_price_label):
     if total_price_label.winfo_exists():
@@ -308,7 +308,7 @@ def reset_commandes():
     global global_list_commande
     global global_dico_all_choices_price
     global global_total_price
-    global_liste_commande_operateur.append(global_list_commande)
+    global_liste_commande_operateur.extend(global_list_commande)
     global_tuple_menu_price = []
     global_list_commande = []
     global_dico_all_choices_price = []
