@@ -119,12 +119,12 @@ def add_element_to_dico_final (element, key, dico_choices_in_the_menu) :
 
 def display_add_message(window, element) : 
     global  main_user_window_width
-    add_message_frame = CTkFrame(master=window, bg_color="#1A355B")
+    add_message_frame = Frame(window, bg="#1A355B", bd=2, relief="solid")
     add_message_frame.place(x=main_user_window_width - 10, y=20, anchor=NE)
     add_message = Label(add_message_frame, text=f"{element} a été sélectionné ! ", font=("Avenir", 15), bg="#1A355B", fg="#FFFFFF")
     add_message.pack(side=TOP, pady=10)
     add_message_frame.after(1000, lambda : add_message_frame.destroy())
-#WIP --> message custom dans test
+
 
 def display_elements_of_the_menu (index, name, element, dico_choices_in_the_menu, i) :
     main_element_in_commande_frame = Frame(main_user_window, bg="#1A355B", bd=2, relief="solid")
@@ -200,12 +200,13 @@ def petite_faim_page (index, total_price_label) :
 
     main_petite_faim_frame = Frame(main_user_window, bd=2, relief="solid", padx=5, pady=5, bg="#1A355B")
     main_petite_faim_frame.pack(pady=10)
+
     for element in global_dico_all_choices_price:
         petite_faim_buttons = Button(main_petite_faim_frame, text=(f"{element['name']} - {element['price']} €" ), height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56",
                             activebackground = "#1A355B", activeforeground = "#FFFFFF", 
                             command=lambda element=element:
                             [add_to_commande(element, total_price_label), refresh_whitout_widjet(main_user_window, total_price_label),
-                                update_total_price(total_price_label), petite_faim_page(index, total_price_label),
+                                update_total_price(total_price_label), petite_faim_page(index, total_price_label), display_add_message(main_user_window, element["name"]),
                                 print(global_list_commande)])
         petite_faim_buttons.pack(pady= 5)
 

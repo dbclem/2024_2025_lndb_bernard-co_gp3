@@ -128,12 +128,3 @@ from tkinter import ttk
 
 # my_canvas = Canvas (main_frame)
 
-
-root = Tk()
-root.title ('test custom tkinter')
-root.iconbitmap ('images/logo_bernard&co.ico')
-root.geometry ('500x500')
-
-main_frame = CTkFrame (master=root, bg_color= 'red', width = 500, height = 500)
-
-root.mainloop()
