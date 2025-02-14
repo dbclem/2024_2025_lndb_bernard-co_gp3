@@ -77,11 +77,18 @@ def main_operateur_window():
         print(global_liste_commande_operateur)
         global_liste_commande_operateur
         for commande in global_liste_commande_operateur :
-            print(type(commande))
+            
+            if "plat" not in commande : 
+                text_commande = f"{commande['name']} - {commande['price']} €"
+            else :
+                # commande faite a partir de chatgpt qui permet de modifier réactivement le texte
+                text_commande = " \n ".join([f"{value} $" if key == "price" else f"{value}" for key, value in commande.items() if key != "temps"])
+
+            
             commande_frame = Frame(demande_frame, bg="#1A355B", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
             commande_frame.pack(pady=10)
 
-            commande_label = Label(commande_frame, text=commande, font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
+            commande_label = Label(commande_frame, text=text_commande, font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
             commande_label.pack(pady=10)
 
             accepter_button = Button(commande_frame, text="Accepter", font=("Helvetica", 10), bg="#1A355B", fg="white"
@@ -115,12 +122,17 @@ def main_operateur_window():
     def add_commandes_en_cours ():
         global global_liste_en_cours
         for commande in global_liste_en_cours :
+            if "plat" not in commande : 
+                text_commande = f"{commande['name']} - {commande['price']} €"
+            else :
+                # commande faite a partir de chatgpt qui permet de modifier réactivement le texte
+                text_commande = " \n ".join([f"{value} $" if key == "price" else f"{value}" for key, value in commande.items() if key != "temps"])
 
             en_cours_frame = Frame(process_frame, bg="#1A355B", width=200, height=200
                                    , highlightbackground="black", highlightcolor="black", highlightthickness=1)
             en_cours_frame.pack(pady=10)
 
-            en_cours_label = Label(en_cours_frame, text=commande, font=("Helvetica", 10), bg="#1A355B", fg="white"
+            en_cours_label = Label(en_cours_frame, text=text_commande, font=("Helvetica", 10), bg="#1A355B", fg="white"
                                    , highlightbackground="black", highlightcolor="black", highlightthickness=1)
             en_cours_label.pack(pady=10, padx=20)
 
@@ -133,12 +145,17 @@ def main_operateur_window():
     def add_commandes_terminees ():
         global global_list_commande_terminees
         for commande in global_list_commande_terminees :
+            if "plat" not in commande : 
+                text_commande = f"{commande['name']} - {commande['price']} €"
+            else :
+                # commande faite a partir de chatgpt qui permet de modifier réactivement le texte
+                text_commande = " \n ".join([f"{value} $" if key == "price" else f"{value}" for key, value in commande.items() if key != "temps"])
 
             terminees_frame = Frame(commande_frame, bg="#1A355B", width=200, height=200
                                     , highlightbackground="black", highlightcolor="black", highlightthickness=1)
             terminees_frame.pack(pady=10)
 
-            terminees_label = Label(terminees_frame, text=commande, font=("Helvetica", 10), bg="#1A355B", fg="white"
+            terminees_label = Label(terminees_frame, text=text_commande, font=("Helvetica", 10), bg="#1A355B", fg="white"
                                     , highlightbackground="black", highlightcolor="black", highlightthickness=1)
             terminees_label.pack(pady=30, padx=20)
     
