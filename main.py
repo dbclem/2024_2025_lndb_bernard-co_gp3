@@ -198,11 +198,9 @@ def petite_faim_page (index, total_price_label) :
                                     [refresh_whitout_widjet(main_user_window, total_price_label), menus_page(index, total_price_label)]) 
     retour_petite_faim_button.pack(side=LEFT, pady=10, padx=10)
 
-    main_petite_faim_frame = Frame(main_user_window, bd=2, relief="solid", padx=5, pady=5, bg="#1A355B")
-    main_petite_faim_frame.pack(pady=10)
 
     for element in global_dico_all_choices_price:
-        petite_faim_buttons = Button(main_petite_faim_frame, text=(f"{element['name']} - {element['price']} €" ), height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56",
+        petite_faim_buttons = Button(main_user_window, text=(f"{element['name']} - {element['price']} €" ), height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56",
                             activebackground = "#1A355B", activeforeground = "#FFFFFF", 
                             command=lambda element=element:
                             [add_to_commande(element, total_price_label), refresh_whitout_widjet(main_user_window, total_price_label),
