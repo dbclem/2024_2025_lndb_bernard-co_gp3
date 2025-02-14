@@ -11,9 +11,6 @@ couleur :
         bleu clair pour l'arriere plan --> #1A355B
 """
 
-
-#wip --> probeleme daffichage avec le prix 
-
 main_user_window = Tk()
 screen_width = main_user_window.winfo_screenwidth()
 screen_height = main_user_window.winfo_screenheight()
@@ -121,9 +118,13 @@ def add_element_to_dico_final (element, key, dico_choices_in_the_menu) :
     dico_choices_in_the_menu[element] = key
 
 def display_add_message(window, element) : 
-    add_message = Label(window, text=f"{element} a été sélectionné", font=("Avenir", 20), bg="#1A355B")
-    add_message.place(relx=0.8, rely=0.1, anchor=NE)
-    add_message.after(2000, lambda : add_message.destroy())
+    global  main_user_window_width
+    add_message_frame = CTkFrame(master=window, bg_color="#1A355B")
+    add_message_frame.place(x=main_user_window_width - 10, y=20, anchor=NE)
+    add_message = Label(add_message_frame, text=f"{element} a été sélectionné ! ", font=("Avenir", 15), bg="#1A355B", fg="#FFFFFF")
+    add_message.pack(side=TOP, pady=10)
+    add_message_frame.after(1000, lambda : add_message_frame.destroy())
+#WIP --> message custom dans test
 
 def display_elements_of_the_menu (index, name, element, dico_choices_in_the_menu, i) :
     main_element_in_commande_frame = Frame(main_user_window, bg="#1A355B", bd=2, relief="solid")
@@ -139,9 +140,8 @@ def display_elements_of_the_menu (index, name, element, dico_choices_in_the_menu
         element_buttons = Button(row_one_frame, text=key, height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56", 
                                     activebackground = "#1A355B", activeforeground = "#FFFFFF",
                     command=lambda key=key : 
-                    [add_element_to_dico_final(element, key, dico_choices_in_the_menu)])
+                    [add_element_to_dico_final(element, key, dico_choices_in_the_menu), display_add_message(main_user_window, key)])
         element_buttons.pack(pady=5)
-        # WIP --> afficher le message de selection
 
 
 def in_menu_page (index, name, price, total_price_label):
