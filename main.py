@@ -119,7 +119,12 @@ def check_if_the_menu_not_empty(dico_choices_in_the_menu, index, total_price_lab
 
 def add_element_to_dico_final (element, key, dico_choices_in_the_menu) :
     dico_choices_in_the_menu[element] = key
-    
+
+def display_add_message(window, element) : 
+    add_message = Label(window, text=f"{element} a été sélectionné", font=("Avenir", 20), bg="#1A355B")
+    add_message.place(relx=0.8, rely=0.1, anchor=NE)
+    add_message.after(2000, lambda : add_message.destroy())
+
 def display_elements_of_the_menu (index, name, element, dico_choices_in_the_menu, i) :
     main_element_in_commande_frame = Frame(main_user_window, bg="#1A355B", bd=2, relief="solid")
     main_element_in_commande_frame.pack(side=TOP, pady=10)
@@ -136,6 +141,8 @@ def display_elements_of_the_menu (index, name, element, dico_choices_in_the_menu
                     command=lambda key=key : 
                     [add_element_to_dico_final(element, key, dico_choices_in_the_menu)])
         element_buttons.pack(pady=5)
+        # WIP --> afficher le message de selection
+
 
 def in_menu_page (index, name, price, total_price_label):
     nav_in_the_menu_frame = Frame(main_user_window, bg="#1A355B")
