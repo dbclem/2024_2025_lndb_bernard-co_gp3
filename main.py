@@ -313,6 +313,7 @@ def reset_commandes():
     global_list_commande = []
     global_dico_all_choices_price = []
     global_total_price = 0
+    
     print("Panier vidé")
 
 def restaurant_page(index):
