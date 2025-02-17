@@ -105,7 +105,7 @@ def check_if_the_menu_not_empty(dico_choices_in_the_menu, index, total_price_lab
 
 
     if is_not_valid :
-        choice_not_finished_text = Label(main_user_window, text="Vous n'avez pas fini votre commande !", font=("Avenir", 20), bg="#1A355B")
+        choice_not_finished_text = Label(main_user_window, text="Vous n'avez pas fini votre commande !", font=("Avenir", 20), bg="#1A355B", fg="#FFFFFF")
         choice_not_finished_text.pack(side=BOTTOM, pady=10)
         choice_not_finished_text.after(2000, lambda : choice_not_finished_text.destroy())
     else : 
