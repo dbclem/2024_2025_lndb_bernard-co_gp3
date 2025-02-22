@@ -10,6 +10,11 @@ couleur :
         bleu foncé pour les boutons--> #0d2c56    
         bleu clair pour l'arriere plan --> #1A355B
 """
+"""
+    mettre tt dans le main 
+    rajouter une derniere page apres avoir payé pour dire que la commande a bien été prise en compte
+    --> bouton pour relancer une page 
+"""
 
 main_user_window = Tk()
 screen_width = main_user_window.winfo_screenwidth()
@@ -27,8 +32,8 @@ def validate_admin(username, password) :
     # any() retourne True si au moins un élément de l'itérable est vrai
     user_valid = any(user["username"] == username and user["password"] == password for user in liste_mdp)
     if user_valid:
-        main_user_window.destroy()
-        # main_operateur_window()  
+        pass
+        #main_operateur_window()  
     else:
         error_label = Label(main_user_window, text="Nom d'utilisateur ou mot de passe incorrect", font=("Avenir", 12), fg="red", bg="#1A355B")
         error_label.pack(pady=5)

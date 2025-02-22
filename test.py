@@ -99,32 +99,14 @@ from tkinter import ttk
 
 
 
-# root = Tk()
-# root.title ('canva test scroll')
-# root.iconbitmap ('images/logo_bernard&co.ico')
-# root.geometry ('500x500')
+root = Tk()
+root.title ('canva test scroll')
+root.iconbitmap ('images/logo_bernard&co.ico')
+root.geometry ('500x500')
 
-# main_frame = Frame (root)
-# main_frame.pack (fill = BOTH, expand = 1)   
+bouton = Button(root, text='test')
+bouton.pack(pady=20)
 
-# canva_scroll_menu = Canvas(main_frame) 
-# canva_scroll_menu.pack (side = LEFT, fill = BOTH, expand = 1)
-
-# scrollbar_menu = ttk.Scrollbar(main_frame, orient = VERTICAL, command = canva_scroll_menu.yview)
-# scrollbar_menu.pack (side = RIGHT, fill= Y)
-
-# canva_scroll_menu.configure(yscrollcommand = canva_scroll_menu.set)
-# canva_scroll_menu.bind ('<Configure>', lambda e : canva_scroll_menu.configure(scrollregion = canva_scroll_menu.bbox("all")))
-            
-# second_frame = Frame(canva_scroll_menu)
-# canva_scroll_menu.create_window ((0,0), window = second_frame, anchor = "nw")
-# for display_elements_of_the_menu in range (50):
-#                 Button (second_frame, text = f'Button {display_elements_of_the_menu}').grid(row = display_elements_of_the_menu, column = 0)
-
-# my_label = Label(second_frame, text = f"Element {display_elements_of_the_menu}").grid(row = 3, column = 2)
-# for element_buttons in range (50):
-#     Button (root, text = f'Button {element_buttons}').grid(row = element_buttons, column = 0, pady = 10, padx = 10)
-
-
-# my_canvas = Canvas (main_frame)
-
+label = Label(bouton, text='label')
+label.pack()
+root.mainloop()
