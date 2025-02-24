@@ -45,7 +45,7 @@ def main_operateur_window():
 
 
     # creation de la frame des demandes initial
-    demande_frame_intial = Frame(main_frame, bg="#0d2c56", width=500, height=500, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+    demande_frame_intial = Frame(main_frame, bg="#0d2c56", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
     demande_frame_intial.pack(side=LEFT, expand=True)
 
     # Label des demandes
@@ -53,7 +53,7 @@ def main_operateur_window():
     label_demande.pack(padx=100, pady=10)
 
     # creation de la frame des demandes
-    demande_frame = Frame(demande_frame_intial, bg="#0d2c56", width=500, height=500)
+    demande_frame = Frame(demande_frame_intial, bg="#0d2c56", width=200, height=200)
     demande_frame.pack(expand=True)
 
     
