@@ -24,7 +24,7 @@ main_user_window.configure(bg = "#FFBF00")
 main_user_window_width = screen_width // 2
 main_user_window_height = screen_height
 main_user_window.geometry(f"{main_user_window_width}x{main_user_window_height}+0+0")
-main_user_window.iconbitmap("images/logo_bernard&co.ico")
+main_user_window.iconbitmap("images\Be_-CO.ico")
 
 
 
