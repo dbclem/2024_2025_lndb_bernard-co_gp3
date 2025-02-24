@@ -7,7 +7,7 @@ from PIL import Image, ImageTk
 
 """
 couleur :
-        bleu foncé pour les boutons--> #0F5741   
+        vert pour les boutons--> #0F5741   
         jaune pour l'arriere plan -->"#FFBF00
 """
 """
