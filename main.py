@@ -58,16 +58,16 @@ def display_admin_check(main_user_window) :
     nav_buttons_frame = Frame(main_user_window, bg="#fff5f1")
     nav_buttons_frame.place(relx=0.5, rely=0.18, anchor=CENTER)
 
-    validate_button = Button(nav_buttons_frame, text="Valider", font=("Avenir", 12), bg="#ffbf00", fg="white", activebackground = "#ffbf00", activeforeground= "#0f5741",
+    validate_button = Button(nav_buttons_frame, text="Valider", font=("Avenir", 12), bg="#0f5741", fg="white", activebackground = "#ffbf00", activeforeground= "#0f5741",
                                 command=lambda: validate_admin(username_entry.get(), password_entry.get()))
     validate_button.pack(side = RIGHT, padx = 10)
-    nav_retour_button = Button(nav_buttons_frame, text="Retour ",  font=("Avenir", 12), fg = "#0f5741", bg = "#ffbf00",
+    nav_retour_button = Button(nav_buttons_frame, text="Retour ",  font=("Avenir", 12), fg = "white", bg = "#0f5741",
                                 activebackground = "#ffbf00", activeforeground = "#0f5741", command=lambda window=main_user_window: 
                                 [destroy_all_widgets(window), reset_commandes(), display_restaurants_names()])
     nav_retour_button.pack(side=LEFT)
 
 def display_restaurants_names () :  
-    admin_button = Button(main_user_window, text="Admin", font=("Avenir", 15),  fg = "#0f5741", bg="#ffbf00", 
+    admin_button = Button(main_user_window, text="Admin", font=("Avenir", 15),  fg = "white", bg="#0f5741", 
                             activebackground = "#fff5f1", activeforeground = "#0f5741", command=lambda : display_admin_check(main_user_window))
     admin_button.pack(side=TOP, pady=20, padx=20)
     main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 20, "bold"), bg="#fff5f1", fg = "#0f5741", padx=20, pady=10)
@@ -129,7 +129,7 @@ def display_add_message(window, element) :
     add_message_frame.place(x=main_user_window_width - 10, y=20, anchor=NE)
     add_message = Label(add_message_frame, text=f"{element} a été sélectionné ! ", font=("Avenir", 15), bg="#fff5f1", fg="#0f5741")
     add_message.pack(side=TOP, pady=10)
-    add_message_frame.after(1000, lambda : add_message_frame.destroy())
+    add_message_frame.after(5000, lambda : add_message_frame.destroy())
 
 
 def display_elements_of_the_menu (index, name, element, dico_choices_in_the_menu, i) :
@@ -154,12 +154,12 @@ def in_menu_page (index, name, price, total_price_label):
     nav_in_the_menu_frame = Frame(main_user_window, bg="#fff5f1")
     nav_in_the_menu_frame.pack(side=TOP, pady=10)
 
-    retour_menus_button = Button(nav_in_the_menu_frame, text="Retour", font=("Avenir", 15, "bold"), fg = "#0f5741", bg = "#ffbf00", 
+    retour_menus_button = Button(nav_in_the_menu_frame, text="Retour", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741", 
                                 activebackground = "#fff5f1", activeforeground = "#0f5741", command=lambda : 
                                     [destroy_all_widgets(main_user_window), menus_page(index, total_price_label)])
     retour_menus_button.pack(side=LEFT, pady=10, padx=10)
     
-    valide_the_menu_button = Button(nav_in_the_menu_frame, text="Valider", font=("Avenir", 15, "bold"), fg = "#0f5741", bg = "#ffbf00",
+    valide_the_menu_button = Button(nav_in_the_menu_frame, text="Valider", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
                                     activebackground = "#fff5f1", activeforeground = "#0f5741",  command=lambda : 
                                     [check_if_the_menu_not_empty(dico_choices_in_the_menu, index, total_price_label)]) 
     valide_the_menu_button.pack(side=LEFT, pady=10, padx=10)
@@ -199,14 +199,14 @@ def petite_faim_page (index, total_price_label) :
 
     nav_petite_faim_frame = Frame(main_user_window, bg="#fff5f1")    
     nav_petite_faim_frame.pack(side=TOP, pady=10)
-    retour_petite_faim_button = Button(nav_petite_faim_frame, text="Retour", font=("Avenir", 15, "bold"), fg = "#0f5741", bg = "#ffbf00",
+    retour_petite_faim_button = Button(nav_petite_faim_frame, text="Retour", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
                                     activebackground = "#fff5f1", activeforeground = "#0f5741",  command=lambda :
                                     [refresh_whitout_widjet(main_user_window, total_price_label), menus_page(index, total_price_label)]) 
     retour_petite_faim_button.pack(side=LEFT, pady=10, padx=10)
 
 
     for element in global_dico_all_choices_price:
-        petite_faim_buttons = Button(main_user_window, text=(f"{element['name']} - {element['price']} €" ), height=2, width=50, fg = "#0f5741", bg = "#ffbf00",
+        petite_faim_buttons = Button(main_user_window, text=(f"{element['name']} - {element['price']} €" ), font=("Avenir", 10, "bold"), height=2, width=50, fg = "#0f5741", bg = "#ffbf00",
                             activebackground = "#fff5f1", activeforeground = "#0f5741", 
                             command=lambda element=element:
                             [add_to_commande(element, total_price_label), refresh_whitout_widjet(main_user_window, total_price_label),
@@ -222,17 +222,17 @@ def navigation_in_menus_page(index, total_price_label):
     nav_buttons_frame = Frame(main_user_window, bg="#fff5f1")
     nav_buttons_frame.place(relx=0.5, rely=0.85, anchor=CENTER)
 
-    nav_retour_button = Button(nav_buttons_frame, text="Retour",  font=("Avenir", 15, "bold"), fg = "#0f5741", bg = "#ffbf00",
+    nav_retour_button = Button(nav_buttons_frame, text="Retour",  font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
                             activebackground = "#fff5f1", activeforeground = "#0f5741", command=lambda window=main_user_window: 
                             [destroy_all_widgets(window), reset_commandes(), display_restaurants_names()])
     nav_retour_button.pack(side=LEFT, padx=10)
 
-    nav_voir_commande_button = Button(nav_buttons_frame, text="Voir la commande", font=("Avenir", 15, "bold"), fg = "#0f5741", bg = "#ffbf00",
+    nav_voir_commande_button = Button(nav_buttons_frame, text="Voir la commande", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
                                     activebackground = "#fff5f1", activeforeground = "#0f5741", 
                                     command=lambda : [refresh_whitout_widjet(main_user_window, total_price_label), all_commande_page(index, total_price_label)])
     nav_voir_commande_button.pack(side=LEFT, padx=10)
 
-    nav_valide_button = Button(nav_buttons_frame, text="Valider", font=("Avenir", 15, "bold"), fg = "#0f5741", bg = "#ffbf00",
+    nav_valide_button = Button(nav_buttons_frame, text="Valider", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
                                 activebackground = "#fff5f1", activeforeground = "#0f5741", command=lambda : check_commande_not_empty(index))
     nav_valide_button.pack(side=LEFT, padx=10) 
 
@@ -277,7 +277,7 @@ def all_commande_page (index, total_price_label) :
                                                 all_commande_page(index, total_price_label), update_total_price(total_price_label)])
             element_of_commande_button.place(relx=0.5, rely=0.2 + index * 0.05, anchor=CENTER)
 
-    retour_commande_button = Button(main_user_window, text="Retour", font=("Avenir", 15, "bold"), fg = "#0f5741", bg = "#ffbf00", 
+    retour_commande_button = Button(main_user_window, text="Retour", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741", 
                         activebackground = "#fff5f1", activeforeground = "#0f5741", command=lambda : 
                         [refresh_whitout_widjet(main_user_window, total_price_label), menus_page(index, total_price_label)])
     retour_commande_button.place(relx=0.5, rely=0.85, anchor=CENTER)
@@ -296,11 +296,11 @@ def valide_page (index):
 
     nav_finish_frame = Frame(finish_frame, bg="#fff5f1")
     nav_finish_frame.pack(side=BOTTOM, pady=10)
-    retour_a_la_commande_button = Button(nav_finish_frame, text="revenir a la commande", font=("Avenir", 15, "bold"), fg = "#0f5741", bg = "#ffbf00",
+    retour_a_la_commande_button = Button(nav_finish_frame, text="revenir a la commande", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
                                         activebackground = "#fff5f1", activeforeground = "#0f5741",
                                             command= lambda i=index : [destroy_all_widgets(main_user_window), restaurant_page(i)])
     retour_a_la_commande_button.pack(side=LEFT, padx=10)
-    nouvelle_commande_button = Button(nav_finish_frame, text="Nouvelle commande", font=("Avenir", 15, "bold"), fg = "#0f5741", bg = "#ffbf00",
+    nouvelle_commande_button = Button(nav_finish_frame, text="Nouvelle commande", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
                                     activebackground = "#fff5f1", activeforeground = "#0f5741",
                                             command= lambda : [destroy_all_widgets(main_user_window), reset_commandes(), main_window()])
     nouvelle_commande_button.pack(side=LEFT, padx=10)
