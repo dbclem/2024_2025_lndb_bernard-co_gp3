@@ -34,7 +34,7 @@ def main_operateur_window():
 
 
     # creation de la frame des demandes initial
-    demande_frame_intial = Frame(main_frame, bg="#0d2c56", width=500, height=500, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+    demande_frame_intial = Frame(main_frame, bg="#0d2c56", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
     demande_frame_intial.pack(side=LEFT, expand=True)
 
     # Label des demandes
@@ -42,7 +42,7 @@ def main_operateur_window():
     label_demande.pack(padx=100, pady=10)
 
     # creation de la frame des demandes
-    demande_frame = Frame(demande_frame_intial, bg="#0d2c56", width=500, height=500)
+    demande_frame = Frame(demande_frame_intial, bg="#0d2c56", width=200, height=200)
     demande_frame.pack(expand=True)
 
     
@@ -70,6 +70,10 @@ def main_operateur_window():
     # creation de la frame des commandes terminées
     commande_frame = Frame(commande_frame_initial, bg="#0d2c56", width=200, height=200)
     commande_frame.pack(side=LEFT, expand=True)
+
+    # creation d'un bouton refresh
+    refresh_button = Button(main_frame, text="Refresh", font=("Helvetica", 10), bg="#1A355B", fg="white", command=lambda: [destroy_all_widgets(demande_frame), add_commandes()])
+    refresh_button.place(relx=0.1, rely=0.1, anchor=CENTER)
 
 
     # creation de la fonction qui ajoute les commandes demandées

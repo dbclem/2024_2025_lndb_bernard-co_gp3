@@ -3,7 +3,7 @@ from tkinter import*
 #from edgar import main_operateur_window
 from tools import destroy_all_widgets
 from PIL import Image, ImageTk
-from customtkinter import*
+
 
 """
 couleur :
@@ -81,6 +81,10 @@ def main_operateur_window():
     # creation de la frame des commandes terminées
     commande_frame = Frame(commande_frame_initial, bg="#0d2c56", width=200, height=200)
     commande_frame.pack(side=LEFT, expand=True)
+
+    # creation d'un bouton refresh
+    refresh_button = Button(main_frame, text="Refresh", font=("Helvetica", 10), bg="#1A355B", fg="white", command=lambda: [destroy_all_widgets(demande_frame), add_commandes()])
+    refresh_button.place(relx=0.1, rely=0.1, anchor=CENTER)
 
 
     # creation de la fonction qui ajoute les commandes demandées
@@ -459,9 +463,9 @@ def valide_page (index):
                                         activebackground = "#1A355B", activeforeground = "#FFFFFF",
                                             command= lambda i=index : [destroy_all_widgets(main_user_window), restaurant_page(i)])
     retour_a_la_commande_button.pack(side=LEFT, padx=10)
-    nouvelle_commande_button = Button(nav_finish_frame, text="Payer", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56",
+    nouvelle_commande_button = Button(nav_finish_frame, text="Nouvelle commande", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56",
                                     activebackground = "#1A355B", activeforeground = "#FFFFFF",
-                                            command= lambda : [main_user_window.destroy(), reset_commandes()])
+                                            command= lambda : [destroy_all_widgets(main_user_window), reset_commandes(), main_window()])
     nouvelle_commande_button.pack(side=LEFT, padx=10)
 
 def check_commande_not_empty (index) : 
