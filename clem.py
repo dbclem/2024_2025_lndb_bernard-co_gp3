@@ -463,9 +463,9 @@ def valide_page (index):
                                         activebackground = "#1A355B", activeforeground = "#FFFFFF",
                                             command= lambda i=index : [destroy_all_widgets(main_user_window), restaurant_page(i)])
     retour_a_la_commande_button.pack(side=LEFT, padx=10)
-    nouvelle_commande_button = Button(nav_finish_frame, text="Payer", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56",
+    nouvelle_commande_button = Button(nav_finish_frame, text="Nouvelle commande", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56",
                                     activebackground = "#1A355B", activeforeground = "#FFFFFF",
-                                            command= lambda : [main_user_window.destroy(), reset_commandes()])
+                                            command= lambda : [destroy_all_widgets(main_user_window), reset_commandes(), main_window()])
     nouvelle_commande_button.pack(side=LEFT, padx=10)
 
 def check_commande_not_empty (index) : 
