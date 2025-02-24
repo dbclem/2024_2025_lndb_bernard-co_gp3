@@ -3,7 +3,7 @@ from tkinter import*
 #from edgar import main_operateur_window
 from tools import destroy_all_widgets
 from PIL import Image, ImageTk
-from customtkinter import*
+
 
 """
 couleur :
