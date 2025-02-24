@@ -82,6 +82,10 @@ def main_operateur_window():
     commande_frame = Frame(commande_frame_initial, bg="#0d2c56", width=200, height=200)
     commande_frame.pack(side=LEFT, expand=True)
 
+    # creation d'un bouton refresh
+    refresh_button = Button(main_frame, text="Refresh", font=("Helvetica", 10), bg="#1A355B", fg="white", command=lambda: [destroy_all_widgets(demande_frame), add_commandes()])
+    refresh_button.pack(pady=10)
+
 
     # creation de la fonction qui ajoute les commandes demandées
     def add_commandes ():
