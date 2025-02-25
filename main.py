@@ -44,30 +44,32 @@ def validate_admin(username, password) :
 def display_admin_check(main_user_window) : 
     destroy_all_widgets(main_user_window)
 
-    username_label = Label(main_user_window, text="Nom d'utilisateur", font=("Avenir", 12),fg = "#0f5741", bg="#fff5f1")
+    admin_frame = Frame(main_user_window, bg="#fff5f1")
+    admin_frame.place(relx=0.5, rely=0.3, anchor=CENTER)
+    username_label = Label(admin_frame, text="Nom d'utilisateur", font=("Avenir", 15, "bold"),fg = "#0f5741", bg="#fff5f1")
     username_label.pack(pady=5)
-    username_entry = Entry(main_user_window, font=("Avenir", 12), bg="#ffbf00", fg="white")
+    username_entry = Entry(admin_frame, font=("Avenir", 15, "bold"), bg="#ffbf00", fg="#0f5741")
     username_entry.pack(pady=5)
     
-    password_label = Label(main_user_window, text="Mot de passe", font=("Avenir", 12), fg = "#0f5741", bg="#fff5f1")
+    password_label = Label(admin_frame, text="Mot de passe", font=("Avenir", 15, "bold"), fg = "#0f5741", bg="#fff5f1")
     password_label.pack(pady=5)
-    password_entry = Entry(main_user_window, show="*", font=("Avenir", 12), bg="#ffbf00", fg="white")
+    password_entry = Entry(admin_frame, show="*", font=("Avenir", 15, "bold"), bg="#ffbf00", fg="#0f5741")
     password_entry.pack(pady=5)
 
 
-    nav_buttons_frame = Frame(main_user_window, bg="#fff5f1")
-    nav_buttons_frame.place(relx=0.5, rely=0.18, anchor=CENTER)
+    nav_buttons_frame = Frame(admin_frame, bg="#fff5f1")
+    nav_buttons_frame.pack(side=BOTTOM, pady=10)
 
-    validate_button = Button(nav_buttons_frame, text="Valider", font=("Avenir", 12), bg="#0f5741", fg="white", activebackground = "#ffbf00", activeforeground= "#0f5741",
+    validate_button = Button(nav_buttons_frame, text="Valider", font=("Avenir", 12, "bold"), bg="#0f5741", fg="white", activebackground = "#ffbf00", activeforeground= "#0f5741",
                                 command=lambda: validate_admin(username_entry.get(), password_entry.get()))
     validate_button.pack(side = RIGHT, padx = 10)
-    nav_retour_button = Button(nav_buttons_frame, text="Retour ",  font=("Avenir", 12), fg = "white", bg = "#0f5741",
+    nav_retour_button = Button(nav_buttons_frame, text="Retour ",  font=("Avenir", 12, "bold"), fg = "white", bg = "#0f5741",
                                 activebackground = "#ffbf00", activeforeground = "#0f5741", command=lambda window=main_user_window: 
                                 [destroy_all_widgets(window), reset_commandes(), display_restaurants_names()])
     nav_retour_button.pack(side=LEFT)
 
 def display_restaurants_names () :  
-    admin_button = Button(main_user_window, text="Admin", font=("Avenir", 15),  fg = "white", bg="#0f5741", 
+    admin_button = Button(main_user_window, text="Admin", font=("Avenir", 15, "bold"),  fg = "white", bg="#0f5741", 
                             activebackground = "#ffbf00", activeforeground = "#0f5741", command=lambda : display_admin_check(main_user_window))
     admin_button.pack(side=TOP, pady=20, padx=20)
     main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 25, "bold"), bg="#fff5f1", fg = "#0f5741", padx=20, pady=10)

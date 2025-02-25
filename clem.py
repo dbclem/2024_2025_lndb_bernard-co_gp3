@@ -7,16 +7,31 @@ from PIL import Image, ImageTk
 
 """
 couleur :
-        bleu foncé pour les boutons--> #0d2c56    
-        bleu clair pour l'arriere plan --> #1A355B
+        jaune pour les boutons--> #ffbf00   
+        blanc cassé pour l'arriere plan -->"#fff5f1
+        vert pour les textes --> #0f5741
 """
+"""
+    changer les couleurs des boutons de la navitation en vert avec ecriutre blanche
+    mettre toutes les ecritures en gras
+    si possible changer les actives colors vert avce eriture blanche
+"""
+
+main_user_window = Tk()
+screen_width = main_user_window.winfo_screenwidth()
+screen_height = main_user_window.winfo_screenheight()
+main_user_window.title("Bernard&co")
+main_user_window.configure(bg = "#fff5f1")
+main_user_window_width = screen_width // 2
+main_user_window_height = screen_height
+main_user_window.geometry(f"{main_user_window_width}x{main_user_window_height}+0+0")
+main_user_window.iconbitmap("images\Be_-CO.ico")
 
 
 def destroy_all_widgets(frame):
     for widget in frame.winfo_children():
         widget.destroy()
         
-# global_liste_commande_operateur = ["commande1", "commande2", "commande3", "commande4", "commande5"]
 global_liste_en_cours = []
 global_list_commande_terminees = []
 
@@ -180,17 +195,6 @@ def main_operateur_window():
 
     operateur_window.mainloop()
 
-    
-main_user_window = Tk()
-screen_width = main_user_window.winfo_screenwidth()
-screen_height = main_user_window.winfo_screenheight()
-main_user_window.title("Bernard&co")
-main_user_window.configure(bg = "#1A355B")
-main_user_window_width = screen_width // 2
-main_user_window_height = screen_height
-main_user_window.geometry(f"{main_user_window_width}x{main_user_window_height}+0+0")
-main_user_window.iconbitmap("images/logo_bernard&co.ico")
-
 
 
 def validate_admin(username, password) : 
@@ -199,7 +203,7 @@ def validate_admin(username, password) :
     if user_valid:
         main_operateur_window()  
     else:
-        error_label = Label(main_user_window, text="Nom d'utilisateur ou mot de passe incorrect", font=("Avenir", 12), fg="red", bg="#1A355B")
+        error_label = Label(main_user_window, text="Nom d'utilisateur ou mot de passe incorrect", font=("Avenir", 12), fg="red", bg="#fff5f1")
         error_label.pack(pady=5)
         error_label.after(2000, error_label.destroy)
 
@@ -207,34 +211,36 @@ def validate_admin(username, password) :
 def display_admin_check(main_user_window) : 
     destroy_all_widgets(main_user_window)
 
-    username_label = Label(main_user_window, text="Nom d'utilisateur", font=("Avenir", 12),fg = "#FFFFFF", bg="#1A355B")
+    admin_frame = Frame(main_user_window, bg="#fff5f1")
+    admin_frame.place(relx=0.5, rely=0.3, anchor=CENTER)
+    username_label = Label(admin_frame, text="Nom d'utilisateur", font=("Avenir", 15, "bold"),fg = "#0f5741", bg="#fff5f1")
     username_label.pack(pady=5)
-    username_entry = Entry(main_user_window, font=("Avenir", 12), bg="#0d2c56", fg="white")
+    username_entry = Entry(admin_frame, font=("Avenir", 15, "bold"), bg="#ffbf00", fg="#0f5741")
     username_entry.pack(pady=5)
     
-    password_label = Label(main_user_window, text="Mot de passe", font=("Avenir", 12), fg = "#FFFFFF", bg="#1A355B")
+    password_label = Label(admin_frame, text="Mot de passe", font=("Avenir", 15, "bold"), fg = "#0f5741", bg="#fff5f1")
     password_label.pack(pady=5)
-    password_entry = Entry(main_user_window, show="*", font=("Avenir", 12), bg="#0d2c56", fg="white")
+    password_entry = Entry(admin_frame, show="*", font=("Avenir", 15, "bold"), bg="#ffbf00", fg="#0f5741")
     password_entry.pack(pady=5)
 
 
-    nav_buttons_frame = Frame(main_user_window, bg="#1A355B")
-    nav_buttons_frame.place(relx=0.5, rely=0.18, anchor=CENTER)
+    nav_buttons_frame = Frame(admin_frame, bg="#fff5f1")
+    nav_buttons_frame.pack(side=BOTTOM, pady=10)
 
-    validate_button = Button(nav_buttons_frame, text="Valider", font=("Avenir", 12), bg="#0d2c56", fg="white", activebackground = "#0d2c56", activeforeground= "#FFFFFF",
+    validate_button = Button(nav_buttons_frame, text="Valider", font=("Avenir", 12, "bold"), bg="#0f5741", fg="white", activebackground = "#ffbf00", activeforeground= "#0f5741",
                                 command=lambda: validate_admin(username_entry.get(), password_entry.get()))
     validate_button.pack(side = RIGHT, padx = 10)
-    nav_retour_button = Button(nav_buttons_frame, text="Retour ",  font=("Avenir", 12), fg = "#FFFFFF", bg = "#0d2c56",
-                                activebackground = "#0d2c56", activeforeground = "#FFFFFF", command=lambda window=main_user_window: 
+    nav_retour_button = Button(nav_buttons_frame, text="Retour ",  font=("Avenir", 12, "bold"), fg = "white", bg = "#0f5741",
+                                activebackground = "#ffbf00", activeforeground = "#0f5741", command=lambda window=main_user_window: 
                                 [destroy_all_widgets(window), reset_commandes(), display_restaurants_names()])
     nav_retour_button.pack(side=LEFT)
 
 def display_restaurants_names () :  
-    admin_button = Button(main_user_window, text="Admin", font=("Avenir", 15),  fg = "#FFFFFF", bg="#0d2c56", 
-                            activebackground = "#1A355B", activeforeground = "#FFFFFF", command=lambda : display_admin_check(main_user_window))
+    admin_button = Button(main_user_window, text="Admin", font=("Avenir", 15),  fg = "white", bg="#0f5741", 
+                            activebackground = "#ffbf00", activeforeground = "#0f5741", command=lambda : display_admin_check(main_user_window))
     admin_button.pack(side=TOP, pady=20, padx=20)
-    main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 20, "bold"), bg="#1A355B", fg = "#FFFFFF", padx=20, pady=10)
-    main_text.place(relx=0.5, rely=0.2, anchor=CENTER)
+    main_text = Label(main_user_window, text="Choisissez votre restaurant", font=("Avenir", 25, "bold"), bg="#fff5f1", fg = "#0f5741", padx=20, pady=10)
+    main_text.place(relx=0.5, rely=0.3, anchor=CENTER)
 
 
     for index, restaurant in enumerate(data):
@@ -248,8 +254,8 @@ def display_restaurants_names () :
             open_restaurant_page prend i qui est index et qui se mais a jour a dynamiquement
         """
         Bouton_restaurant = Button(main_user_window, text=restaurant["nom"],
-                                    image = photo, compound = "right", padx = 70, height=80, width=460, font=("Avenir", 20, "bold"), fg = "#FFFFFF", bg = "#0d2c56", 
-                                    activebackground = "#1A355B", activeforeground = "#FFFFFF",
+                                    image = photo, compound = "right", padx = 70, height=80, width=460, font=("Avenir", 20, "bold"), fg = "#0f5741", bg = "#ffbf00", 
+                                    activebackground = "#0f5741", activeforeground = "white",
             command=lambda i=index: [destroy_all_widgets(main_user_window), restaurant_page(i)])
         Bouton_restaurant.image = photo
         Bouton_restaurant.place(relx=0.5, rely=0.5 + index * 0.1, anchor=CENTER)
@@ -274,7 +280,7 @@ def check_if_the_menu_not_empty(dico_choices_in_the_menu, index, total_price_lab
 
 
     if is_not_valid :
-        choice_not_finished_text = Label(main_user_window, text="Vous n'avez pas fini votre commande !", font=("Avenir", 20), bg="#1A355B", fg="#FFFFFF")
+        choice_not_finished_text = Label(main_user_window, text="Vous n'avez pas fini votre commande !", font=("Avenir", 20), bg="#fff5f1", fg="#0f5741")
         choice_not_finished_text.pack(side=BOTTOM, pady=10)
         choice_not_finished_text.after(2000, lambda : choice_not_finished_text.destroy())
     else : 
@@ -288,42 +294,42 @@ def add_element_to_dico_final (element, key, dico_choices_in_the_menu) :
 
 def display_add_message(window, element) : 
     global  main_user_window_width
-    add_message_frame = Frame(window, bg="#1A355B", bd=2, relief="solid", highlightbackground="#FFFFFF", highlightthickness=2)
+    add_message_frame = Frame(window, bg="#fff5f1", bd=2, relief="solid", highlightbackground="#0f5741", highlightthickness=2)
     add_message_frame.place(x=main_user_window_width - 10, y=20, anchor=NE)
-    add_message = Label(add_message_frame, text=f"{element} a été sélectionné ! ", font=("Avenir", 15), bg="#1A355B", fg="#FFFFFF")
+    add_message = Label(add_message_frame, text=f"{element} a été sélectionné ! ", font=("Avenir", 15), bg="#fff5f1", fg="#0f5741")
     add_message.pack(side=TOP, pady=10)
-    add_message_frame.after(1000, lambda : add_message_frame.destroy())
+    add_message_frame.after(5000, lambda : add_message_frame.destroy())
 
 
 def display_elements_of_the_menu (index, name, element, dico_choices_in_the_menu, i) :
-    main_element_in_commande_frame = Frame(main_user_window, bg="#1A355B")
+    main_element_in_commande_frame = Frame(main_user_window, bg="#fff5f1")
     main_element_in_commande_frame.pack(side=TOP, pady=10)
 
-    main_element_text = Label(main_element_in_commande_frame, text=element, font=("Avenir", 15), fg = "#FFFFFF", bg="#1A355B")
+    main_element_text = Label(main_element_in_commande_frame, text=element, font=("Avenir", 15), fg = "#0f5741", bg="#fff5f1")
     main_element_text.grid(row=0, column=i, padx=5, pady=5)
 
-    row_one_frame = Frame(main_element_in_commande_frame, bg = "#1A355B")
+    row_one_frame = Frame(main_element_in_commande_frame, bg = "#fff5f1")
     row_one_frame.grid(row=1, column=i, padx=5, pady=5)
 
     for key in list(data[index]["menus"][name][element].keys()) : 
-        element_buttons = Button(row_one_frame, text=key, height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56", 
-                                    activebackground = "#1A355B", activeforeground = "#FFFFFF",
+        element_buttons = Button(row_one_frame, text=key, height=2, width=50, fg = "#0f5741", bg = "#ffbf00", 
+                                    activebackground = "#0f5741", activeforeground = "white", font=("Avenir", 10, "bold"),
                     command=lambda key=key : 
                     [add_element_to_dico_final(element, key, dico_choices_in_the_menu), display_add_message(main_user_window, key)])
         element_buttons.pack(pady=5)
 
 
 def in_menu_page (index, name, price, total_price_label):
-    nav_in_the_menu_frame = Frame(main_user_window, bg="#1A355B")
+    nav_in_the_menu_frame = Frame(main_user_window, bg="#fff5f1")
     nav_in_the_menu_frame.pack(side=TOP, pady=10)
 
-    retour_menus_button = Button(nav_in_the_menu_frame, text="Retour", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56", 
-                                activebackground = "#1A355B", activeforeground = "#FFFFFF", command=lambda : 
+    retour_menus_button = Button(nav_in_the_menu_frame, text="Retour", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741", 
+                                activebackground = "#ffbf00", activeforeground = "#0f5741",  command=lambda : 
                                     [destroy_all_widgets(main_user_window), menus_page(index, total_price_label)])
     retour_menus_button.pack(side=LEFT, pady=10, padx=10)
     
-    valide_the_menu_button = Button(nav_in_the_menu_frame, text="Valider", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56",
-                                    activebackground = "#1A355B", activeforeground = "#FFFFFF",  command=lambda : 
+    valide_the_menu_button = Button(nav_in_the_menu_frame, text="Valider", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
+                                    activebackground = "#ffbf00", activeforeground = "#0f5741",  command=lambda : 
                                     [check_if_the_menu_not_empty(dico_choices_in_the_menu, index, total_price_label)]) 
     valide_the_menu_button.pack(side=LEFT, pady=10, padx=10)
             
@@ -343,34 +349,34 @@ def in_menu_page (index, name, price, total_price_label):
             display_elements_of_the_menu(index, name, element, dico_choices_in_the_menu, i)
 
 def menus_page(index, total_price_label):
-    menus_frame = Frame(main_user_window, bg="#1A355B")
+    menus_frame = Frame(main_user_window, bg="#fff5f1")
     menus_frame.place(relx=0.5, rely=0.2, anchor=CENTER)
 
     for name, price in global_tuple_menu_price:
-        menus_buttons = Button(menus_frame, text=(f"{name} - {price} €" ), height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56",
-                            activebackground = "#1A355B", activeforeground = "#FFFFFF", font=("Avenir", 10, "bold"), 
+        menus_buttons = Button(menus_frame, text=(f"{name} - {price} €" ), height=2, width=50, font=("Avenir", 11, "bold"), fg = "#0f5741", bg = "#ffbf00",
+                            activebackground = "#0f5741", activeforeground = "white", 
                             command=lambda name=name, price=price: [refresh_whitout_widjet(main_user_window, total_price_label), in_menu_page(index, name, price, total_price_label)])
         menus_buttons.pack(pady=10)
     
-    petite_faim_button = Button(menus_frame, text="Petite faim", height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56", 
-                            activebackground = "#1A355B", activeforeground = "#FFFFFF", font=("Avenir", 10, "bold"), 
+    petite_faim_button = Button(menus_frame, text="Petite faim", height=2, width=50, fg = "#0f5741", bg = "#ffbf00", 
+                            activebackground = "#0f5741", activeforeground = "white", font=("Avenir", 11, "bold"), 
                             command=lambda :[refresh_whitout_widjet(main_user_window, total_price_label), petite_faim_page(index, total_price_label)])
     petite_faim_button.pack(pady=10)
     navigation_in_menus_page(index, total_price_label)
 
 def petite_faim_page (index, total_price_label) : 
 
-    nav_petite_faim_frame = Frame(main_user_window, bg="#1A355B")    
+    nav_petite_faim_frame = Frame(main_user_window, bg="#fff5f1")    
     nav_petite_faim_frame.pack(side=TOP, pady=10)
-    retour_petite_faim_button = Button(nav_petite_faim_frame, text="Retour", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56",
-                                    activebackground = "#1A355B", activeforeground = "#FFFFFF",  command=lambda :
+    retour_petite_faim_button = Button(nav_petite_faim_frame, text="Retour", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
+                                    activebackground = "#ffbf00", activeforeground = "#0f5741",  command=lambda :
                                     [refresh_whitout_widjet(main_user_window, total_price_label), menus_page(index, total_price_label)]) 
     retour_petite_faim_button.pack(side=LEFT, pady=10, padx=10)
 
 
     for element in global_dico_all_choices_price:
-        petite_faim_buttons = Button(main_user_window, text=(f"{element['name']} - {element['price']} €" ), height=2, width=50, fg = "#FFFFFF", bg = "#0d2c56",
-                            activebackground = "#1A355B", activeforeground = "#FFFFFF", 
+        petite_faim_buttons = Button(main_user_window, text=(f"{element['name']} - {element['price']} €" ), font=("Avenir", 10, "bold"), height=2, width=50, fg = "#0f5741", bg = "#ffbf00",
+                            activebackground = "#0f5741", activeforeground = "white", 
                             command=lambda element=element:
                             [add_to_commande(element, total_price_label), refresh_whitout_widjet(main_user_window, total_price_label),
                                 update_total_price(total_price_label), petite_faim_page(index, total_price_label), display_add_message(main_user_window, element["name"]),
@@ -382,21 +388,21 @@ def update_total_price(total_price_label):
         total_price_label.config(text=f"Prix total : {global_total_price} €")
 
 def navigation_in_menus_page(index, total_price_label):    
-    nav_buttons_frame = Frame(main_user_window, bg="#1A355B")
+    nav_buttons_frame = Frame(main_user_window, bg="#fff5f1")
     nav_buttons_frame.place(relx=0.5, rely=0.85, anchor=CENTER)
 
-    nav_retour_button = Button(nav_buttons_frame, text="Retour",  font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56",
-                            activebackground = "#1A355B", activeforeground = "#FFFFFF", command=lambda window=main_user_window: 
+    nav_retour_button = Button(nav_buttons_frame, text="Retour",  font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
+                            activebackground = "#ffbf00", activeforeground = "#0f5741", command=lambda window=main_user_window: 
                             [destroy_all_widgets(window), reset_commandes(), display_restaurants_names()])
     nav_retour_button.pack(side=LEFT, padx=10)
 
-    nav_voir_commande_button = Button(nav_buttons_frame, text="Voir la commande", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56",
-                                    activebackground = "#1A355B", activeforeground = "#FFFFFF", 
+    nav_voir_commande_button = Button(nav_buttons_frame, text="Voir la commande", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
+                                    activebackground = "#ffbf00", activeforeground = "#0f5741", 
                                     command=lambda : [refresh_whitout_widjet(main_user_window, total_price_label), all_commande_page(index, total_price_label)])
     nav_voir_commande_button.pack(side=LEFT, padx=10)
 
-    nav_valide_button = Button(nav_buttons_frame, text="Valider", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56",
-                                activebackground = "#1A355B", activeforeground = "#FFFFFF", command=lambda : check_commande_not_empty(index))
+    nav_valide_button = Button(nav_buttons_frame, text="Valider", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
+                                activebackground = "#ffbf00", activeforeground = "#0f5741", command=lambda : check_commande_not_empty(index))
     nav_valide_button.pack(side=LEFT, padx=10) 
 
 def remove_in_global_list_command_total_price(element):
@@ -418,13 +424,13 @@ def refresh_whitout_widjet(window, widjet):
 
 def all_commande_page (index, total_price_label) :
     if global_list_commande == [] : 
-        panier_vide_text = Label(main_user_window, text="Votre panier est vide", font=("Avenir", 20), fg = "#FFFFFF", bg="#1A355B")
+        panier_vide_text = Label(main_user_window, text="Votre panier est vide", font=("Avenir", 23, "bold"), fg = "#0f5741", bg="#fff5f1")
         panier_vide_text.place(relx=0.5, rely=0.1, anchor=CENTER)
         
     else : 
-        main_commande_text = Label(main_user_window, text="Votre panier :" , font=("Avenir", 20), fg = "#FFFFFF", bg="#1A355B")
+        main_commande_text = Label(main_user_window, text="Votre panier :" , font=("Avenir", 20, "bold"), fg = "#0f5741", bg="#fff5f1")
         main_commande_text.place(relx=0.5, rely=0.1, anchor=CENTER)
-        click_to_supp_text = Label(main_user_window, text="Appuyez pour supprimer", font=("Avenir", 10), fg = "#FFFFFF", bg="#1A355B")
+        click_to_supp_text = Label(main_user_window, text="Appuyez pour supprimer", font=("Avenir", 12), fg = "#0f5741", bg="#fff5f1")
         click_to_supp_text.place(relx=0.5, rely=0.13, anchor=CENTER) 
 
         for index , element in enumerate(global_list_commande):
@@ -434,14 +440,14 @@ def all_commande_page (index, total_price_label) :
                 # commande faite a partir de chatgpt qui permet de modifier réactivement le texte
                 text = " - ".join([f"{value} $" if key == "price" else f"{value}" for key, value in element.items() if key != "temps"])
 
-            element_of_commande_button = Button(main_user_window, text=text, font=("Avenir", 12, "bold"), fg = "#FFFFFF", bg = "#0d2c56", 
-                                                activebackground = "#1A355B", activeforeground = "#FFFFFF", command=lambda index=index, element=element: 
+            element_of_commande_button = Button(main_user_window, text=text, font=("Avenir", 12, "bold"), fg = "#0f5741", bg = "#ffbf00", 
+                                                activebackground = "#0f5741", activeforeground = "white", command=lambda index=index, element=element: 
                                                 [remove_in_global_list_command_total_price(element), refresh_whitout_widjet(main_user_window, total_price_label),
                                                 all_commande_page(index, total_price_label), update_total_price(total_price_label)])
             element_of_commande_button.place(relx=0.5, rely=0.2 + index * 0.05, anchor=CENTER)
 
-    retour_commande_button = Button(main_user_window, text="Retour", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56", 
-                        activebackground = "#1A355B", activeforeground = "#FFFFFF", command=lambda : 
+    retour_commande_button = Button(main_user_window, text="Retour", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741", 
+                        activebackground = "#ffbf00", activeforeground = "#0f5741", command=lambda : 
                         [refresh_whitout_widjet(main_user_window, total_price_label), menus_page(index, total_price_label)])
     retour_commande_button.place(relx=0.5, rely=0.85, anchor=CENTER)
 
@@ -450,28 +456,28 @@ def all_commande_page (index, total_price_label) :
 def valide_page (index):
     destroy_all_widgets(main_user_window)
 
-    finish_frame = Frame(main_user_window, bg="#1A355B")
+    finish_frame = Frame(main_user_window, bg="#fff5f1")
     finish_frame.place(relx=0.5, rely=0.5, anchor=CENTER)
 
     valide_page_text = f"Votre commande s'élève à un montant de {global_total_price} €"
-    main_valide_page_text = Label(finish_frame, text=valide_page_text, font=("Avenir", 20), bg="#1A355B", fg = "#FFFFFF")
+    main_valide_page_text = Label(finish_frame, text=valide_page_text, font=("Avenir", 20), bg="#fff5f1", fg = "#0f5741")
     main_valide_page_text.pack(side=TOP, pady=10)
 
-    nav_finish_frame = Frame(finish_frame, bg="#1A355B")
+    nav_finish_frame = Frame(finish_frame, bg="#fff5f1")
     nav_finish_frame.pack(side=BOTTOM, pady=10)
-    retour_a_la_commande_button = Button(nav_finish_frame, text="revenir a la commande", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56",
-                                        activebackground = "#1A355B", activeforeground = "#FFFFFF",
+    retour_a_la_commande_button = Button(nav_finish_frame, text="revenir a la commande", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
+                                        activebackground = "#ffbf00", activeforeground = "#0f5741",
                                             command= lambda i=index : [destroy_all_widgets(main_user_window), restaurant_page(i)])
     retour_a_la_commande_button.pack(side=LEFT, padx=10)
-    nouvelle_commande_button = Button(nav_finish_frame, text="Nouvelle commande", font=("Avenir", 15, "bold"), fg = "#FFFFFF", bg = "#0d2c56",
-                                    activebackground = "#1A355B", activeforeground = "#FFFFFF",
+    nouvelle_commande_button = Button(nav_finish_frame, text="Nouvelle commande", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
+                                    activebackground = "#ffbf00", activeforeground = "#0f5741",
                                             command= lambda : [destroy_all_widgets(main_user_window), reset_commandes(), main_window()])
     nouvelle_commande_button.pack(side=LEFT, padx=10)
 
 def check_commande_not_empty (index) : 
     if global_list_commande == [] : 
-        panier_vide_text = Label(main_user_window, text="Votre panier est vide", font=("Avenir", 20), bg="#1A355B", fg="#FFFFFF")
-        panier_vide_text.pack(side=BOTTOM, pady=10)
+        panier_vide_text = Label(main_user_window, text="Votre panier est vide", font=("Avenir", 20), bg="#fff5f1", fg="#0f5741")
+        panier_vide_text.place(relx=0.5, rely=0.9, anchor=CENTER)
         panier_vide_text.after(2000, lambda : panier_vide_text.destroy())
     else : 
         valide_page(index)
@@ -543,7 +549,7 @@ def restaurant_page(index):
         global_dico_all_choices_price = [dict(item) for item in unique_items]
 
     
-        total_price_label = Label(main_user_window, text="",  font=("Avenir", 10, "bold"), bg="#1A355B", fg = "#FFFFFF")
+        total_price_label = Label(main_user_window, text="",  font=("Avenir", 13, "bold"), bg="#fff5f1", fg = "#0f5741")
         total_price_label.place(relx=0.5, rely=0.9, anchor=CENTER)
         
         menus_page(i, total_price_label)
@@ -558,10 +564,10 @@ def main_window():
     main_user_window.mainloop()
 
 
+
 global_list_commande = []
 global_tuple_menu_price = []
 global_dico_all_choices_price = []
 global_total_price = 0
 global_liste_commande_operateur = []
 main_window()
-
