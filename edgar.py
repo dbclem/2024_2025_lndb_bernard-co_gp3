@@ -22,7 +22,7 @@ def main_operateur_window():
     operateur_window_width = screen_width // 2
     operateur_window_height = screen_height
     operateur_window.geometry(f"{operateur_window_width}x{operateur_window_height}+{screen_width // 2}+0")
-    operateur_window.config(bg="#0d2c56")
+    operateur_window.config(bg="#fff5f1")
     
     # creation de la frame principale
     main_frame = Frame(operateur_window, bg="#0d2c56")
