@@ -129,7 +129,7 @@ def display_add_message(window, element) :
     add_message_frame.place(x=main_user_window_width - 10, y=20, anchor=NE)
     add_message = Label(add_message_frame, text=f"{element} a été sélectionné ! ", font=("Avenir", 15), bg="#fff5f1", fg="#0f5741")
     add_message.pack(side=TOP, pady=10)
-    add_message_frame.after(1000, lambda : add_message_frame.destroy())
+    add_message_frame.after(5000, lambda : add_message_frame.destroy())
 
 
 def display_elements_of_the_menu (index, name, element, dico_choices_in_the_menu, i) :
@@ -308,7 +308,7 @@ def valide_page (index):
 def check_commande_not_empty (index) : 
     if global_list_commande == [] : 
         panier_vide_text = Label(main_user_window, text="Votre panier est vide", font=("Avenir", 20), bg="#fff5f1", fg="#0f5741")
-        panier_vide_text.pack(side=BOTTOM, pady=10)
+        panier_vide_text.place(relx=0.5, rely=0.9, anchor=CENTER)
         panier_vide_text.after(2000, lambda : panier_vide_text.destroy())
     else : 
         valide_page(index)
