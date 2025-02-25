@@ -1,17 +1,17 @@
 from tkinter import *
-#from main import global_liste_commande_operateur
+from main import global_liste_commande_operateur
 
 def destroy_all_widgets(frame):
     for widget in frame.winfo_children():
         widget.destroy()
         
-global_liste_commande_operateur = [
-    {"name": "Plat 1", "price": 10},
-    {"name": "Plat 2", "price": 15},
-    {"name": "Plat 3", "price": 20},
-    {"name": "Plat 4", "price": 25},
-    {"name": "Plat 5", "price": 30}
-]
+# global_liste_commande_operateur = [
+#     {"name": "Plat 1", "price": 10},
+#     {"name": "Plat 2", "price": 15},
+#     {"name": "Plat 3", "price": 20},
+#     {"name": "Plat 4", "price": 25},
+#     {"name": "Plat 5", "price": 30}
+# ]
 global_liste_en_cours = []
 global_list_commande_terminees = []
 
@@ -78,7 +78,9 @@ def main_operateur_window():
     commande_frame.pack(side=LEFT, expand=True)
 
     # creation d'un bouton refresh
-    refresh_button = Button(main_frame, text="Refresh", font=("Helvetica", 15, "bold"), bg="#0f5741", fg="white", command=lambda: [destroy_all_widgets(demande_frame), add_commandes()])
+    refresh_button = Button(main_frame, text="Refresh", font=("Helvetica", 15, "bold"), bg="#0f5741", fg="white"
+                            , activebackground = "#ffbf00", activeforeground = "#0f5741"
+                            , command=lambda: [destroy_all_widgets(demande_frame), add_commandes()])
     refresh_button.place(relx=0.1, rely=0.1, anchor=CENTER)
 
 
@@ -169,7 +171,7 @@ def main_operateur_window():
             terminees_frame.pack(pady=10)
 
             terminees_label = Label(terminees_frame, text=text_commande, font=("Helvetica", 12, "bold"), bg="#ffbf00", fg="#0f5741")
-            terminees_label.pack(pady=30, padx=20)
+            terminees_label.pack(pady=15, padx=15)
     
 
 
