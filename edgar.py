@@ -39,7 +39,7 @@ def add_commandes(demande_frame, process_frame):
         accepter_button = Button(commande_frame, text="Accepter", font=("Helvetica", 10), bg="#1A355B", fg="white",
                                  highlightbackground="black", highlightcolor="black", highlightthickness=1,
                                  command=lambda commande=commande: [accepter_commande(commande), destroy_all_widgets(demande_frame),
-                                                                    destroy_all_widgets(process_frame), add_commandes(demande_frame, process_frame), add_commandes_en_cours(process_frame)])
+                                                                    destroy_all_widgets(process_frame), add_commandes(demande_frame, process_frame), add_commandes_en_cours(process_frame, commande_frame)])
         accepter_button.pack(pady=10, side=RIGHT)
 
         refuser_button = Button(commande_frame, text="Refuser", font=("Helvetica", 10), bg="#1A355B", fg="white",
@@ -47,7 +47,7 @@ def add_commandes(demande_frame, process_frame):
                                 command=lambda commande=commande: [refuser_commande(commande), destroy_all_widgets(demande_frame), add_commandes(demande_frame, process_frame)])
         refuser_button.pack(pady=10, side=LEFT)
 
-def add_commandes_en_cours(process_frame):
+def add_commandes_en_cours(process_frame, commande_frame):
     global global_liste_en_cours
     for commande in global_liste_en_cours:
         if "plat" not in commande:
@@ -64,10 +64,10 @@ def add_commandes_en_cours(process_frame):
         terminer_button = Button(en_cours_frame, text="Terminer", font=("Helvetica", 10), bg="#1A355B", fg="white",
                                  highlightbackground="black", highlightcolor="black", highlightthickness=1,
                                  command=lambda commande=commande: [accepter_commande(commande), destroy_all_widgets(process_frame),
-                                                                    destroy_all_widgets(en_cours_frame), add_commandes_en_cours(process_frame), add_commandes_terminees()])
+                                                                    destroy_all_widgets(en_cours_frame), add_commandes_en_cours(process_frame), add_commandes_terminees(commande_frame)])
         terminer_button.pack(pady=10)
 
-def add_commandes_terminees():
+def add_commandes_terminees(commande_frame):
     global global_list_commande_terminees
     for commande in global_list_commande_terminees:
         if "plat" not in commande:
