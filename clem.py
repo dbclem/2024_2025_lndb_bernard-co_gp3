@@ -409,7 +409,7 @@ def navigation_in_menus_page(index, total_price_label):
                             [destroy_all_widgets(window), reset_commandes(), display_restaurants_names()])
     nav_retour_button.pack(side=LEFT, padx=10)
 
-    nav_voir_commande_button = Button(nav_buttons_frame, text="Voir la commande", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
+    nav_voir_commande_button = Button(nav_buttons_frame, text="| Panier |", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
                                     activebackground = "#ffbf00", activeforeground = "#0f5741", 
                                     command=lambda : [refresh_whitout_widjet(main_user_window, total_price_label), all_commande_page(index, total_price_label)])
     nav_voir_commande_button.pack(side=LEFT, padx=10)
