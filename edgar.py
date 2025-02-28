@@ -1,5 +1,13 @@
 from tkinter import *
-from main import global_liste_commande_operateur
+#from main import global_liste_commande_operateur
+
+global_liste_commande_operateur = [
+    {"name": "Plat 1", "price": 10},
+    {"name": "Plat 2", "price": 15},
+    {"name": "Plat 3", "price": 20},
+    {"name": "Plat 4", "price": 25},
+    {"name": "Plat 5", "price": 30}
+]
 
 def destroy_all_widgets(frame):
     for widget in frame.winfo_children():
@@ -30,20 +38,22 @@ def add_commandes(demande_frame, process_frame, commande_terminees_frame):
         else:
             text_commande = " \n ".join([f"{value} $" if key == "price" else f"{value}" for key, value in commande.items() if key != "temps"])
 
-        commande_frame = Frame(demande_frame, bg="#1A355B", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        commande_frame = Frame(demande_frame, bg="#ffbf00", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=2)
         commande_frame.pack(pady=10)
 
-        commande_label = Label(commande_frame, text=text_commande, font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        commande_label = Label(commande_frame, text=text_commande, font=("Helvetica", 12, "bold"), bg="#ffbf00", fg="#0f5741")
         commande_label.pack(pady=10)
 
-        accepter_button = Button(commande_frame, text="Accepter", font=("Helvetica", 10), bg="#1A355B", fg="white",
-                                 highlightbackground="black", highlightcolor="black", highlightthickness=1,
+        accepter_button = Button(commande_frame, text="Accepter", font=("Helvetica", 10, "bold"), bg="#0f5741", fg="white"
+                                    , highlightbackground="black", highlightcolor="black", highlightthickness=1
+                                    ,activebackground = "#ffbf00", activeforeground = "#0f5741", 
                                  command=lambda commande=commande: [accepter_commande(commande), destroy_all_widgets(demande_frame),
                                                                     destroy_all_widgets(process_frame), add_commandes(demande_frame, process_frame, commande_terminees_frame), add_commandes_en_cours(process_frame, commande_terminees_frame)])
         accepter_button.pack(pady=10, side=RIGHT)
 
-        refuser_button = Button(commande_frame, text="Refuser", font=("Helvetica", 10), bg="#1A355B", fg="white",
-                                highlightbackground="black", highlightcolor="black", highlightthickness=1,
+        refuser_button = Button(commande_frame, text="Refuser", font=("Helvetica", 10, "bold"), bg="#0f5741", fg="white"
+                                    , highlightbackground="black", highlightcolor="black", highlightthickness=1
+                                    ,activebackground = "#ffbf00", activeforeground = "#0f5741",
                                 command=lambda commande=commande: [refuser_commande(commande), destroy_all_widgets(demande_frame), add_commandes(demande_frame, process_frame, commande_terminees_frame)])
         refuser_button.pack(pady=10, side=LEFT)
 
@@ -55,14 +65,17 @@ def add_commandes_en_cours(process_frame, commande_terminees_frame):
         else:
             text_commande = " \n ".join([f"{value} $" if key == "price" else f"{value}" for key, value in commande.items() if key != "temps"])
 
-        en_cours_frame = Frame(process_frame, bg="#1A355B", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        en_cours_frame = Frame(process_frame, bg="#ffbf00", width=200, height=200
+                                   , highlightbackground="black", highlightcolor="black", highlightthickness=2)
         en_cours_frame.pack(pady=10)
 
-        en_cours_label = Label(en_cours_frame, text=text_commande, font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        en_cours_label = Label(en_cours_frame, text=text_commande, font=("Helvetica", 12, "bold"), bg="#ffbf00", fg="#0f5741"
+                                   , highlightbackground="black")
         en_cours_label.pack(pady=10, padx=20)
 
-        terminer_button = Button(en_cours_frame, text="Terminer", font=("Helvetica", 10), bg="#1A355B", fg="white",
-                                 highlightbackground="black", highlightcolor="black", highlightthickness=1,
+        terminer_button = Button(en_cours_frame, text="Terminer", font=("Helvetica", 10, "bold"), bg="#0f5741", fg="white"
+                                    , highlightbackground="black", highlightcolor="black", highlightthickness=1, activebackground = "#ffbf00"
+                                    , activeforeground = "#0f5741",
                                  command=lambda commande=commande: [accepter_commande(commande), destroy_all_widgets(en_cours_frame),
                                                                     destroy_all_widgets(process_frame), add_commandes_en_cours(process_frame, commande_terminees_frame),
                                                                     destroy_all_widgets(commande_terminees_frame) ,add_commandes_terminees(commande_terminees_frame)])
@@ -76,10 +89,11 @@ def add_commandes_terminees(commande_terminees_frame):
         else:
             text_commande = " \n ".join([f"{value} $" if key == "price" else f"{value}" for key, value in commande.items() if key != "temps"])
 
-        terminees_frame = Frame(commande_terminees_frame, bg="#1A355B", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        terminees_frame = Frame(commande_terminees_frame, bg="#ffbf00", width=200, height=200
+                                    , highlightbackground="black", highlightcolor="black", highlightthickness=2)
         terminees_frame.pack(pady=10)
 
-        terminees_label = Label(terminees_frame, text=text_commande, font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        terminees_label = Label(terminees_frame, text=text_commande, font=("Helvetica", 12, "bold"), bg="#ffbf00", fg="#0f5741")
         terminees_label.pack(pady=30, padx=20)
 
 def main_operateur_window():
@@ -97,51 +111,53 @@ def main_operateur_window():
     operateur_window.config(bg="#fff5f1")
     
     # creation de la frame principale
-    main_frame = Frame(operateur_window, bg="#0d2c56")
+    main_frame = Frame(operateur_window, bg="#fff5f1")
     main_frame.pack(fill=BOTH, expand=True)
     
     # Label de la page
-    label = Label(main_frame, text="Interface Opérateur", font=("Helvetica", 20), bg="#0d2c56", fg="white")
+    label = Label(main_frame, text="Interface Opérateur", font=("Helvetica", 20, "bold"), bg="#fff5f1", fg="#0f5741")
     label.pack(pady=20)
 
     # creation de la frame des demandes initial
-    demande_frame_intial = Frame(main_frame, bg="#0d2c56", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+    demande_frame_intial = Frame(main_frame, bg="#fff5f1", width=200, height=200, highlightbackground="#0f5741", highlightcolor="#0f5741", highlightthickness=5)
     demande_frame_intial.pack(side=LEFT, expand=True)
 
     # Label des demandes
-    label_demande = Label(demande_frame_intial, text="Demandes", font=("Helvetica", 15), bg="#0d2c56", fg="white")
+    label_demande = Label(demande_frame_intial, text="Demandes", font=("Helvetica", 15, "bold"), bg="#fff5f1", fg="#0f5741")
     label_demande.pack(padx=100, pady=10)
 
     # creation de la frame des demandes
-    demande_frame = Frame(demande_frame_intial, bg="#0d2c56", width=200, height=200)
+    demande_frame = Frame(demande_frame_intial, bg="#fff5f1", width=200, height=200)
     demande_frame.pack(expand=True)
 
     # creation de la frame des process initial
-    process_frame_initial = Frame(main_frame, bg="#0d2c56", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+    process_frame_initial = Frame(main_frame, bg="#fff5f1", width=200, height=200, highlightbackground="#0f5741", highlightcolor="#0f5741", highlightthickness=5)
     process_frame_initial.pack(side=LEFT, expand=True)
 
     # Label des process
-    label_process = Label(process_frame_initial, text="en cours", font=("Helvetica", 15), bg="#0d2c56", fg="white")
+    label_process = Label(process_frame_initial, text="En cours", font=("Helvetica", 15, "bold"), bg="#fff5f1", fg="#0f5741")
     label_process.pack(padx=100, pady=10)
 
     # creation de la frame des process
-    process_frame = Frame(process_frame_initial, bg="#0d2c56", width=200, height=200)
+    process_frame = Frame(process_frame_initial, bg="#fff5f1", width=200, height=200)
     process_frame.pack(side=LEFT, expand=True) 
 
     # creation de la frame des commandes initial
-    commande_terminees_frame_initial = Frame(main_frame, bg="#0d2c56", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+    commande_terminees_frame_initial = Frame(main_frame, bg="#fff5f1", width=200, height=200, highlightbackground="#0f5741", highlightcolor="#0f5741", highlightthickness=5)
     commande_terminees_frame_initial.pack(side=LEFT, expand=True)
 
     # Label des commandes terminées
-    label_commande_terminees = Label(commande_terminees_frame_initial, text="Commandes terminées", font=("Helvetica", 15), bg="#0d2c56", fg="white")
+    label_commande_terminees = Label(commande_terminees_frame_initial, text="Commandes \n terminées", font=("Helvetica", 15, "bold"), bg="#fff5f1", fg="#0f5741")
     label_commande_terminees.pack(padx=85, pady=10)
 
     # creation de la frame des commandes terminées
-    commande_terminees_frame = Frame(commande_terminees_frame_initial, bg="#0d2c56", width=200, height=200)
+    commande_terminees_frame = Frame(commande_terminees_frame_initial, bg="#fff5f1", width=200, height=200)
     commande_terminees_frame.pack(side=LEFT, expand=True)
 
     # creation d'un bouton refresh
-    refresh_button = Button(main_frame, text="Refresh", font=("Helvetica", 10), bg="#1A355B", fg="white", command=lambda: [destroy_all_widgets(demande_frame), add_commandes(demande_frame, process_frame)])
+    refresh_button = Button(main_frame, text="Refresh", font=("Helvetica", 15, "bold"), bg="#0f5741", fg="white"
+                            , activebackground = "#ffbf00", activeforeground = "#0f5741"
+                            , command=lambda: [destroy_all_widgets(demande_frame), add_commandes(demande_frame, process_frame, commande_terminees_frame)])
     refresh_button.place(relx=0.1, rely=0.1, anchor=CENTER)
 
     add_commandes(demande_frame, process_frame, commande_terminees_frame)
