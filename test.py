@@ -22,7 +22,7 @@ def accepter_commande(commande):
     print(global_liste_en_cours)
     print(global_list_commande_terminees)
 
-def add_commandes(demande_frame, process_frame):
+def add_commandes(demande_frame, process_frame, commande_terminees_frame):
     print(global_liste_commande_operateur)
     for commande in global_liste_commande_operateur:
         if "plat" not in commande:
@@ -39,15 +39,15 @@ def add_commandes(demande_frame, process_frame):
         accepter_button = Button(commande_frame, text="Accepter", font=("Helvetica", 10), bg="#1A355B", fg="white",
                                  highlightbackground="black", highlightcolor="black", highlightthickness=1,
                                  command=lambda commande=commande: [accepter_commande(commande), destroy_all_widgets(demande_frame),
-                                                                    destroy_all_widgets(process_frame), add_commandes(demande_frame, process_frame), add_commandes_en_cours(process_frame)])
+                                                                    destroy_all_widgets(process_frame), add_commandes(demande_frame, process_frame, commande_terminees_frame), add_commandes_en_cours(process_frame, commande_terminees_frame)])
         accepter_button.pack(pady=10, side=RIGHT)
 
         refuser_button = Button(commande_frame, text="Refuser", font=("Helvetica", 10), bg="#1A355B", fg="white",
                                 highlightbackground="black", highlightcolor="black", highlightthickness=1,
-                                command=lambda commande=commande: [refuser_commande(commande), destroy_all_widgets(demande_frame), add_commandes(demande_frame, process_frame)])
+                                command=lambda commande=commande: [refuser_commande(commande), destroy_all_widgets(demande_frame), add_commandes(demande_frame, process_frame, commande_terminees_frame)])
         refuser_button.pack(pady=10, side=LEFT)
 
-def add_commandes_en_cours(process_frame):
+def add_commandes_en_cours(process_frame, commande_terminees_frame):
     global global_liste_en_cours
     for commande in global_liste_en_cours:
         if "plat" not in commande:
@@ -63,8 +63,8 @@ def add_commandes_en_cours(process_frame):
 
         terminer_button = Button(en_cours_frame, text="Terminer", font=("Helvetica", 10), bg="#1A355B", fg="white",
                                  highlightbackground="black", highlightcolor="black", highlightthickness=1,
-                                 command=lambda commande=commande: [accepter_commande(commande), destroy_all_widgets(process_frame),
-                                                                    destroy_all_widgets(en_cours_frame), add_commandes_en_cours(process_frame), add_commandes_terminees()])
+                                 command=lambda commande=commande: [accepter_commande(commande), destroy_all_widgets(en_cours_frame),
+                                                                    destroy_all_widgets(process_frame), add_commandes_en_cours(process_frame, commande_terminees_frame), add_commandes_terminees(commande_terminees_frame)])
         terminer_button.pack(pady=10)
 
 def add_commandes_terminees(commande_terminees_frame):
@@ -143,7 +143,7 @@ def main_operateur_window():
     refresh_button = Button(main_frame, text="Refresh", font=("Helvetica", 10), bg="#1A355B", fg="white", command=lambda: [destroy_all_widgets(demande_frame), add_commandes(demande_frame, process_frame)])
     refresh_button.place(relx=0.1, rely=0.1, anchor=CENTER)
 
-    add_commandes(demande_frame, process_frame)
+    add_commandes(demande_frame, process_frame, commande_terminees_frame)
     operateur_window.mainloop()
 
 main_operateur_window()
