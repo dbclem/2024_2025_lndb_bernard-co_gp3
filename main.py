@@ -241,7 +241,7 @@ def display_restaurants_names () :
         Bouton_restaurant.place(relx=0.5, rely=0.5 + index * 0.1, anchor=CENTER)
 
 
-def add_to_commande (formule, total_price_label) : 
+def add_to_command (formule, total_price_label) : 
     global global_list_commande
     global global_total_price
     global_list_commande.append(formule)
@@ -263,7 +263,7 @@ def check_if_the_menu_not_empty(dico_choices_in_the_menu, index, total_price_lab
         choice_not_finished_text.pack(side=BOTTOM, pady=10)
         choice_not_finished_text.after(2000, lambda : choice_not_finished_text.destroy())
     else : 
-        add_to_commande(dico_choices_in_the_menu, total_price_label)
+        add_to_command(dico_choices_in_the_menu, total_price_label)
         refresh_whitout_widjet(main_user_window, total_price_label)
         menus_page(index, total_price_label)
         print(global_list_commande)
@@ -367,7 +367,7 @@ def petite_faim_page (index, total_price_label) :
         petite_faim_buttons = Button(main_user_window, text=(f"{element['name']} - {element['price']} €" ), font=("Avenir", 10, "bold"), height=2, width=50, fg = "#0f5741", bg = "#ffbf00",
                             activebackground = "#0f5741", activeforeground = "white", 
                             command=lambda element=element:
-                            [add_to_commande(element, total_price_label), refresh_whitout_widjet(main_user_window, total_price_label),
+                            [add_to_command(element, total_price_label), refresh_whitout_widjet(main_user_window, total_price_label),
                                 update_total_price(total_price_label), petite_faim_page(index, total_price_label), display_add_message(main_user_window, element["name"]),
                                 print(global_list_commande)])
         petite_faim_buttons.pack(pady= 5)
