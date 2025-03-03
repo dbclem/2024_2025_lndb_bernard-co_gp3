@@ -231,6 +231,8 @@ def display_restaurants_names () :
 
             open_restaurant_page prend i qui est index et qui se mais a jour a dynamiquement
         """
+
+        
         Bouton_restaurant = Button(main_user_window, text=restaurant["nom"],
                                     image = photo, compound = "right", padx = 70, height=80, width=460, font=("Avenir", 20, "bold"), fg = "#0f5741", bg = "#ffbf00", 
                                     activebackground = "#0f5741", activeforeground = "white",
@@ -327,8 +329,17 @@ def in_menu_page (index, name, price, total_price_label):
             display_elements_of_the_menu(index, name, element, dico_choices_in_the_menu, i)
 
 def menus_page(index, total_price_label):
+    details_frame = Frame(main_user_window, bg="#fff5f1")
+    details_frame.place(relx=0.5, rely=0.1, anchor=CENTER)
+
+    address_label = Label(details_frame, text=f"{data[index]['adresse']}", font=("Avenir", 15, "bold"), fg="#0f5741", bg="#fff5f1")
+    address_label.pack( pady=5)
+
+    reviews_label = Label(details_frame, text=f"Avis : {data[index]['avis']}", font=("Avenir", 15, "bold"), fg="#0f5741", bg="#fff5f1")
+    reviews_label.pack( pady=5)
+
     menus_frame = Frame(main_user_window, bg="#fff5f1")
-    menus_frame.place(relx=0.5, rely=0.2, anchor=CENTER)
+    menus_frame.place(relx=0.5, rely=0.3, anchor=CENTER)
 
     for name, price in global_tuple_menu_price:
         menus_buttons = Button(menus_frame, text=(f"{name} - {price} €" ), height=2, width=50, font=("Avenir", 11, "bold"), fg = "#0f5741", bg = "#ffbf00",

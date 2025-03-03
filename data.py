@@ -62,7 +62,7 @@ patus_paninus = {
     "nom" : "Patus Paninus",
     "adresse" : "12 rue du Parchamp",
     "horaires" : horaires_patus,
-    "avis" : 4.8,      
+    "avis" : "5 ⭐⭐⭐⭐⭐",      
     "menus" : menus_patus,
     "image_path" : "images/patus-paninus.jpg"
 }
@@ -137,7 +137,7 @@ la_casa_del_panini = {
     "nom" : "La casa del panini",
     "adresse" : "79 Avenue Jean Baptiste Clement",
     "horaires" : horaires_casa,
-    "avis" : 4.8,      
+    "avis" : "3.4 ⭐⭐⭐",      
     "menus" : menus_casa,
     "image_path" : "images/la_casa_del_panini.jpg" 
 }
@@ -219,7 +219,7 @@ grenier_a_pain = {
     "nom" : "Grenier à pain",
     "adresse" : "12 rue du Parchamp",
     "horaires" : horaires_grenier_a_pain,
-    "avis" : 4.8,      
+    "avis" : "4.3 ⭐⭐⭐⭐" ,      
     "menus" : menus_grenier_a_pain,
     "image_path" : "images/le-grenier-a-pain.jpg" 
 } 
