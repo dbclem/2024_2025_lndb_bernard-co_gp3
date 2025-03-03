@@ -1,129 +1,150 @@
 from tkinter import *
-from customtkinter import*
-from tkinter import ttk
+from main import global_liste_commande_operateur
 
-# class RoundedFrame(Canvas):
-#     def __init__(self, parent, width, height, radius, **kwargs):
-#         Canvas.__init__(self, parent, width=width, height=height, **kwargs)
-#         self.radius = radius
-#         self.width = width
-#         self.height = height
-#         self.draw_rounded_frame()
+def destroy_all_widgets(frame):
+    for widget in frame.winfo_children():
+        widget.destroy()
 
-#     def draw_rounded_frame(self):
-#         points = [
-#             self.radius, 0,
-#             self.width - self.radius, 0,
-#             self.width, 0,
-#             self.width, self.radius,
-#             self.width, self.height - self.radius,
-#             self.width, self.height,
-#             self.width - self.radius, self.height,
-#             self.radius, self.height,
-#             0, self.height,
-#             0, self.height - self.radius,
-#             0, self.radius,
-#             0, 0
-#         ]
-#         self.create_polygon(points, smooth=True, fill="#3533cd", outline="#3533cd")
+global_liste_en_cours = []
+global_list_commande_terminees = []
 
-# def create_rounded_button(canvas, x, y, width, height, radius, text, command):
-#     points = [
-#         x + radius, y,
-#         x + width - radius, y,
-#         x + width, y,
-#         x + width, y + radius,
-#         x + width, y + height - radius,
-#         x + width, y + height,
-#         x + width - radius, y + height,
-#         x + radius, y + height,
-#         x, y + height,
-#         x, y + height - radius,
-#         x, y + radius,
-#         x, y
-#     ]
-#     button = canvas.create_polygon(points, smooth=True, fill="#3533cd", outline="#3533cd")
-#     canvas.create_text(x + width / 2, y + height / 2, text=text, fill="white", font=("Helvetica", 12))
-#     canvas.tag_bind(button, "<Button-1>", lambda event: command())
+def refuser_commande(commande):
+    global_liste_commande_operateur.remove(commande)
+    print(global_liste_commande_operateur)
 
-# def main_window():
-#     """
-#     la page affiche sous forme de liste tous les restaurants disponibles
-#     """
-#     global main_user_window
-#     main_user_window = Tk()
-#     screen_width = main_user_window.winfo_screenwidth()
-#     screen_height = main_user_window.winfo_screenheight()
-#     main_user_window.title("Bernard&co")
-#     main_user_window_width = screen_width // 2
-#     main_user_window_height = screen_height
-#     main_user_window.geometry(f"{main_user_window_width}x{main_user_window_height}")
-#     main_user_window.iconbitmap("images/logo_bernard&co.ico")
-#     # main_user_window.configure(bg="#3533cd")
+def accepter_commande(commande):
+    if commande in global_liste_en_cours:
+        global_list_commande_terminees.append(commande)
+        global_liste_en_cours.remove(commande)
+    else:
+        global_liste_en_cours.append(commande)
+        global_liste_commande_operateur.remove(commande)
+    print(global_liste_en_cours)
+    print(global_list_commande_terminees)
 
-#     canvas = Canvas(main_user_window, width=main_user_window_width, height=main_user_window_height)
-#     canvas.pack()
+def add_commandes(demande_frame, process_frame, commande_terminees_frame):
+    print(global_liste_commande_operateur)
+    for commande in global_liste_commande_operateur:
+        if "plat" not in commande:
+            text_commande = f"{commande['name']} - {commande['price']} €"
+        else:
+            text_commande = " \n ".join([f"{value} $" if key == "price" else f"{value}" for key, value in commande.items() if key != "temps"])
 
-#     create_rounded_button(canvas, 50, 50, 200, 50, 20, "Bouton 1", lambda: print("Bouton 1 cliqué"))
-#     create_rounded_button(canvas, 50, 150, 200, 50, 20, "Bouton 2", lambda: print("Bouton 2 cliqué"))
+        commande_frame = Frame(demande_frame, bg="#1A355B", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        commande_frame.pack(pady=10)
 
-#     rounded_frame = RoundedFrame(canvas, 300, 200, 20)
-#     rounded_frame.place(x=300, y=50)
+        commande_label = Label(commande_frame, text=text_commande, font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        commande_label.pack(pady=10)
 
-#     main_user_window.mainloop()
+        accepter_button = Button(commande_frame, text="Accepter", font=("Helvetica", 10), bg="#1A355B", fg="white",
+                                 highlightbackground="black", highlightcolor="black", highlightthickness=1,
+                                 command=lambda commande=commande: [accepter_commande(commande), destroy_all_widgets(demande_frame),
+                                                                    destroy_all_widgets(process_frame), add_commandes(demande_frame, process_frame, commande_terminees_frame), add_commandes_en_cours(process_frame, commande_terminees_frame)])
+        accepter_button.pack(pady=10, side=RIGHT)
 
-# main_window()
+        refuser_button = Button(commande_frame, text="Refuser", font=("Helvetica", 10), bg="#1A355B", fg="white",
+                                highlightbackground="black", highlightcolor="black", highlightthickness=1,
+                                command=lambda commande=commande: [refuser_commande(commande), destroy_all_widgets(demande_frame), add_commandes(demande_frame, process_frame, commande_terminees_frame)])
+        refuser_button.pack(pady=10, side=LEFT)
 
-# class MyFrame(CTkFrame):
-#     def __init__(self, master, **kwargs):
-#         super().__init__(master, **kwargs)
+def add_commandes_en_cours(process_frame, commande_terminees_frame):
+    global global_liste_en_cours
+    for commande in global_liste_en_cours:
+        if "plat" not in commande:
+            text_commande = f"{commande['name']} - {commande['price']} €"
+        else:
+            text_commande = " \n ".join([f"{value} $" if key == "price" else f"{value}" for key, value in commande.items() if key != "temps"])
 
-#         # add widgets onto the frame, for example:
-#         self.label = CTkLabel(self)
-#         self.label.grid(row=0, column=0, padx=20)
+        en_cours_frame = Frame(process_frame, bg="#1A355B", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        en_cours_frame.pack(pady=10)
 
+        en_cours_label = Label(en_cours_frame, text=text_commande, font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        en_cours_label.pack(pady=10, padx=20)
 
-# class App(CTk):
-#     def __init__(self):
-#         super().__init__()
-#         self.geometry("400x200")
-#         self.grid_rowconfigure(0, weight=1)  # configure grid system
-#         self.grid_columnconfigure(0, weight=1)
+        terminer_button = Button(en_cours_frame, text="Terminer", font=("Helvetica", 10), bg="#1A355B", fg="white",
+                                 highlightbackground="black", highlightcolor="black", highlightthickness=1,
+                                 command=lambda commande=commande: [accepter_commande(commande), destroy_all_widgets(en_cours_frame),
+                                                                    destroy_all_widgets(process_frame), add_commandes_en_cours(process_frame, commande_terminees_frame),
+                                                                    destroy_all_widgets(commande_terminees_frame) ,add_commandes_terminees(commande_terminees_frame)])
+        terminer_button.pack(pady=10)
 
-#         self.my_frame = MyFrame(master=self)
-#         self.my_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+def add_commandes_terminees(commande_terminees_frame):
+    global global_list_commande_terminees
+    for commande in global_list_commande_terminees:
+        if "plat" not in commande:
+            text_commande = f"{commande['name']} - {commande['price']} €"
+        else:
+            text_commande = " \n ".join([f"{value} $" if key == "price" else f"{value}" for key, value in commande.items() if key != "temps"])
 
+        terminees_frame = Frame(commande_terminees_frame, bg="#1A355B", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        terminees_frame.pack(pady=10)
 
-# app = App()
-# app.mainloop()
+        terminees_label = Label(terminees_frame, text=text_commande, font=("Helvetica", 10), bg="#1A355B", fg="white", highlightbackground="black", highlightcolor="black", highlightthickness=1)
+        terminees_label.pack(pady=30, padx=20)
 
+def main_operateur_window():
+    """
+    Fonction qui affiche la fenêtre de l'opérateur
+    """
+    global operateur_window
+    operateur_window = Tk()
+    screen_width = operateur_window.winfo_screenwidth()
+    screen_height = operateur_window.winfo_screenheight()
+    operateur_window.title("Opérateur")
+    operateur_window_width = screen_width // 2
+    operateur_window_height = screen_height
+    operateur_window.geometry(f"{operateur_window_width}x{operateur_window_height}+{screen_width // 2}+0")
+    operateur_window.config(bg="#fff5f1")
+    
+    # creation de la frame principale
+    main_frame = Frame(operateur_window, bg="#0d2c56")
+    main_frame.pack(fill=BOTH, expand=True)
+    
+    # Label de la page
+    label = Label(main_frame, text="Interface Opérateur", font=("Helvetica", 20), bg="#0d2c56", fg="white")
+    label.pack(pady=20)
 
+    # creation de la frame des demandes initial
+    demande_frame_intial = Frame(main_frame, bg="#0d2c56", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+    demande_frame_intial.pack(side=LEFT, expand=True)
 
-root = Tk()
-root.title ('canva test scroll')
-root.iconbitmap ('images/logo_bernard&co.ico')
-root.geometry ('500x500')
+    # Label des demandes
+    label_demande = Label(demande_frame_intial, text="Demandes", font=("Helvetica", 15), bg="#0d2c56", fg="white")
+    label_demande.pack(padx=100, pady=10)
 
-main_frame = Frame (root)
-main_frame.pack (fill = BOTH, expand = 1)   
+    # creation de la frame des demandes
+    demande_frame = Frame(demande_frame_intial, bg="#0d2c56", width=200, height=200)
+    demande_frame.pack(expand=True)
 
-canva_scroll_menu = Canvas(main_frame) 
-canva_scroll_menu.pack (side = LEFT, fill = BOTH, expand = 1)
+    # creation de la frame des process initial
+    process_frame_initial = Frame(main_frame, bg="#0d2c56", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+    process_frame_initial.pack(side=LEFT, expand=True)
 
-scrollbar_menu = ttk.Scrollbar(main_frame, orient = VERTICAL, command = canva_scroll_menu.yview)
-scrollbar_menu.pack (side = RIGHT, fill= Y)
+    # Label des process
+    label_process = Label(process_frame_initial, text="en cours", font=("Helvetica", 15), bg="#0d2c56", fg="white")
+    label_process.pack(padx=100, pady=10)
 
-canva_scroll_menu.configure(yscrollcommand = canva_scroll_menu.set)
-canva_scroll_menu.bind ('<Configure>', lambda e : canva_scroll_menu.configure(scrollregion = canva_scroll_menu.bbox("all")))
-            
-second_frame = Frame(canva_scroll_menu)
-canva_scroll_menu.create_window ((0,0), window = second_frame, anchor = "nw")
-for display_elements_of_the_menu in range (50):
-                Button (second_frame, text = f'Button {display_elements_of_the_menu}').grid(row = display_elements_of_the_menu, column = 0)
+    # creation de la frame des process
+    process_frame = Frame(process_frame_initial, bg="#0d2c56", width=200, height=200)
+    process_frame.pack(side=LEFT, expand=True) 
 
-my_label = Label(second_frame, text = f"Element {display_elements_of_the_menu}").grid(row = 3, column = 2)
-for element_buttons in range (50):
-    Button (root, text = f'Button {element_buttons}').grid(row = element_buttons, column = 0, pady = 10, padx = 10)
+    # creation de la frame des commandes initial
+    commande_terminees_frame_initial = Frame(main_frame, bg="#0d2c56", width=200, height=200, highlightbackground="black", highlightcolor="black", highlightthickness=1)
+    commande_terminees_frame_initial.pack(side=LEFT, expand=True)
 
+    # Label des commandes terminées
+    label_commande_terminees = Label(commande_terminees_frame_initial, text="Commandes terminées", font=("Helvetica", 15), bg="#0d2c56", fg="white")
+    label_commande_terminees.pack(padx=85, pady=10)
 
-my_canvas = Canvas (main_frame)
+    # creation de la frame des commandes terminées
+    commande_terminees_frame = Frame(commande_terminees_frame_initial, bg="#0d2c56", width=200, height=200)
+    commande_terminees_frame.pack(side=LEFT, expand=True)
+
+    # creation d'un bouton refresh
+    refresh_button = Button(main_frame, text="Refresh", font=("Helvetica", 10), bg="#1A355B", fg="white", command=lambda: [destroy_all_widgets(demande_frame), add_commandes(demande_frame, process_frame)])
+    refresh_button.place(relx=0.1, rely=0.1, anchor=CENTER)
+
+    add_commandes(demande_frame, process_frame, commande_terminees_frame)
+    operateur_window.mainloop()
+
+main_operateur_window()
