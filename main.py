@@ -137,7 +137,7 @@ def main_operateur_window():
     label_commande_terminees = Label(commande_terminees_frame_initial, text="Commandes \n terminées", font=("Helvetica", 15, "bold"), bg="#fff5f1", fg="#0f5741")
     label_commande_terminees.pack(padx=85, pady=10)
 
-    commande_terminees_frame = Frame(commande_terminees_frame_initial, bg="#fff5f1", width=200, height=200)
+    commande_terminees_frame = Frame(commande_terminees_frame_initial, bg="#fff5f1", width=177, height=177)
     commande_terminees_frame.pack(side=LEFT, expand=True)
 
 
