@@ -256,7 +256,6 @@ def check_if_the_menu_not_empty(dico_choices_in_the_menu, index, total_price_lab
         else : 
             is_not_valid = False
 
-
     if is_not_valid :
         choice_not_finished_text = Label(main_user_window, text="Vous n'avez pas fini votre commande !", font=("Avenir", 20), bg="#fff5f1", fg="#0f5741")
         choice_not_finished_text.pack(side=BOTTOM, pady=10)
@@ -266,6 +265,7 @@ def check_if_the_menu_not_empty(dico_choices_in_the_menu, index, total_price_lab
         refresh_whitout_widjet(main_user_window, total_price_label)
         menus_page(index, total_price_label)
         print(global_list_commande)
+
 
 def add_element_to_dico_final (element, key, dico_choices_in_the_menu) :
     dico_choices_in_the_menu[element] = key
@@ -374,7 +374,7 @@ def navigation_in_menus_page(index, total_price_label):
                             [destroy_all_widgets(window), reset_commandes(), display_restaurants_names()])
     nav_retour_button.pack(side=LEFT, padx=10)
 
-    nav_voir_commande_button = Button(nav_buttons_frame, text="|Panier |", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
+    nav_voir_commande_button = Button(nav_buttons_frame, text="| Panier |", font=("Avenir", 15, "bold"), fg = "white", bg = "#0f5741",
                                     activebackground = "#ffbf00", activeforeground = "#0f5741", 
                                     command=lambda : [refresh_whitout_widjet(main_user_window, total_price_label), all_commande_page(index, total_price_label)])
     nav_voir_commande_button.pack(side=LEFT, padx=10)

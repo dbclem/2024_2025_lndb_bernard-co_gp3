@@ -53,9 +53,9 @@ formule_patus_3 = {
 
 
 menus_patus = {
-    "formule patus 1" : formule_patus_1,  
-    "formule patus 2" : formule_patus_2, 
-    "formule patus 3" : formule_patus_3,    
+    "formule patus 1 : \n plat-boisson-dessert" : formule_patus_1,  
+    "formule patus 2 : \n plat-dessert" : formule_patus_2, 
+    "formule patus 3 : \n plat-boisson" : formule_patus_3,    
 }
 
 patus_paninus = {
@@ -128,9 +128,9 @@ grande_formule_casa = {
 }
 
 menus_casa = {
-    "petite formule casa" : petite_formule_casa,
-    "formule XL casa" : formule_XL_casa,
-    "grande formule casa" : grande_formule_casa 
+    "petite formule casa : \n plat-boisson-dessert" : petite_formule_casa,
+    "formule XL casa : \n plat-boisson" : formule_XL_casa,
+    "grande formule casa : \n plat-dessert" : grande_formule_casa 
 } 
 
 la_casa_del_panini = {
@@ -209,9 +209,9 @@ formule_grenier_3 = {
 }
 
 menus_grenier_a_pain = {
-    "formule grenier 1" : formule_grenier_1,
-    "formule grenier 2" : formule_grenier_2,
-    "formule grenier 3" : formule_grenier_3
+    "formule grenier 1 : \n plat-dessert" : formule_grenier_1,
+    "formule grenier 2 : \n plat-boisson" : formule_grenier_2,
+    "formule grenier 3 : \n plat-boisson-dessert" : formule_grenier_3
 
 }
 
