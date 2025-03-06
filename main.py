@@ -244,7 +244,8 @@ def display_restaurants_names () :
 def add_to_command (formule, total_price_label) : 
     global global_list_commande
     global global_total_price
-    global_list_commande.append(formule)
+    formule_with_index = {**formule, "index": len(global_list_commande) + 1}
+    global_list_commande.append(formule_with_index)
     global_total_price += formule["price"]
     print(f"La {formule['name']} a été ajoutée au panier au price de {formule['price']}.")
     update_total_price(total_price_label)
